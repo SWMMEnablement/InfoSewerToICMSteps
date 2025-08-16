@@ -159,7 +159,7 @@ function OverviewContent({ showStep }: { showStep: (step: string) => void }) {
         </Alert>
 
         {/* Getting Started */}
-        <div className="text-center">
+        <div className="text-center mb-12">
           <button 
             onClick={() => showStep('step1')}
             className="gradient-primary text-white px-8 py-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105"
@@ -167,6 +167,84 @@ function OverviewContent({ showStep }: { showStep: (step: string) => void }) {
             <i className="fas fa-arrow-right mr-2"></i>
             Start Conversion Process
           </button>
+        </div>
+
+        {/* Official Documentation Reference */}
+        <div className="mt-12">
+          <Alert type="info">
+            <h4 className="font-semibold mb-3"><i className="fas fa-book mr-2"></i>Official Autodesk Documentation - Overview</h4>
+            <div className="bg-gray-50 p-4 rounded-lg border-l-4 border-blue-500">
+              <p className="text-sm text-gray-700 mb-3"><strong>Importing InfoSewer to InfoWorks ICM - Overview of Import Steps</strong></p>
+              <div className="space-y-3 text-sm text-gray-600">
+                <p><strong>Issue:</strong> Converting hydraulic models from one program to another requires a degree of dedication due to the intricacies involved in the process. It requires a certain investment of time and an understanding of both programs.</p>
+                
+                <p><strong>Solution:</strong> The process involves nine steps to import and configure data from InfoSewer to the format required by InfoWorks ICM. At a high level, the steps include:</p>
+                
+                <ul className="list-disc list-inside ml-4 space-y-1">
+                  <li><strong>Converting DBF Files to CSV:</strong> Use an Excel macro to convert DBF files within the .IEDB model folder to CSV format for importing network data into ICM.</li>
+                  <li><strong>Converting Map.mdb to SHP:</strong> Use ESRI's ArcCatalog to convert the Map.mdb file within the .IEDB model folder to SHP format for importing network geometry into ICM.</li>
+                  <li><strong>Importing CSV Files:</strong> Import network data from CSV files with configuration (CFG) files.</li>
+                  <li><strong>Importing SHP Files:</strong> Import geometry data from SHP files with configuration (CFG) files.</li>
+                  <li><strong>Performing Data Manipulation:</strong> Modify imported data using SQL.</li>
+                </ul>
+
+                <p><strong>Nine Conversion Steps:</strong></p>
+                <ol className="list-decimal list-inside ml-4 space-y-1">
+                  <li>Import Nodes and Create Subcatchments</li>
+                  <li>Import Links</li>
+                  <li>Import Manhole Hydraulics</li>
+                  <li>Import Link Hydraulics</li>
+                  <li>Import Pump Hydraulics</li>
+                  <li>Import Pump Controls</li>
+                  <li>Import Subcatchment DWF</li>
+                  <li>Import Wet Well Hydraulics</li>
+                  <li>Configuration for Rainfall-Dependent Infiltration and Inflow (RDII) hydrographs</li>
+                </ol>
+              </div>
+              <p className="text-xs text-gray-500 mt-3 border-t pt-2">
+                Source: <a href="https://www.autodesk.com/support/technical/article/caas/sfdcarticles/sfdcarticles/Knowledge-Importing-InfoSewer-to-InfoWorks-ICM-Overview-of-all-Import-Steps.html" className="text-blue-600 hover:text-blue-800 underline" target="_blank" rel="noopener noreferrer">Official Autodesk Documentation</a>
+              </p>
+              <div className="mt-4">
+                <h5 className="text-xs font-semibold text-gray-600 mb-2">Source Material:</h5>
+                <CodeBlock language="text" code={`Importing InfoSewer to InfoWorks ICM - Overview of Import Steps
+
+Issue:
+Converting hydraulic models from one program to another requires a degree of dedication due to the intricacies involved in the process. It requires a certain investment of time and an understanding of both programs. This series of articles contains step-by-step instructions to perform a basic conversion for the BASE scenario from InfoSewer to InfoWorks ICM.
+
+Please be aware that this guide is not exhaustive. The unique setup of each InfoSewer model means a one-size-fits-all approach to conversion is impractical. However, these steps have been carefully planned to facilitate the conversion process for as many models as possible.
+
+Solution:
+Several scripts are utilized to perform the conversion from InfoSewer to InfoWorks ICM. The required files are available within the Innovyze GitHub repository:
+01 InfoWorks ICM/01 Ruby/01 InfoWorks/0060 - InfoSewer to InfoWorks ICM Conversion Tools
+
+The process involves nine steps to import and configure data from InfoSewer to the format required by InfoWorks ICM. At a high level, the steps include:
+
+- Converting DBF Files to CSV: Use an Excel macro to convert DBF files within the .IEDB model folder to CSV format for importing network data into ICM.
+- Converting Map.mdb to SHP: Use ESRI's ArcCatalog to convert the Map.mdb file within the .IEDB model folder to SHP format for importing network geometry into ICM.
+- Importing CSV Files: Import network data from CSV files with configuration (CFG) files.
+- Importing SHP Files: Import geometry data from SHP files with configuration (CFG) files.
+- Performing Data Manipulation: Modify imported data using SQL.
+
+Nine Conversion Steps:
+1. Import Nodes and Create Subcatchments
+2. Import Links
+3. Import Manhole Hydraulics
+4. Import Link Hydraulics
+5. Import Pump Hydraulics
+6. Import Pump Controls
+7. Import Subcatchment DWF
+8. Import Wet Well Hydraulics
+9. Configuration for Rainfall-Dependent Infiltration and Inflow (RDII) hydrographs
+
+A companion Ruby script was developed to combine the nine steps into a single script. This Ruby script requires the following inputs:
+- Folder containing converted SHP files from Map.mdb
+- Folder containing converted CSV files from .IEDB
+- Folder containing CFG files
+
+Important: Verify that display units are set as desired prior to import. To review units in ICM, go to Tools > Options and view the Units tab. Display units can be modified as necessary.`} />
+              </div>
+            </div>
+          </Alert>
         </div>
       </div>
     </div>
