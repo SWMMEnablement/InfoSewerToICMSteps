@@ -169,6 +169,210 @@ function OverviewContent({ showStep }: { showStep: (step: string) => void }) {
           </button>
         </div>
 
+        {/* App Source Code & Documentation */}
+        <div className="mb-8 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-gray-100 mb-6 sm:mb-8 text-center sm:text-left">
+            <i className="fas fa-code mr-2"></i>
+            Application Architecture & Source Code
+          </h2>
+          
+          <div className="grid lg:grid-cols-2 gap-6 sm:gap-8">
+            {/* Technology Stack */}
+            <div className="space-y-6">
+              <Alert type="success">
+                <h4 className="font-semibold mb-3 text-sm sm:text-base">
+                  <i className="fas fa-layer-group mr-2"></i>
+                  Technology Stack
+                </h4>
+                <div className="space-y-3">
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="flex items-center space-x-2">
+                      <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
+                      <span className="text-xs sm:text-sm font-medium">React 18</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-3 h-3 bg-blue-600 rounded-full"></div>
+                      <span className="text-xs sm:text-sm font-medium">TypeScript</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-3 h-3 bg-cyan-500 rounded-full"></div>
+                      <span className="text-xs sm:text-sm font-medium">Tailwind CSS</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                      <span className="text-xs sm:text-sm font-medium">Node.js</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
+                      <span className="text-xs sm:text-sm font-medium">Vite</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-3 h-3 bg-orange-500 rounded-full"></div>
+                      <span className="text-xs sm:text-sm font-medium">Express</span>
+                    </div>
+                  </div>
+                </div>
+              </Alert>
+
+              <div className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+                <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-4 text-base sm:text-lg">
+                  <i className="fas fa-folder-tree mr-2"></i>
+                  Project Structure
+                </h3>
+                <CodeBlock language="text" code={`src/
+├── components/           # UI Components
+│   ├── theme-selector.tsx
+│   ├── sidebar.tsx
+│   ├── step-content.tsx
+│   ├── alert.tsx
+│   └── code-block.tsx
+├── hooks/               # Custom Hooks
+│   ├── use-theme.tsx
+│   ├── use-conversion-progress.tsx
+│   └── use-mobile.tsx
+├── pages/               # Route Components
+│   └── conversion-guide.tsx
+└── lib/                 # Utilities
+    └── queryClient.ts
+
+server/                  # Backend API
+├── index.ts            # Express server
+└── routes.ts           # API endpoints
+
+shared/                  # Shared types
+└── schema.ts           # Data schemas`} />
+              </div>
+            </div>
+
+            {/* Key Features & Architecture */}
+            <div className="space-y-6">
+              <div className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+                <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-4 text-base sm:text-lg">
+                  <i className="fas fa-star mr-2"></i>
+                  Key Features
+                </h3>
+                <ul className="space-y-2 text-xs sm:text-sm text-gray-600 dark:text-gray-300">
+                  <li><i className="fas fa-check text-green-500 mr-2"></i>8 customizable themes with dark mode</li>
+                  <li><i className="fas fa-check text-green-500 mr-2"></i>Mobile-first responsive design</li>
+                  <li><i className="fas fa-check text-green-500 mr-2"></i>Progress tracking with localStorage</li>
+                  <li><i className="fas fa-check text-green-500 mr-2"></i>Keyboard navigation support</li>
+                  <li><i className="fas fa-check text-green-500 mr-2"></i>Interactive step-by-step guide</li>
+                  <li><i className="fas fa-check text-green-500 mr-2"></i>Official documentation integration</li>
+                </ul>
+              </div>
+
+              <Alert type="info">
+                <h4 className="font-semibold mb-3 text-sm sm:text-base">
+                  <i className="fas fa-palette mr-2"></i>
+                  Theme System
+                </h4>
+                <p className="text-xs sm:text-sm mb-3">Dynamic theme switching with persistent storage:</p>
+                <CodeBlock language="typescript" code={`// Theme Hook Usage
+const { currentTheme, setTheme, isDarkMode, toggleDarkMode } = useTheme();
+
+// Available Themes
+const themes = {
+  ocean: 'Ocean Blue',
+  sunset: 'Sunset Orange',
+  forest: 'Forest Green',
+  lavender: 'Lavender Purple',
+  corporate: 'Corporate Gray',
+  midnight: 'Midnight Blue',
+  autumn: 'Autumn Warmth',
+  arctic: 'Arctic Teal'
+};`} />
+              </Alert>
+            </div>
+          </div>
+
+          {/* Component Examples */}
+          <div className="mt-6 sm:mt-8">
+            <h3 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4 sm:mb-6">
+              <i className="fas fa-puzzle-piece mr-2"></i>
+              Core Components
+            </h3>
+            
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+                <h4 className="font-semibold text-gray-800 dark:text-gray-100 mb-3 text-sm sm:text-base">
+                  <i className="fas fa-cogs mr-2"></i>
+                  Progress Hook
+                </h4>
+                <CodeBlock language="typescript" code={`// Conversion Progress Management
+const useConversionProgress = () => {
+  const [currentStep, setCurrentStep] = useState('overview');
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const showStep = (step: string) => {
+    setCurrentStep(step);
+    localStorage.setItem('icm-converter-progress', step);
+  };
+
+  const getProgressPercentage = () => {
+    const stepIndex = steps.indexOf(currentStep);
+    return Math.round((stepIndex / (steps.length - 1)) * 100);
+  };
+
+  return { currentStep, showStep, getProgressPercentage };
+};`} />
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+                <h4 className="font-semibold text-gray-800 dark:text-gray-100 mb-3 text-sm sm:text-base">
+                  <i className="fas fa-mobile-alt mr-2"></i>
+                  Responsive Design
+                </h4>
+                <CodeBlock language="typescript" code={`// Mobile Detection Hook
+const useIsMobile = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  return isMobile;
+};`} />
+              </div>
+            </div>
+          </div>
+
+          {/* Development Info */}
+          <div className="mt-6 sm:mt-8">
+            <Alert type="warning">
+              <h4 className="font-semibold mb-3 text-sm sm:text-base">
+                <i className="fas fa-tools mr-2"></i>
+                Development Environment
+              </h4>
+              <div className="grid sm:grid-cols-2 gap-4 text-xs sm:text-sm">
+                <div>
+                  <p className="font-medium mb-2">Build Tools:</p>
+                  <ul className="space-y-1 ml-4">
+                    <li>• Vite for fast development</li>
+                    <li>• TypeScript for type safety</li>
+                    <li>• ESLint for code quality</li>
+                    <li>• Tailwind CSS for styling</li>
+                  </ul>
+                </div>
+                <div>
+                  <p className="font-medium mb-2">Features:</p>
+                  <ul className="space-y-1 ml-4">
+                    <li>• Hot Module Replacement</li>
+                    <li>• Path aliases (@/components)</li>
+                    <li>• Error overlay for debugging</li>
+                    <li>• Production optimizations</li>
+                  </ul>
+                </div>
+              </div>
+            </Alert>
+          </div>
+        </div>
+
         {/* Official Documentation Reference */}
         <div className="mt-8 sm:mt-12">
           <Alert type="info">
