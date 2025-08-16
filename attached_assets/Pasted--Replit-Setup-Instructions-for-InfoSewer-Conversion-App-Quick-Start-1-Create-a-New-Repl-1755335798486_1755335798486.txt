@@ -1,0 +1,171 @@
+# Replit Setup Instructions for InfoSewer Conversion App
+
+## Quick Start
+
+1. **Create a New Repl**
+   - Go to [Replit.com](https://replit.com)
+   - Click "Create Repl"
+   - Choose "HTML, CSS, JS" template
+   - Name it "InfoSewer-ICM-Converter"
+
+2. **Add Configuration File**
+   - Create a new file called `replit.json`
+   - Copy the provided JSON configuration into this file
+   - This configures the Repl for Node.js with proper ports and deployment settings
+
+3. **Add the Main Application**
+   - Create a file called `index.html`
+   - Copy the entire HTML application code into this file
+   - This contains the complete interactive guide
+
+4. **Optional: Create a Simple Server** (for advanced features)
+   - Create `server.js`:
+   ```javascript
+   const express = require('express');
+   const path = require('path');
+   const app = express();
+   const PORT = 3000;
+
+   app.use(express.static('.'));
+   
+   app.get('/', (req, res) => {
+     res.sendFile(path.join(__dirname, 'index.html'));
+   });
+   
+   app.listen(PORT, () => {
+     console.log(`Server running on port ${PORT}`);
+   });
+   ```
+
+   - Create `package.json`:
+   ```json
+   {
+     "name": "infosewer-converter",
+     "version": "1.0.0",
+     "main": "server.js",
+     "scripts": {
+       "start": "node server.js"
+     },
+     "dependencies": {
+       "express": "^4.18.2"
+     }
+   }
+   ```
+
+5. **Run the Application**
+   - Click the "Run" button in Replit
+   - The app will open in the webview panel
+   - Navigate through the conversion steps using the tabs
+
+## Features of the Application
+
+### Interactive Navigation
+- **Tab-based Interface**: Click through each conversion step
+- **Progress Indicator**: Visual tracking of conversion progress
+- **Keyboard Navigation**: Use arrow keys to move between steps
+
+### Content Organization
+- **Overview Section**: Introduction and requirements
+- **9 Detailed Steps**: Complete conversion process
+- **Code Examples**: Highlighted SQL and configuration snippets
+- **Visual Alerts**: Warnings, success messages, and information boxes
+
+### Responsive Design
+- Works on desktop and mobile devices
+- Animated transitions between sections
+- Modern gradient design with hover effects
+
+## Customization Options
+
+### Adding More Steps
+Edit the HTML file to add new tabs and corresponding content sections:
+```html
+<button class="tab" onclick="showStep('step10')">Step 10: New Step</button>
+
+<div id="step10" class="step-content">
+  <!-- Your content here -->
+</div>
+```
+
+### Modifying Styles
+The CSS is embedded in the HTML file. Key color variables:
+- Primary gradient: `#667eea to #764ba2`
+- Secondary gradient: `#5e72e4 to #825ee4`
+- Success color: `#28a745`
+- Warning color: `#ffc107`
+
+### Adding Data Storage
+To save user progress or notes, add JavaScript:
+```javascript
+// Save progress to localStorage
+function saveProgress(step) {
+  localStorage.setItem('currentStep', step);
+}
+
+// Load saved progress
+function loadProgress() {
+  const saved = localStorage.getItem('currentStep');
+  if (saved) showStep(saved);
+}
+```
+
+## Deployment Options
+
+### Public Sharing
+1. Click "Share" in Replit
+2. Make the Repl public
+3. Share the Repl URL with others
+
+### Custom Domain
+1. Go to Hosting settings in Replit
+2. Configure a custom domain
+3. Deploy using the configured settings in `replit.json`
+
+### Export for Self-Hosting
+1. Download all files from Replit
+2. Host on any static web server
+3. No server-side requirements for basic functionality
+
+## Troubleshooting
+
+### App Not Loading
+- Ensure `index.html` is in the root directory
+- Check that `replit.json` is properly formatted
+- Try refreshing the webview panel
+
+### Styling Issues
+- Clear browser cache
+- Check for CSS syntax errors
+- Ensure all style tags are properly closed
+
+### Navigation Not Working
+- Verify JavaScript is enabled
+- Check browser console for errors
+- Ensure all step IDs match tab onclick handlers
+
+## Additional Resources
+
+### Required Files from Autodesk/Innovyze
+The actual conversion requires files from:
+- GitHub: `01 InfoWorks ICM/01 Ruby/01 InfoWorks/0060 - InfoSewer to InfoWorks ICM Conversion Tools`
+- Excel Macro: `InfoSewer_VBA_DBF_CSV_Conversion.xlsm`
+- Configuration files (`.cfg`) for each import step
+- Ruby scripts (`.rb`) for data transformation
+- SQL queries for data validation
+
+### Software Requirements
+For actual conversion (not just viewing the guide):
+- InfoWorks ICM software
+- Microsoft Excel (for VBA macro)
+- Ruby interpreter (for transformation scripts)
+- Access to InfoSewer IEDB folder
+
+## Support
+
+For issues with:
+- **Replit Setup**: Check Replit documentation
+- **Application Code**: Review the HTML/CSS/JS in the artifacts
+- **Conversion Process**: Refer to Autodesk support documentation
+- **InfoWorks ICM**: Contact Autodesk technical support
+
+This application serves as an interactive guide. The actual conversion requires the professional software and tools mentioned above.
