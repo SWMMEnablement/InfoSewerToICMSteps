@@ -12,15 +12,15 @@ interface TabItem {
 
 const tabs: TabItem[] = [
   { id: 'overview', icon: 'fas fa-info-circle', title: 'Overview', subtitle: 'Getting Started' },
-  { id: 'step1', icon: 'fas fa-download', title: 'Step 1', subtitle: 'Download Files' },
-  { id: 'step2', icon: 'fas fa-database', title: 'Step 2', subtitle: 'Export Database' },
-  { id: 'step3', icon: 'fas fa-file-excel', title: 'Step 3', subtitle: 'Excel Conversion' },
-  { id: 'step4', icon: 'fas fa-project-diagram', title: 'Step 4', subtitle: 'Create ICM Database' },
-  { id: 'step5', icon: 'fas fa-upload', title: 'Step 5', subtitle: 'Import Nodes' },
-  { id: 'step6', icon: 'fas fa-route', title: 'Step 6', subtitle: 'Import Links' },
-  { id: 'step7', icon: 'fas fa-water', title: 'Step 7', subtitle: 'Import Subcatchments' },
-  { id: 'step8', icon: 'fas fa-cogs', title: 'Step 8', subtitle: 'Configure Options' },
-  { id: 'step9', icon: 'fas fa-check-circle', title: 'Step 9', subtitle: 'Validation & Testing' },
+  { id: 'step1', icon: 'fas fa-circle-nodes', title: 'Step 1', subtitle: 'Import Nodes & Subcatchments' },
+  { id: 'step2', icon: 'fas fa-route', title: 'Step 2', subtitle: 'Import Links & Geometry' },
+  { id: 'step3', icon: 'fas fa-water', title: 'Step 3', subtitle: 'Import Manhole Hydraulics' },
+  { id: 'step4', icon: 'fas fa-pipe', title: 'Step 4', subtitle: 'Import Link Hydraulics' },
+  { id: 'step5', icon: 'fas fa-pump-soap', title: 'Step 5', subtitle: 'Import Pump Hydraulics' },
+  { id: 'step6', icon: 'fas fa-cogs', title: 'Step 6', subtitle: 'Import Pump Controls' },
+  { id: 'step7', icon: 'fas fa-tint', title: 'Step 7', subtitle: 'Import Subcatchment DWF' },
+  { id: 'step8', icon: 'fas fa-flask', title: 'Step 8', subtitle: 'Import Wet Well Hydraulics' },
+  { id: 'step9', icon: 'fas fa-cloud-rain', title: 'Step 9', subtitle: 'Configure RDII Hydrographs' },
 ];
 
 export default function Sidebar() {

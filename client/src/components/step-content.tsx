@@ -59,7 +59,7 @@ function OverviewContent({ showStep }: { showStep: (step: string) => void }) {
       <div className="gradient-primary text-white">
         <div className="max-w-6xl mx-auto px-6 py-16">
           <div className="text-center">
-            <h1 className="text-4xl lg:text-5xl font-bold mb-6">InfoSewer to ICM InfoWorks Networks</h1>
+            <h1 className="text-4xl lg:text-5xl font-bold mb-6">InfoSewer to InfoWorks ICM</h1>
             <p className="text-xl lg:text-2xl mb-8 opacity-90">Complete Conversion Guide</p>
             <div className="flex flex-wrap justify-center gap-4">
               <div className="glass-effect px-6 py-3 rounded-full">
@@ -90,7 +90,7 @@ function OverviewContent({ showStep }: { showStep: (step: string) => void }) {
               </div>
               <h3 className="font-semibold text-gray-800 mb-2">Software</h3>
               <ul className="text-gray-600 text-sm space-y-1">
-                <li>• ICM InfoWorks Networks</li>
+                <li>• InfoWorks ICM</li>
                 <li>• Microsoft Excel</li>
                 <li>• Ruby interpreter</li>
               </ul>
@@ -147,7 +147,7 @@ function OverviewContent({ showStep }: { showStep: (step: string) => void }) {
                 <i className="fas fa-upload text-white text-2xl"></i>
               </div>
               <h3 className="font-semibold text-xl text-gray-800 mb-2">Import</h3>
-              <p className="text-gray-600">Import converted data into ICM InfoWorks Networks</p>
+              <p className="text-gray-600">Import converted data into InfoWorks ICM</p>
             </div>
           </div>
         </div>
@@ -182,8 +182,8 @@ function Step1Content({ showStep }: { showStep: (step: string) => void }) {
             <i className="fas fa-download text-white"></i>
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-gray-800">Step 1: Download Required Files</h1>
-            <p className="text-gray-600">Get the conversion tools from GitHub repository</p>
+            <h1 className="text-3xl font-bold text-gray-800">Step 1: Import Nodes and Create Subcatchments</h1>
+            <p className="text-gray-600">Convert DBF files to CSV and import node data using ODIC</p>
           </div>
         </div>
       </div>
@@ -191,32 +191,39 @@ function Step1Content({ showStep }: { showStep: (step: string) => void }) {
       <div className="grid lg:grid-cols-2 gap-8">
         <div className="space-y-6">
           <Alert type="info">
-            <h4 className="font-semibold mb-2">GitHub Repository</h4>
+            <h4 className="font-semibold mb-2">Official GitHub Repository</h4>
             <p>Access the official Innovyze conversion tools from the GitHub repository:</p>
-            <div className="mt-3">
-              <a href="https://github.com/innovyze/Open-Source-Support" className="text-blue-600 hover:text-blue-800 underline text-sm font-mono" target="_blank" rel="noopener noreferrer">
+            <div className="mt-3 space-y-2">
+              <a href="https://github.com/innovyze/Open-Source-Support/tree/main/01%20InfoWorks%20ICM/01%20Ruby/01%20InfoWorks/0060%20-%20InfoSewer%20to%20InfoWorks%20ICM%20Conversion%20Tools" className="block text-blue-600 hover:text-blue-800 underline text-sm" target="_blank" rel="noopener noreferrer">
                 <i className="fab fa-github mr-2"></i>
-                https://github.com/innovyze/Open-Source-Support
+                InfoSewer to InfoWorks ICM Conversion Tools
+              </a>
+              <a href="https://download-directory.github.io/?url=https%3A%2F%2Fgithub.com%2Finnovyze%2FOpen-Source-Support%2Ftree%2Fmain%2F01%2520InfoWorks%2520ICM%2F01%2520Ruby%2F01%2520InfoWorks%2F0060%2520-%2520InfoSewer%2520to%2520InfoWorks%2520ICM%2520Conversion%2520Tools" className="block text-green-600 hover:text-green-800 underline text-sm" target="_blank" rel="noopener noreferrer">
+                <i className="fas fa-download mr-2"></i>
+                Direct Download Link
               </a>
             </div>
           </Alert>
 
           <div className="bg-white p-6 rounded-xl shadow-sm border">
             <h3 className="font-semibold text-gray-800 mb-4">Required Files Location</h3>
-            <CodeBlock language="bash" code={`Repository Path:
-01 ICM InfoWorks Networks/
+            <CodeBlock language="bash" code={`Repository Structure:
+01 InfoWorks ICM/
 ├── 01 Ruby/
 │   └── 01 InfoWorks/
-│       └── 0060 - InfoSewer to ICM InfoWorks Networks Conversion Tools/
-│           ├── InfoSewer_VBA_DBF_CSV_Conversion.xlsm
-│           ├── *.cfg files
-│           ├── *.rb files
-│           └── SQL validation queries
+│       └── 0060 - InfoSewer to InfoWorks ICM Conversion Tools/
+│           ├── Configuration (CFG) Files/
+│           ├── DBF to CSV Macro/
+│           │   └── DBF_to_CSV.xlsm
+│           ├── Ruby Import BASE/
+│           │   └── InfoSewer_to_InfoWorks_BASE.rb
+│           ├── SQL Scripts/
+│           ├── Scenario Tools/
+│           ├── Pattern Tools/
+│           └── readme.md
 
-GitHub Links:
-• Main Repository: https://github.com/innovyze/Open-Source-Support
-• ICM Tools: https://github.com/innovyze/ICM-InfoWorks
-• Ruby Scripts: https://github.com/innovyze/Ruby-Scripts`} />
+Official Documentation:
+https://www.autodesk.com/support/technical/article/caas/sfdcarticles/sfdcarticles/Knowledge-Importing-InfoSewer-to-InfoWorks-ICM-Overview-of-all-Import-Steps.html`} />
           </div>
 
           <div className="bg-white p-6 rounded-xl shadow-sm border">
