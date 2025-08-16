@@ -53,15 +53,19 @@
   --tracking-normal: 0em;
   --spacing: 0.25rem;
   
-  /* Custom colors for InfoSewer conversion app */
-  --primary-start: hsl(244 57% 72%);
-  --primary-end: hsl(264 52% 66%);
-  --secondary-start: hsl(242 66% 69%);
-  --secondary-end: hsl(264 61% 67%);
-  --success-color: hsl(134 61% 41%);
-  --warning-color: hsl(45 100% 51%);
-  --danger-color: hsl(354 70% 54%);
-  --info-color: hsl(188 78% 41%);
+  /* Enhanced colors for InfoSewer Knowledge Management app */
+  --primary-start: hsl(210 100% 56%);
+  --primary-end: hsl(220 95% 65%);
+  --secondary-start: hsl(195 85% 45%);
+  --secondary-end: hsl(210 90% 55%);
+  --accent-start: hsl(240 60% 70%);
+  --accent-end: hsl(260 55% 75%);
+  --success-color: hsl(142 76% 36%);
+  --warning-color: hsl(38 92% 50%);
+  --danger-color: hsl(346 87% 43%);
+  --info-color: hsl(199 89% 48%);
+  --surface: hsl(220 20% 98%);
+  --surface-dark: hsl(220 15% 8%);
 }
 
 .dark {
@@ -140,9 +144,15 @@
   }
   
   .glass-effect {
-    backdrop-filter: blur(10px);
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dark .glass-effect {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
   
   .tab-active {
@@ -171,9 +181,16 @@
   }
   
   .code-block {
-    background: #1e1e1e;
-    border-radius: 8px;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    border-radius: 12px;
     font-family: var(--font-mono);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .dark .code-block {
+    background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+    border-color: rgba(255, 255, 255, 0.05);
   }
   
   .alert {
@@ -207,14 +224,26 @@
   }
   
   .step-card {
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     border: 1px solid #e2e8f0;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    backdrop-filter: blur(8px);
   }
   
   .step-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
     border-color: var(--primary-start);
+    background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+  }
+  
+  .dark .step-card {
+    background: linear-gradient(135deg, hsl(var(--card)) 0%, hsl(220 15% 12%) 100%);
+    border-color: hsl(var(--border));
+  }
+  
+  .dark .step-card:hover {
+    background: linear-gradient(135deg, hsl(220 15% 12%) 0%, hsl(220 15% 15%) 100%);
   }
   
   .animate-fade-in {

@@ -56,64 +56,64 @@ export default function StepContent({ step }: StepContentProps) {
 function OverviewContent({ showStep }: { showStep: (step: string) => void }) {
   return (
     <div className="animate-fade-in">
-      <div className="gradient-primary text-white">
-        <div className="max-w-6xl mx-auto px-6 py-16">
+      <div className="gradient-primary text-white min-h-[60vh] flex items-center">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 w-full">
           <div className="text-center">
-            <h1 className="text-4xl lg:text-5xl font-bold mb-6">InfoSewer to InfoWorks ICM</h1>
-            <p className="text-xl lg:text-2xl mb-8 opacity-90">Complete Conversion Guide</p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <div className="glass-effect px-6 py-3 rounded-full">
-                <i className="fas fa-clock mr-2"></i>
-                <span>~2-4 hours</span>
+            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight px-2">InfoSewer to InfoWorks ICM</h1>
+            <p className="text-lg sm:text-xl lg:text-2xl mb-6 sm:mb-8 opacity-90 leading-relaxed px-2">Knowledge Management Conversion Guide</p>
+            <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 px-4">
+              <div className="glass-effect px-4 sm:px-6 py-3 rounded-full backdrop-blur-md">
+                <i className="fas fa-clock mr-2 text-sm sm:text-base"></i>
+                <span className="text-sm sm:text-base">~2-4 hours</span>
               </div>
-              <div className="glass-effect px-6 py-3 rounded-full">
-                <i className="fas fa-layer-group mr-2"></i>
-                <span>9 Steps</span>
+              <div className="glass-effect px-4 sm:px-6 py-3 rounded-full backdrop-blur-md">
+                <i className="fas fa-layer-group mr-2 text-sm sm:text-base"></i>
+                <span className="text-sm sm:text-base">9 Steps</span>
               </div>
-              <div className="glass-effect px-6 py-3 rounded-full">
-                <i className="fas fa-users mr-2"></i>
-                <span>Expert Level</span>
+              <div className="glass-effect px-4 sm:px-6 py-3 rounded-full backdrop-blur-md">
+                <i className="fas fa-users mr-2 text-sm sm:text-base"></i>
+                <span className="text-sm sm:text-base">Expert Level</span>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-6 py-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
         {/* Requirements Section */}
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold text-gray-800 mb-8">Requirements</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div className="step-card bg-white p-6 rounded-xl">
-              <div className="w-12 h-12 gradient-secondary rounded-lg flex items-center justify-center mb-4">
-                <i className="fas fa-desktop text-white"></i>
+        <div className="mb-8 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-gray-100 mb-6 sm:mb-8 text-center sm:text-left">Requirements</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            <div className="step-card bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-xl shadow-lg">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 gradient-secondary rounded-lg flex items-center justify-center mb-3 sm:mb-4">
+                <i className="fas fa-desktop text-white text-sm sm:text-base"></i>
               </div>
-              <h3 className="font-semibold text-gray-800 mb-2">Software</h3>
-              <ul className="text-gray-600 text-sm space-y-1">
+              <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-2 text-base sm:text-lg">Software</h3>
+              <ul className="text-gray-600 dark:text-gray-300 text-sm space-y-1">
                 <li>• InfoWorks ICM</li>
                 <li>• Microsoft Excel</li>
                 <li>• Ruby interpreter</li>
               </ul>
             </div>
 
-            <div className="step-card bg-white p-6 rounded-xl">
-              <div className="w-12 h-12 gradient-secondary rounded-lg flex items-center justify-center mb-4">
-                <i className="fas fa-file-alt text-white"></i>
+            <div className="step-card bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-xl shadow-lg">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 gradient-secondary rounded-lg flex items-center justify-center mb-3 sm:mb-4">
+                <i className="fas fa-file-alt text-white text-sm sm:text-base"></i>
               </div>
-              <h3 className="font-semibold text-gray-800 mb-2">Files</h3>
-              <ul className="text-gray-600 text-sm space-y-1">
+              <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-2 text-base sm:text-lg">Files</h3>
+              <ul className="text-gray-600 dark:text-gray-300 text-sm space-y-1">
                 <li>• VBA Conversion Macro</li>
                 <li>• Ruby Scripts (.rb)</li>
                 <li>• Configuration Files (.cfg)</li>
               </ul>
             </div>
 
-            <div className="step-card bg-white p-6 rounded-xl">
-              <div className="w-12 h-12 gradient-secondary rounded-lg flex items-center justify-center mb-4">
-                <i className="fas fa-database text-white"></i>
+            <div className="step-card bg-white dark:bg-gray-800 p-4 sm:p-6 rounded-xl shadow-lg">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 gradient-secondary rounded-lg flex items-center justify-center mb-3 sm:mb-4">
+                <i className="fas fa-database text-white text-sm sm:text-base"></i>
               </div>
-              <h3 className="font-semibold text-gray-800 mb-2">Access</h3>
-              <ul className="text-gray-600 text-sm space-y-1">
+              <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-2 text-base sm:text-lg">Access</h3>
+              <ul className="text-gray-600 dark:text-gray-300 text-sm space-y-1">
                 <li>• InfoSewer IEDB folder</li>
                 <li>• GitHub repository</li>
                 <li>• Admin privileges</li>
@@ -123,46 +123,46 @@ function OverviewContent({ showStep }: { showStep: (step: string) => void }) {
         </div>
 
         {/* Process Overview */}
-        <div className="mb-12">
-          <h2 className="text-3xl font-bold text-gray-800 mb-8">Conversion Process</h2>
-          <div className="grid lg:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-20 h-20 gradient-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                <i className="fas fa-download text-white text-2xl"></i>
+        <div className="mb-8 sm:mb-12">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-gray-100 mb-6 sm:mb-8 text-center sm:text-left">Conversion Process</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            <div className="text-center p-4 sm:p-0">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 gradient-primary rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-lg">
+                <i className="fas fa-download text-white text-lg sm:text-2xl"></i>
               </div>
-              <h3 className="font-semibold text-xl text-gray-800 mb-2">Prepare</h3>
-              <p className="text-gray-600">Download required files and export InfoSewer database</p>
+              <h3 className="font-semibold text-lg sm:text-xl text-gray-800 dark:text-gray-100 mb-2">Prepare</h3>
+              <p className="text-gray-600 dark:text-gray-300 text-sm sm:text-base leading-relaxed">Download required files and export InfoSewer database</p>
             </div>
 
-            <div className="text-center">
-              <div className="w-20 h-20 gradient-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                <i className="fas fa-exchange-alt text-white text-2xl"></i>
+            <div className="text-center p-4 sm:p-0">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 gradient-primary rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-lg">
+                <i className="fas fa-exchange-alt text-white text-lg sm:text-2xl"></i>
               </div>
-              <h3 className="font-semibold text-xl text-gray-800 mb-2">Convert</h3>
-              <p className="text-gray-600">Transform data using Excel macros and Ruby scripts</p>
+              <h3 className="font-semibold text-lg sm:text-xl text-gray-800 dark:text-gray-100 mb-2">Convert</h3>
+              <p className="text-gray-600 dark:text-gray-300 text-sm sm:text-base leading-relaxed">Transform data using Excel macros and Ruby scripts</p>
             </div>
 
-            <div className="text-center">
-              <div className="w-20 h-20 gradient-primary rounded-full flex items-center justify-center mx-auto mb-4">
-                <i className="fas fa-upload text-white text-2xl"></i>
+            <div className="text-center p-4 sm:p-0 sm:col-span-2 lg:col-span-1">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 gradient-primary rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4 shadow-lg">
+                <i className="fas fa-upload text-white text-lg sm:text-2xl"></i>
               </div>
-              <h3 className="font-semibold text-xl text-gray-800 mb-2">Import</h3>
-              <p className="text-gray-600">Import converted data into InfoWorks ICM</p>
+              <h3 className="font-semibold text-lg sm:text-xl text-gray-800 dark:text-gray-100 mb-2">Import</h3>
+              <p className="text-gray-600 dark:text-gray-300 text-sm sm:text-base leading-relaxed">Import converted data into InfoWorks ICM</p>
             </div>
           </div>
         </div>
 
         {/* Important Notes */}
-        <Alert type="warning" className="mb-8">
-          <h4 className="font-semibold mb-2">Important Notice</h4>
-          <p>This conversion process requires professional software licenses and technical expertise. Always backup your original data before beginning the conversion process.</p>
+        <Alert type="warning" className="mb-6 sm:mb-8">
+          <h4 className="font-semibold mb-2 text-sm sm:text-base">Important Notice</h4>
+          <p className="text-sm sm:text-base leading-relaxed">This conversion process requires professional software licenses and technical expertise. Always backup your original data before beginning the conversion process.</p>
         </Alert>
 
         {/* Getting Started */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-8 sm:mb-12">
           <button 
             onClick={() => showStep('step1')}
-            className="gradient-primary text-white px-8 py-4 rounded-xl font-semibold hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+            className="gradient-primary text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-sm sm:text-base w-full sm:w-auto max-w-sm"
           >
             <i className="fas fa-arrow-right mr-2"></i>
             Start Conversion Process
@@ -170,17 +170,17 @@ function OverviewContent({ showStep }: { showStep: (step: string) => void }) {
         </div>
 
         {/* Official Documentation Reference */}
-        <div className="mt-12">
+        <div className="mt-8 sm:mt-12">
           <Alert type="info">
-            <h4 className="font-semibold mb-3"><i className="fas fa-book mr-2"></i>Official Autodesk Documentation - Overview</h4>
-            <div className="bg-gray-50 p-4 rounded-lg border-l-4 border-blue-500">
-              <p className="text-sm text-gray-700 mb-3"><strong>Importing InfoSewer to InfoWorks ICM - Overview of Import Steps</strong></p>
-              <div className="space-y-3 text-sm text-gray-600">
+            <h4 className="font-semibold mb-3 text-sm sm:text-base"><i className="fas fa-book mr-2"></i>Official Autodesk Documentation - Overview</h4>
+            <div className="bg-gray-50 dark:bg-gray-800 p-3 sm:p-4 rounded-lg border-l-4 border-blue-500">
+              <p className="text-xs sm:text-sm text-gray-700 dark:text-gray-200 mb-3"><strong>Importing InfoSewer to InfoWorks ICM - Overview of Import Steps</strong></p>
+              <div className="space-y-2 sm:space-y-3 text-xs sm:text-sm text-gray-600 dark:text-gray-300">
                 <p><strong>Issue:</strong> Converting hydraulic models from one program to another requires a degree of dedication due to the intricacies involved in the process. It requires a certain investment of time and an understanding of both programs.</p>
                 
                 <p><strong>Solution:</strong> The process involves nine steps to import and configure data from InfoSewer to the format required by InfoWorks ICM. At a high level, the steps include:</p>
                 
-                <ul className="list-disc list-inside ml-4 space-y-1">
+                <ul className="list-disc list-inside ml-2 sm:ml-4 space-y-1 text-xs sm:text-sm">
                   <li><strong>Converting DBF Files to CSV:</strong> Use an Excel macro to convert DBF files within the .IEDB model folder to CSV format for importing network data into ICM.</li>
                   <li><strong>Converting Map.mdb to SHP:</strong> Use ESRI's ArcCatalog to convert the Map.mdb file within the .IEDB model folder to SHP format for importing network geometry into ICM.</li>
                   <li><strong>Importing CSV Files:</strong> Import network data from CSV files with configuration (CFG) files.</li>
@@ -189,7 +189,7 @@ function OverviewContent({ showStep }: { showStep: (step: string) => void }) {
                 </ul>
 
                 <p><strong>Nine Conversion Steps:</strong></p>
-                <ol className="list-decimal list-inside ml-4 space-y-1">
+                <ol className="list-decimal list-inside ml-2 sm:ml-4 space-y-1 text-xs sm:text-sm">
                   <li>Import Nodes and Create Subcatchments</li>
                   <li>Import Links</li>
                   <li>Import Manhole Hydraulics</li>
@@ -201,11 +201,11 @@ function OverviewContent({ showStep }: { showStep: (step: string) => void }) {
                   <li>Configuration for Rainfall-Dependent Infiltration and Inflow (RDII) hydrographs</li>
                 </ol>
               </div>
-              <p className="text-xs text-gray-500 mt-3 border-t pt-2">
-                Source: <a href="https://www.autodesk.com/support/technical/article/caas/sfdcarticles/sfdcarticles/Knowledge-Importing-InfoSewer-to-InfoWorks-ICM-Overview-of-all-Import-Steps.html" className="text-blue-600 hover:text-blue-800 underline" target="_blank" rel="noopener noreferrer">Official Autodesk Documentation</a>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-2 sm:mt-3 border-t border-gray-200 dark:border-gray-600 pt-2">
+                Source: <a href="https://www.autodesk.com/support/technical/article/caas/sfdcarticles/sfdcarticles/Knowledge-Importing-InfoSewer-to-InfoWorks-ICM-Overview-of-all-Import-Steps.html" className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline" target="_blank" rel="noopener noreferrer">Official Autodesk Documentation</a>
               </p>
-              <div className="mt-4">
-                <h5 className="text-xs font-semibold text-gray-600 mb-2">Source Material:</h5>
+              <div className="mt-3 sm:mt-4">
+                <h5 className="text-xs font-semibold text-gray-600 dark:text-gray-300 mb-2">Source Material:</h5>
                 <CodeBlock language="text" code={`Importing InfoSewer to InfoWorks ICM - Overview of Import Steps
 
 Issue:
