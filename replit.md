@@ -35,7 +35,8 @@ Preferred communication style: Simple, everyday language.
 
 ### Component Architecture
 - **UI Components**: Comprehensive shadcn/ui component library with Radix UI primitives
-- **Custom Components**: Specialized components for conversion workflow (Sidebar, StepContent, ProgressBar, Alert, CodeBlock)
+- **Custom Components**: Specialized components for conversion workflow (Sidebar, StepContent, ProgressBar, Alert, CodeBlock, ThemeSelector)
+- **Theme System**: 8 different color themes (Ocean, Sunset, Forest, Lavender, Corporate, Midnight, Autumn, Arctic) with dark/light mode toggle
 - **Responsive Design**: Mobile-first approach with custom hooks for device detection
 - **Accessibility**: Keyboard navigation support and ARIA compliance through Radix UI
 
@@ -45,6 +46,7 @@ Preferred communication style: Simple, everyday language.
 - **Hot Reload**: Vite HMR for instant development feedback
 - **Path Aliases**: Configured import aliases for clean module resolution
 - **Error Handling**: Runtime error overlay for development environment
+- **Theme System**: Multiple color themes with dark/light mode support and persistent storage
 
 ## External Dependencies
 
