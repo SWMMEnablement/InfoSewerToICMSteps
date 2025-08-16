@@ -59,7 +59,7 @@ function OverviewContent({ showStep }: { showStep: (step: string) => void }) {
       <div className="gradient-primary text-white">
         <div className="max-w-6xl mx-auto px-6 py-16">
           <div className="text-center">
-            <h1 className="text-4xl lg:text-5xl font-bold mb-6">InfoSewer to InfoWorks ICM</h1>
+            <h1 className="text-4xl lg:text-5xl font-bold mb-6">InfoSewer to ICM InfoWorks</h1>
             <p className="text-xl lg:text-2xl mb-8 opacity-90">Complete Conversion Guide</p>
             <div className="flex flex-wrap justify-center gap-4">
               <div className="glass-effect px-6 py-3 rounded-full">
@@ -90,7 +90,7 @@ function OverviewContent({ showStep }: { showStep: (step: string) => void }) {
               </div>
               <h3 className="font-semibold text-gray-800 mb-2">Software</h3>
               <ul className="text-gray-600 text-sm space-y-1">
-                <li>• InfoWorks ICM</li>
+                <li>• ICM InfoWorks</li>
                 <li>• Microsoft Excel</li>
                 <li>• Ruby interpreter</li>
               </ul>
@@ -147,7 +147,7 @@ function OverviewContent({ showStep }: { showStep: (step: string) => void }) {
                 <i className="fas fa-upload text-white text-2xl"></i>
               </div>
               <h3 className="font-semibold text-xl text-gray-800 mb-2">Import</h3>
-              <p className="text-gray-600">Import converted data into InfoWorks ICM</p>
+              <p className="text-gray-600">Import converted data into ICM InfoWorks</p>
             </div>
           </div>
         </div>
@@ -192,20 +192,31 @@ function Step1Content({ showStep }: { showStep: (step: string) => void }) {
         <div className="space-y-6">
           <Alert type="info">
             <h4 className="font-semibold mb-2">GitHub Repository</h4>
-            <p>Access the official Autodesk/Innovyze conversion tools from the GitHub repository.</p>
+            <p>Access the official Innovyze conversion tools from the GitHub repository:</p>
+            <div className="mt-3">
+              <a href="https://github.com/innovyze/Open-Source-Support" className="text-blue-600 hover:text-blue-800 underline text-sm font-mono" target="_blank" rel="noopener noreferrer">
+                <i className="fab fa-github mr-2"></i>
+                https://github.com/innovyze/Open-Source-Support
+              </a>
+            </div>
           </Alert>
 
           <div className="bg-white p-6 rounded-xl shadow-sm border">
             <h3 className="font-semibold text-gray-800 mb-4">Required Files Location</h3>
             <CodeBlock language="bash" code={`Repository Path:
-01 InfoWorks ICM/
+01 ICM InfoWorks/
 ├── 01 Ruby/
 │   └── 01 InfoWorks/
-│       └── 0060 - InfoSewer to InfoWorks ICM Conversion Tools/
+│       └── 0060 - InfoSewer to ICM InfoWorks Conversion Tools/
 │           ├── InfoSewer_VBA_DBF_CSV_Conversion.xlsm
 │           ├── *.cfg files
 │           ├── *.rb files
-│           └── SQL validation queries`} />
+│           └── SQL validation queries
+
+GitHub Links:
+• Main Repository: https://github.com/innovyze/Open-Source-Support
+• ICM Tools: https://github.com/innovyze/ICM-InfoWorks
+• Ruby Scripts: https://github.com/innovyze/Ruby-Scripts`} />
           </div>
 
           <div className="bg-white p-6 rounded-xl shadow-sm border">
@@ -324,10 +335,13 @@ function Step2Content({ showStep }: { showStep: (step: string) => void }) {
               <h3 className="font-semibold text-gray-800 mb-4">Locate IEDB Folder</h3>
               <div className="space-y-4">
                 <CodeBlock language="bash" code={`# Typical InfoSewer installation path
-C:\\Program Files\\Bentley\\InfoSewer\\IEDB\\
+C:\\Program Files\\Innovyze\\InfoSewer\\IEDB\\
 
 # Or user-specific location
-C:\\Users\\[Username]\\Documents\\InfoSewer\\IEDB\\`} />
+C:\\Users\\[Username]\\Documents\\InfoSewer\\IEDB\\
+
+# Alternative Innovyze installation path
+C:\\Program Files (x86)\\Innovyze\\InfoSewer\\IEDB\\`} />
                 
                 <Alert type="warning">
                   <p className="text-sm">Path may vary depending on your InfoSewer installation and configuration.</p>
@@ -610,7 +624,7 @@ function Step4Content({ showStep }: { showStep: (step: string) => void }) {
             <i className="fas fa-project-diagram text-white"></i>
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-gray-800">Step 4: Create InfoWorks ICM Database</h1>
+            <h1 className="text-3xl font-bold text-gray-800">Step 4: Create ICM InfoWorks Database</h1>
             <p className="text-gray-600">Set up a new ICM database for the converted data</p>
           </div>
         </div>
@@ -619,7 +633,7 @@ function Step4Content({ showStep }: { showStep: (step: string) => void }) {
       <div className="space-y-8">
         <Alert type="info">
           <h4 className="font-semibold mb-2">Database Creation</h4>
-          <p>Create a new InfoWorks ICM database to receive the converted InfoSewer data. This ensures a clean import process.</p>
+          <p>Create a new ICM InfoWorks database to receive the converted InfoSewer data. This ensures a clean import process.</p>
         </Alert>
 
         <div className="grid lg:grid-cols-2 gap-8">
@@ -661,8 +675,8 @@ function Step4Content({ showStep }: { showStep: (step: string) => void }) {
                   <span className="text-blue-600 font-semibold text-sm">1</span>
                 </div>
                 <div>
-                  <div className="font-medium text-gray-800">Launch InfoWorks ICM</div>
-                  <div className="text-sm text-gray-600">Open InfoWorks ICM software</div>
+                  <div className="font-medium text-gray-800">Launch ICM InfoWorks</div>
+                  <div className="text-sm text-gray-600">Open ICM InfoWorks software</div>
                 </div>
               </div>
 
@@ -903,7 +917,7 @@ function Step9Content({ showStep }: { showStep: (step: string) => void }) {
       <div className="space-y-8">
         <Alert type="success">
           <h4 className="font-semibold mb-2">Conversion Complete!</h4>
-          <p>Your InfoSewer model has been successfully converted to InfoWorks ICM. Run validation tests to ensure accuracy.</p>
+          <p>Your InfoSewer model has been successfully converted to ICM InfoWorks. Run validation tests to ensure accuracy.</p>
         </Alert>
 
         <div className="grid lg:grid-cols-2 gap-8">
