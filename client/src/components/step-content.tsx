@@ -311,6 +311,51 @@ https://www.autodesk.com/support/technical/article/caas/sfdcarticles/sfdcarticle
           </div>
         </div>
       </div>
+
+      {/* Official Documentation Reference */}
+      <div className="mt-12 mb-8">
+        <Alert type="info">
+          <h4 className="font-semibold mb-3"><i className="fas fa-book mr-2"></i>Official Autodesk Documentation - Step 1</h4>
+          <div className="bg-gray-50 p-4 rounded-lg border-l-4 border-blue-500">
+            <p className="text-sm text-gray-700 mb-3"><strong>Step 1: Import Nodes and Create Subcatchments</strong></p>
+            <div className="space-y-2 text-sm text-gray-600">
+              <p><strong>1. Convert DBF to CSV:</strong> Use VBA macro to convert all DBF files in the InfoSewer IEDB folder to CSV format for use in ODIC.</p>
+              <p><strong>2. Import NODE.CSV:</strong> Use ODIC to import data from NODE.CSV with configuration file Step01_InfoSewer_Node_csv.cfg. This imports ID and geometry (X-Y coordinates) for all nodes.</p>
+              <p><strong>3. Import MANHOLE.CSV:</strong> Use ODIC to import data from MANHOLE.CSV with configuration file Step01a_InfoSewer_Manhole_csv.cfg. Use Overwrite and Update based on asset ID options.</p>
+              <p><strong>4. Run SQL Script:</strong> Execute SET node_type = 'Outfall' to re-assign node type to outfall based on imported information.</p>
+              <p><strong>5. Create Subcatchments:</strong> Run SQL script Create_Subcatchments to create a subcatchment corresponding to each manhole.</p>
+              <p><strong>6. Create Boundaries:</strong> Use the 'Create dummy boundaries...' tool to create polygons for the newly created subcatchments.</p>
+            </div>
+            <p className="text-xs text-gray-500 mt-3 border-t pt-2">
+              Source: <a href="https://www.autodesk.com/support/technical/article/caas/sfdcarticles/sfdcarticles/Step-1-Import-Nodes-and-Create-Subcatchments-in-the-Import-of-InfoSewer-to-ICM-InfoWorks.html" className="text-blue-600 hover:text-blue-800 underline" target="_blank" rel="noopener noreferrer">Official Autodesk Documentation</a>
+            </p>
+            <div className="mt-4">
+              <h5 className="text-xs font-semibold text-gray-600 mb-2">Source Material:</h5>
+              <CodeBlock language="text" code={`Step 1: Import Nodes and Create Subcatchments
+
+The files required for conversion are located on the Innovyze GitHub repository.
+
+1. Convert the format of files within the InfoSewer IEDB folder from DBF to CSV for use in the Open Data Import Center (ODIC):
+This script, written in VBA (Visual Basic for Applications), converts all DBF files to CSV files in the IEDB folder and its subfolders. InfoWorks ICM cannot interact with DBF files, but can easily import CSV files.
+
+2. Use ODIC to import data from NODE.CSV, configuration file Step01_InfoSewer_Node_csv.cfg:
+This step imports the ID and geometry (X-Y coordinates) for all nodes (manholes, chambers, wetwells, and outlets). The imported nodes are assigned a user_text_10 = 'WW'.
+
+3. Use ODIC to import data from MANHOLE.CSV, configuration file Step01a_InfoSewer_Manhole_csv.cfg:
+This step imports the TYPE and DESCRIPT fields from the Manhole Information table in InfoSewer. The imported manholes are re-assigned a user_text_10 = 'Manhole'. Use Overwrite and Update based on asset ID options.
+
+4. Run the SQL script SET node_type = 'Outfall':
+This step will re-assign node type to outfall based on the information imported from MANHOLE.CSV.
+
+5. Run the SQL script Create_Subcatchments:
+Create a subcatchment corresponding to each manhole. Subcatchments will be used for flow loadings from InfoSewer.
+
+6. Use the 'Create dummy boundaries...' tool:
+Create polygons for the newly created subcatchments.`} />
+            </div>
+          </div>
+        </Alert>
+      </div>
     </div>
   );
 }
@@ -439,43 +484,34 @@ C:\\Program Files (x86)\\Innovyze\\InfoSewer\\IEDB\\`} />
         {/* Official Documentation Reference */}
         <div className="mt-12 mb-8">
           <Alert type="info">
-            <h4 className="font-semibold mb-3"><i className="fas fa-book mr-2"></i>Official Autodesk Documentation - Step 1</h4>
+            <h4 className="font-semibold mb-3"><i className="fas fa-book mr-2"></i>Official Autodesk Documentation - Step 2</h4>
             <div className="bg-gray-50 p-4 rounded-lg border-l-4 border-blue-500">
-              <p className="text-sm text-gray-700 mb-3"><strong>Step 1: Import Nodes and Create Subcatchments</strong></p>
+              <p className="text-sm text-gray-700 mb-3"><strong>Step 2: Import Links and Correct Geometry</strong></p>
               <div className="space-y-2 text-sm text-gray-600">
-                <p><strong>1. Convert DBF to CSV:</strong> Use VBA macro to convert all DBF files in the InfoSewer IEDB folder to CSV format for use in ODIC.</p>
-                <p><strong>2. Import NODE.CSV:</strong> Use ODIC to import data from NODE.CSV with configuration file Step01_InfoSewer_Node_csv.cfg. This imports ID and geometry (X-Y coordinates) for all nodes.</p>
-                <p><strong>3. Import MANHOLE.CSV:</strong> Use ODIC to import data from MANHOLE.CSV with configuration file Step01a_InfoSewer_Manhole_csv.cfg. Use Overwrite and Update based on asset ID options.</p>
-                <p><strong>4. Run SQL Script:</strong> Execute SET node_type = 'Outfall' to re-assign node type to outfall based on imported information.</p>
-                <p><strong>5. Create Subcatchments:</strong> Run SQL script Create_Subcatchments to create a subcatchment corresponding to each manhole.</p>
-                <p><strong>6. Create Boundaries:</strong> Use the 'Create dummy boundaries...' tool to create polygons for the newly created subcatchments.</p>
+                <p><strong>1. Import LINK.CSV:</strong> Use ODIC to import data from LINK.CSV with configuration file Step02_InfoSewer_Link_csv.cfg into the Conduit table. This imports link asset ID and connectivity.</p>
+                <p><strong>2. Convert Map.mdb:</strong> Use ArcCatalog to convert the contents of Map.mdb to shapefiles for geometry import.</p>
+                <p><strong>3. Import Geometry:</strong> Use ODIC to import link geometry data from PIPE.shp, FORCEMAIN.shp, and PUMP.shp using respective configuration files into appropriate tables.</p>
+                <p className="text-yellow-700 bg-yellow-50 p-2 rounded"><strong>Note:</strong> If error "Autogenerated Link IDs: multiple link objects at..." occurs, it can safely be ignored. ICM assigns Link IDs using syntax us_node_id.link_suffix.</p>
               </div>
               <p className="text-xs text-gray-500 mt-3 border-t pt-2">
-                Source: <a href="https://www.autodesk.com/support/technical/article/caas/sfdcarticles/sfdcarticles/Step-1-Import-Nodes-and-Create-Subcatchments-in-the-Import-of-InfoSewer-to-ICM-InfoWorks.html" className="text-blue-600 hover:text-blue-800 underline" target="_blank" rel="noopener noreferrer">Official Autodesk Documentation</a>
+                Source: <a href="https://knowledge.autodesk.com/article/Step-2-Import-Links-in-the-Import-of-InfoSewer-to-ICM-InfoWorks-using-ODIC" className="text-blue-600 hover:text-blue-800 underline" target="_blank" rel="noopener noreferrer">Official Autodesk Documentation</a>
               </p>
               <div className="mt-4">
                 <h5 className="text-xs font-semibold text-gray-600 mb-2">Source Material:</h5>
-                <CodeBlock language="text" code={`Step 1: Import Nodes and Create Subcatchments
+                <CodeBlock language="text" code={`Step 2: Import Links and Correct Geometry
 
 The files required for conversion are located on the Innovyze GitHub repository.
 
-1. Convert the format of files within the InfoSewer IEDB folder from DBF to CSV for use in the Open Data Import Center (ODIC):
-This script, written in VBA (Visual Basic for Applications), converts all DBF files to CSV files in the IEDB folder and its subfolders. InfoWorks ICM cannot interact with DBF files, but can easily import CSV files.
+1. Use ODIC to import data from LINK.CSV, configuration file Step02_InfoSewer_Link_csv.cfg, into the Conduit table:
+This step imports the link asset ID and connectivity (upstream and downstream node IDs) for all links. The imported conduits are assigned a user_text_10 = 'Pump'. This assignment will be updated when the link hydraulic information is imported.
 
-2. Use ODIC to import data from NODE.CSV, configuration file Step01_InfoSewer_Node_csv.cfg:
-This step imports the ID and geometry (X-Y coordinates) for all nodes (manholes, chambers, wetwells, and outlets). The imported nodes are assigned a user_text_10 = 'WW'.
+If the error "Autogenerated Link IDs: multiple link objects at..." occurs, it can safely be ignored. ICM assigns Link IDs using the syntax us_node_id.link_suffix. The link suffix defaults to 1 and must be unique. Therefore, when multiple links are connected to a single upstream node, ICM must generate additional suffixes.
 
-3. Use ODIC to import data from MANHOLE.CSV, configuration file Step01a_InfoSewer_Manhole_csv.cfg:
-This step imports the TYPE and DESCRIPT fields from the Manhole Information table in InfoSewer. The imported manholes are re-assigned a user_text_10 = 'Manhole'. Use Overwrite and Update based on asset ID options.
+2. Use ArcCatalog to convert the contents of Map.mdb to shapefiles:
+This step prepares the geometric data for import into ICM.
 
-4. Run the SQL script SET node_type = 'Outfall':
-This step will re-assign node type to outfall based on the information imported from MANHOLE.CSV.
-
-5. Run the SQL script Create_Subcatchments:
-Create a subcatchment corresponding to each manhole. Subcatchments will be used for flow loadings from InfoSewer.
-
-6. Use the 'Create dummy boundaries...' tool:
-Create polygons for the newly created subcatchments.`} />
+3. Use ODIC to import link geometry data from PIPE.shp, FORCEMAIN.shp, and PUMP.shp:
+Configuration files Step02a_InfoSewer_ConduitVertices_Pipe_shp.cfg, Step02b_InfoSewer_ConduitVertices_Forcemain_shp.cfg, Step02c_InfoSewer_ConduitVertices_Pump_shp.cfg into the appropriate tables (Conduit, Conduit, Pump). Since links have already been imported, use the Overwrite and Update based on asset ID options.`} />
               </div>
             </div>
           </Alert>
