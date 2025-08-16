@@ -453,6 +453,30 @@ C:\\Program Files (x86)\\Innovyze\\InfoSewer\\IEDB\\`} />
               <p className="text-xs text-gray-500 mt-3 border-t pt-2">
                 Source: <a href="https://knowledge.autodesk.com/article/Step-1-Import-Nodes-and-Create-Subcatchments-in-the-Import-of-InfoSewer-to-ICM-InfoWorks" className="text-blue-600 hover:text-blue-800 underline" target="_blank" rel="noopener noreferrer">Official Autodesk Documentation</a>
               </p>
+              <div className="mt-4">
+                <h5 className="text-xs font-semibold text-gray-600 mb-2">Source Material:</h5>
+                <CodeBlock language="text" code={`Step 1: Import Nodes and Create Subcatchments
+
+This procedure imports all InfoSewer manholes and creates subcatchments for InfoWorks ICM.
+
+1. Convert DBF Files to CSV:
+Use Excel VBA macro to convert all DBF files in the InfoSewer IEDB folder to CSV format for importing network data into ICM.
+
+2. Import NODE.CSV:
+Use ODIC to import data from NODE.CSV with configuration file Step01_InfoSewer_Node_csv.cfg. This imports ID and geometry (X-Y coordinates) for all nodes.
+
+3. Import MANHOLE.CSV:
+Use ODIC to import data from MANHOLE.CSV with configuration file Step01a_InfoSewer_Manhole_csv.cfg. Use Overwrite and Update based on asset ID options.
+
+4. Run SQL Script:
+Execute SET node_type = 'Outfall' to re-assign node type to outfall based on imported information.
+
+5. Create Subcatchments:
+Run SQL script Create_Subcatchments to create a subcatchment corresponding to each manhole.
+
+6. Create Boundaries:
+Use the 'Create dummy boundaries...' tool to create polygons for the newly created subcatchments.`} />
+              </div>
             </div>
           </Alert>
         </div>
@@ -638,6 +662,23 @@ End Sub`} />
             <p className="text-xs text-gray-500 mt-3 border-t pt-2">
               Source: <a href="https://knowledge.autodesk.com/article/Step-2-Import-Links-in-the-Import-of-InfoSewer-to-ICM-InfoWorks-using-ODIC" className="text-blue-600 hover:text-blue-800 underline" target="_blank" rel="noopener noreferrer">Official Autodesk Documentation</a>
             </p>
+            <div className="mt-4">
+              <h5 className="text-xs font-semibold text-gray-600 mb-2">Source Material:</h5>
+              <CodeBlock language="text" code={`Step 2: Import Links and Correct Geometry
+
+This procedure imports all InfoSewer conduits and corrects geometry issues.
+
+1. Import LINK.CSV:
+Use ODIC to import data from LINK.CSV with configuration file Step02_InfoSewer_Link_csv.cfg. This imports all conduit information including ID, upstream and downstream node IDs, lengths, and other hydraulic parameters.
+
+2. Run Geometry Correction:
+Execute SQL scripts to correct any geometry issues that may have occurred during the import process. This ensures proper connectivity between nodes and links.
+
+Important Notes:
+- Use Overwrite and Update based on asset ID options during import
+- Verify that all links are properly connected to their upstream and downstream nodes
+- Check for any missing or incorrectly imported conduit data`} />
+            </div>
           </div>
         </Alert>
       </div>
@@ -774,6 +815,20 @@ function Step4Content({ showStep }: { showStep: (step: string) => void }) {
               <p className="text-xs text-gray-500 mt-3 border-t pt-2">
                 Source: <a href="https://knowledge.autodesk.com/article/Step-3-Import-Manhole-Hydraulics-in-the-Import-of-InfoSewer-to-ICM-InfoWorks-using-ODIC" className="text-blue-600 hover:text-blue-800 underline" target="_blank" rel="noopener noreferrer">Official Autodesk Documentation</a>
               </p>
+              <div className="mt-4">
+                <h5 className="text-xs font-semibold text-gray-600 mb-2">Source Material:</h5>
+                <CodeBlock language="text" code={`Step 3: Import Manhole Hydraulics
+
+This procedure imports hydraulic properties for manholes from InfoSewer to InfoWorks ICM.
+
+Import MHHYD.CSV:
+Use ODIC to import data from MHHYD.CSV with configuration file Step03_InfoSewer_Manhole_HYD_csv.cfg. This imports manhole hydraulic information including invert elevations, rim elevations, and hydraulic losses.
+
+Important Notes:
+- Use Overwrite and Update based on asset ID options during import
+- Verify that all hydraulic parameters are correctly transferred
+- Check for any missing or zero values that might affect model performance`} />
+              </div>
             </div>
           </Alert>
         </div>
@@ -842,6 +897,21 @@ FROM Nodes_ICM.csv`} />
             <p className="text-xs text-gray-500 mt-3 border-t pt-2">
               Source: <a href="https://knowledge.autodesk.com/article/Step-4-Import-Link-Hydraulics-in-the-Import-of-InfoSewer-to-ICM-InfoWorks-using-ODIC" className="text-blue-600 hover:text-blue-800 underline" target="_blank" rel="noopener noreferrer">Official Autodesk Documentation</a>
             </p>
+            <div className="mt-4">
+              <h5 className="text-xs font-semibold text-gray-600 mb-2">Source Material:</h5>
+              <CodeBlock language="text" code={`Step 4: Import Link Hydraulics
+
+This procedure imports hydraulic properties for conduits from InfoSewer to InfoWorks ICM.
+
+Import LINKHYD.CSV:
+Use ODIC to import data from LINKHYD.CSV with configuration file Step04_InfoSewer_Link_HYD_csv.cfg. This imports conduit hydraulic information including pipe diameters, lengths, roughness coefficients, and slopes.
+
+Important Notes:
+- Use Overwrite and Update based on asset ID options during import
+- Verify that all pipe dimensions and hydraulic parameters are correctly transferred
+- Check slope calculations and ensure they match the original InfoSewer model
+- Validate roughness coefficients for different pipe materials`} />
+            </div>
           </div>
         </Alert>
       </div>
@@ -900,6 +970,21 @@ function Step6Content({ showStep }: { showStep: (step: string) => void }) {
             <p className="text-xs text-gray-500 mt-3 border-t pt-2">
               Source: <a href="https://knowledge.autodesk.com/article/Importing-InfoSewer-to-InfoWorks-ICM---Step-5-Import-Pump-Hydraulics-in-the-Import-of-InfoSewer-to-ICM-InfoWorks-using-ODIC" className="text-blue-600 hover:text-blue-800 underline" target="_blank" rel="noopener noreferrer">Official Autodesk Documentation</a>
             </p>
+            <div className="mt-4">
+              <h5 className="text-xs font-semibold text-gray-600 mb-2">Source Material:</h5>
+              <CodeBlock language="text" code={`Step 5: Import Pump Hydraulics
+
+This procedure imports pump hydraulic properties from InfoSewer to InfoWorks ICM.
+
+Import PUMPHYD.CSV:
+Use ODIC to import data from PUMPHYD.CSV with configuration file Step05_InfoSewer_Pump_HYD_csv.cfg. This imports pump hydraulic information including pump curves, capacity, head, efficiency, and operational parameters.
+
+Important Notes:
+- Use Overwrite and Update based on asset ID options during import
+- Verify that all pump curves and operational parameters are correctly transferred
+- Check pump station configurations and wet well parameters
+- Validate pump control settings and operational schedules`} />
+            </div>
           </div>
         </Alert>
       </div>
@@ -958,6 +1043,22 @@ function Step7Content({ showStep }: { showStep: (step: string) => void }) {
             <p className="text-xs text-gray-500 mt-3 border-t pt-2">
               Source: <a href="https://knowledge.autodesk.com/article/Step-6-Import-Pump-Controls-in-the-Import-of-InfoSewer-to-ICM-InfoWorks-using-ODIC" className="text-blue-600 hover:text-blue-800 underline" target="_blank" rel="noopener noreferrer">Official Autodesk Documentation</a>
             </p>
+            <div className="mt-4">
+              <h5 className="text-xs font-semibold text-gray-600 mb-2">Source Material:</h5>
+              <CodeBlock language="text" code={`Step 6: Import Pump Controls
+
+This procedure imports pump control settings and operational parameters from InfoSewer to InfoWorks ICM.
+
+Import CONTROLS.CSV:
+Use ODIC to import data from CONTROLS.CSV with configuration file Step06_InfoSewer_Controls_csv.cfg. This imports pump control information including start/stop levels, operational schedules, and control logic.
+
+Important Notes:
+- Use Overwrite and Update based on asset ID options during import
+- Verify that all control parameters are correctly transferred
+- Check pump operational logic and timing sequences
+- Validate wet well level controls and alarm settings
+- Ensure proper integration with pump hydraulic data from previous steps`} />
+            </div>
           </div>
         </Alert>
       </div>
@@ -1015,6 +1116,20 @@ function Step8Content({ showStep }: { showStep: (step: string) => void }) {
             <p className="text-xs text-gray-500 mt-3 border-t pt-2">
               Source: <a href="https://knowledge.autodesk.com/article/Step-7-Import-Pump-Controls-in-the-Import-of-InfoSewer-to-ICM-InfoWorks-using-ODIC" className="text-blue-600 hover:text-blue-800 underline" target="_blank" rel="noopener noreferrer">Official Autodesk Documentation</a>
             </p>
+            <div className="mt-4">
+              <h5 className="text-xs font-semibold text-gray-600 mb-2">Source Material:</h5>
+              <CodeBlock language="text" code={`Step 7: Import Subcatchment Loadings
+
+This procedure imports subcatchment loading information from InfoSewer into InfoWorks ICM.
+
+Import MHHYD.CSV:
+Use ODIC to import data from MHHYD.CSV with configuration file Step07_InfoSewer_subcatchment_dwf_mhhyd_csv.cfg.
+
+This step imports the LOAD and PATTERN information from InfoSewer into the Subcatchment table in ICM into the user number (loads) and user text (patterns) fields.
+
+Important Note:
+User number and user text fields are not used in simulations, so this data must be further investigated and assigned to the appropriate fields prior to finalizing the conversion. Use Overwrite and Only update existing objects options.`} />
+            </div>
           </div>
         </Alert>
       </div>
@@ -1034,6 +1149,24 @@ function Step8Content({ showStep }: { showStep: (step: string) => void }) {
             <p className="text-xs text-gray-500 mt-3 border-t pt-2">
               Source: <a href="https://knowledge.autodesk.com/article/Step-8-Import-Subcatchment-DWF-in-the-Import-of-InfoSewer-to-ICM-InfoWorks-using-ODIC" className="text-blue-600 hover:text-blue-800 underline" target="_blank" rel="noopener noreferrer">Official Autodesk Documentation</a>
             </p>
+            <div className="mt-4">
+              <h5 className="text-xs font-semibold text-gray-600 mb-2">Source Material:</h5>
+              <CodeBlock language="text" code={`Step 8: Import Wet Well Hydraulics
+
+This procedure finalizes the hydraulic parameters and prepares the model for validation.
+
+1. Run SQL Query:
+Execute SET calculate wet well hydraulics to correct the wet well hydraulic parameters imported from WWELLHYD.CSV. This converts imported diameters to shaft and chamber areas and converts the maximum wet well level to ground level.
+
+2. Choose Forcemain Solution:
+Run either 'Use full solution for forcemains' or 'Use forcemain solution for forcemains' SQL query.
+
+Full solution: Sets Manning's n roughness values to 0.014 for forcemains.
+Forcemain solution: Sets roughness type to HW for forcemains.
+
+3. Run Validation:
+In ICM, run the validation tool to ensure all imported and adjusted data is accurate. If errors occur, revisit previous steps and correct discrepancies before proceeding.`} />
+            </div>
           </div>
         </Alert>
       </div>
@@ -1167,6 +1300,21 @@ function Step9Content({ showStep }: { showStep: (step: string) => void }) {
               <p className="text-xs text-gray-500 mt-3 border-t pt-2">
                 Source: <a href="https://knowledge.autodesk.com/article/Step-9-rdii-hydrograph-csv-cfg-Configuration-for-Rainfall-Dependent-Infiltration-and-Inflow-RDII-hydrographs" className="text-blue-600 hover:text-blue-800 underline" target="_blank" rel="noopener noreferrer">Official Autodesk Documentation</a>
               </p>
+              <div className="mt-4">
+                <h5 className="text-xs font-semibold text-gray-600 mb-2">Source Material:</h5>
+                <CodeBlock language="text" code={`Step 9: Configuration for Rainfall-Dependent Infiltration and Inflow (RDII) Hydrographs
+
+This is an optional conversion step for InfoSewer models utilizing the implicit tri-triangle unit hydrograph method (a modified RTK method).
+
+1. Import HYDROGRH.CSV:
+Use ODIC to import data from HYDROGRH.CSV with configuration file Step09_rdii_hydrograph_csv.cfg. This imports the implicit pattern parameters (RTK) from InfoSewer into the RTK hydrograph table in ICM.
+
+2. Run SQL Script:
+Execute Assign R Values script to calculate corrected R values and assign them to the corresponding field in ICM.
+
+Note:
+The T and K values are imported directly into corresponding ICM fields. The R values differ between InfoSewer and ICM, so R values from InfoSewer are imported to user number fields for later modification.`} />
+              </div>
             </div>
           </Alert>
         </div>
