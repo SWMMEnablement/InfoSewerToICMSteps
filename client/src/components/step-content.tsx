@@ -114,6 +114,176 @@ function DocumentationContent({ showStep }: { showStep: (step: string) => void }
           </div>
         </Alert>
 
+        {/* InfoSewer Project Structure */}
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+          <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-4 text-lg">
+            <i className="fas fa-folder-tree mr-2"></i>
+            InfoSewer Project Structure & File Organization
+          </h3>
+          
+          <div className="space-y-6">
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 className="font-medium text-gray-700 dark:text-gray-200 mb-3">
+                  <i className="fas fa-sitemap mr-2 text-blue-500"></i>
+                  Basic Files in InfoSewer
+                </h4>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm border border-gray-200 dark:border-gray-600 rounded-lg">
+                    <thead className="bg-gray-50 dark:bg-gray-700">
+                      <tr>
+                        <th className="px-3 py-2 text-left font-medium text-gray-700 dark:text-gray-200 border-b border-gray-200 dark:border-gray-600">Each Project Contains</th>
+                        <th className="px-3 py-2 text-left font-medium text-gray-700 dark:text-gray-200 border-b border-gray-200 dark:border-gray-600">Project Storage Structure</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Network Map</td>
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Network Schematic - Stored as *.MXD File</td>
+                      </tr>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Feature Attributes</td>
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Database Tables and Modeling Files - Stored as *.IEDB Folder</td>
+                      </tr>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Modeling Parameters</td>
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Results Directory - *.OUT Folder (post-successful Run)</td>
+                      </tr>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Model Solution and Results</td>
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300"></td>
+                      </tr>
+                      <tr>
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Model Scenarios</td>
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div>
+                <h4 className="font-medium text-gray-700 dark:text-gray-200 mb-3">
+                  <i className="fas fa-water mr-2 text-green-500"></i>
+                  Basic Files in InfoSWMM
+                </h4>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm border border-gray-200 dark:border-gray-600 rounded-lg">
+                    <thead className="bg-gray-50 dark:bg-gray-700">
+                      <tr>
+                        <th className="px-3 py-2 text-left font-medium text-gray-700 dark:text-gray-200 border-b border-gray-200 dark:border-gray-600">Each Project Contains</th>
+                        <th className="px-3 py-2 text-left font-medium text-gray-700 dark:text-gray-200 border-b border-gray-200 dark:border-gray-600">Project Storage Structure</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Network Map</td>
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Network Schematic - Stored as *.MXD File</td>
+                      </tr>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Feature Attributes</td>
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Database Tables and Modeling Files - Stored as *.ISDB Folder</td>
+                      </tr>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Modeling Parameters</td>
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Results Directory - *.OUT Folder (post-successful Run)</td>
+                      </tr>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Model Solution and Results</td>
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300"></td>
+                      </tr>
+                      <tr>
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Model Scenarios</td>
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300"></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 className="font-medium text-gray-700 dark:text-gray-200 mb-3">
+                  <i className="fas fa-file-alt mr-2 text-orange-500"></i>
+                  InfoSewer Scenario Files
+                </h4>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm border border-gray-200 dark:border-gray-600 rounded-lg">
+                    <thead className="bg-gray-50 dark:bg-gray-700">
+                      <tr>
+                        <th className="px-3 py-2 text-left font-medium text-gray-700 dark:text-gray-200 border-b border-gray-200 dark:border-gray-600">File Type</th>
+                        <th className="px-3 py-2 text-left font-medium text-gray-700 dark:text-gray-200 border-b border-gray-200 dark:border-gray-600">File Extensions and Names</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Text Files</td>
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300 font-mono text-xs">~SSNINP, ~DGNINP, ~EPSINP, STEADY.RPT, DESIGN.RPT, EPS.RPT</td>
+                      </tr>
+                      <tr>
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Binary Files</td>
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300 font-mono text-xs">STEADY.OUT, EPS.OUT</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div>
+                <h4 className="font-medium text-gray-700 dark:text-gray-200 mb-3">
+                  <i className="fas fa-file-code mr-2 text-purple-500"></i>
+                  InfoSWMM Scenario Files
+                </h4>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm border border-gray-200 dark:border-gray-600 rounded-lg">
+                    <thead className="bg-gray-50 dark:bg-gray-700">
+                      <tr>
+                        <th className="px-3 py-2 text-left font-medium text-gray-700 dark:text-gray-200 border-b border-gray-200 dark:border-gray-600">File Type</th>
+                        <th className="px-3 py-2 text-left font-medium text-gray-700 dark:text-gray-200 border-b border-gray-200 dark:border-gray-600">File Extensions and Names</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Text Files</td>
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300 font-mono text-xs">HYDQUA.INP, HYDQUA.RPT.TXT, HYDQUA.HTML</td>
+                      </tr>
+                      <tr>
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Binary Files</td>
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300 font-mono text-xs">HYDQUA.OUT</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <Alert type="info">
+              <h4 className="font-semibold mb-2">Key Differences Between InfoSewer and InfoSWMM</h4>
+              <div className="grid md:grid-cols-2 gap-4 text-sm">
+                <div>
+                  <p className="font-medium mb-2">InfoSewer (*.IEDB):</p>
+                  <ul className="space-y-1 ml-4">
+                    <li>• Sanitary sewer collection systems</li>
+                    <li>• Steady-state and extended period simulation</li>
+                    <li>• Design analysis capabilities</li>
+                    <li>• Multiple report files (STEADY.RPT, DESIGN.RPT, EPS.RPT)</li>
+                  </ul>
+                </div>
+                <div>
+                  <p className="font-medium mb-2">InfoSWMM (*.ISDB):</p>
+                  <ul className="space-y-1 ml-4">
+                    <li>• Stormwater and combined sewer systems</li>
+                    <li>• Dynamic rainfall-runoff modeling</li>
+                    <li>• Hydrologic and hydraulic analysis</li>
+                    <li>• Single comprehensive output format (HYDQUA.*)</li>
+                  </ul>
+                </div>
+              </div>
+            </Alert>
+          </div>
+        </div>
+
         {/* InfoSewer System Requirements */}
         <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
           <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-4 text-lg">
