@@ -583,6 +583,68 @@ C:\\\\YourProject.IEDB\\\\
                 </div>
               </div>
             </Alert>
+
+            <div className="mt-6">
+              <h4 className="font-medium text-gray-700 dark:text-gray-200 mb-3">
+                <i className="fas fa-table mr-2 text-blue-500"></i>
+                Example: PIPEHYD.DBF File Structure
+              </h4>
+              <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
+                <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">Sample data structure from InfoSewer PIPEHYD.DBF file in the IEDB folder:</p>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm border border-gray-200 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-800">
+                    <thead className="bg-gray-100 dark:bg-gray-700">
+                      <tr>
+                        <th className="px-3 py-2 text-left font-medium text-gray-700 dark:text-gray-200 border-b border-gray-200 dark:border-gray-600">Field</th>
+                        <th className="px-3 py-2 text-left font-medium text-gray-700 dark:text-gray-200 border-b border-gray-200 dark:border-gray-600">Sample Value</th>
+                        <th className="px-3 py-2 text-left font-medium text-gray-700 dark:text-gray-200 border-b border-gray-200 dark:border-gray-600">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300 font-mono">ID</td>
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300">53</td>
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Pipe identification number</td>
+                      </tr>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300 font-mono">FROM_INV</td>
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300">292.5</td>
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Upstream invert elevation</td>
+                      </tr>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300 font-mono">TO_INV</td>
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300">291</td>
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Downstream invert elevation</td>
+                      </tr>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300 font-mono">LENGTH</td>
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300">624</td>
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Pipe length</td>
+                      </tr>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300 font-mono">DIAMETER</td>
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300">12</td>
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Pipe diameter (inches)</td>
+                      </tr>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300 font-mono">COEFF</td>
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300">0.014</td>
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Manning's roughness coefficient</td>
+                      </tr>
+                      <tr>
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300 font-mono">PARALLEL</td>
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300">0</td>
+                        <td className="px-3 py-2 text-gray-600 dark:text-gray-300">Number of parallel pipes</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-3">
+                  <i className="fas fa-info-circle mr-1"></i>
+                  This data structure will be converted to CSV format for import into ICM InfoWorks using ODIC configuration files.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
 
