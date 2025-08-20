@@ -329,7 +329,7 @@ function DocumentationContent({ showStep }: { showStep: (step: string) => void }
                   </div>
                   <div>
                     <div className="font-medium text-gray-800 dark:text-gray-100">DBF Files (dBase Database)</div>
-                    <div className="text-sm text-gray-600 dark:text-gray-300">NODE.DBF, LINK.DBF, MANHOLE.DBF, PIPE.DBF, etc.</div>
+                    <div className="text-sm text-gray-600 dark:text-gray-300">NODE.DBF, LINK.DBF, MANHOLE.DBF, PIPE.DBF, etc. - Convert to CSV for ICM import</div>
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
@@ -358,6 +358,231 @@ C:\\\\YourProject.IEDB\\\\
 ├── HYDROGRH.DBF       # RDII hydrographs
 ├── Map.mdb            # Spatial geometry
 └── [Other DBF files]  # Additional data tables`} />
+          </div>
+        </div>
+
+        {/* Complete CSV File Reference */}
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+          <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-4 text-lg">
+            <i className="fas fa-file-csv mr-2"></i>
+            Complete InfoSewer CSV File Reference
+          </h3>
+          
+          <Alert type="info">
+            <h4 className="font-semibold mb-2">Conversion Note</h4>
+            <p className="text-sm">The CSV file extensions shown below are converted from DBF files for import to ICM InfoWorks. In the original IEDB folder, these files have the .DBF extension.</p>
+          </Alert>
+
+          <div className="mt-6 space-y-6">
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 className="font-medium text-gray-700 dark:text-gray-200 mb-3">
+                  <i className="fas fa-network-wired mr-2 text-blue-500"></i>
+                  Network Elements & Core Data
+                </h4>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-xs border border-gray-200 dark:border-gray-600 rounded-lg">
+                    <thead className="bg-gray-50 dark:bg-gray-700">
+                      <tr>
+                        <th className="px-2 py-1 text-left font-medium text-gray-700 dark:text-gray-200 border-b border-gray-200 dark:border-gray-600">File</th>
+                        <th className="px-2 py-1 text-left font-medium text-gray-700 dark:text-gray-200 border-b border-gray-200 dark:border-gray-600">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300 font-mono">NODE.csv</td>
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300">Node element information</td>
+                      </tr>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300 font-mono">LINK.csv</td>
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300">Link element information</td>
+                      </tr>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300 font-mono">MANHOLE.csv</td>
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300">Manhole data</td>
+                      </tr>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300 font-mono">PIPE.csv</td>
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300">Pipe element information</td>
+                      </tr>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300 font-mono">PUMP.csv</td>
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300">Pump data</td>
+                      </tr>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300 font-mono">WWELL.csv</td>
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300">Well data</td>
+                      </tr>
+                      <tr>
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300 font-mono">VERTEX.csv</td>
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300">Vertex data</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div>
+                <h4 className="font-medium text-gray-700 dark:text-gray-200 mb-3">
+                  <i className="fas fa-cogs mr-2 text-green-500"></i>
+                  Hydraulic & Design Data
+                </h4>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-xs border border-gray-200 dark:border-gray-600 rounded-lg">
+                    <thead className="bg-gray-50 dark:bg-gray-700">
+                      <tr>
+                        <th className="px-2 py-1 text-left font-medium text-gray-700 dark:text-gray-200 border-b border-gray-200 dark:border-gray-600">File</th>
+                        <th className="px-2 py-1 text-left font-medium text-gray-700 dark:text-gray-200 border-b border-gray-200 dark:border-gray-600">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300 font-mono">MHHYD.csv</td>
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300">MH hydraulic data</td>
+                      </tr>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300 font-mono">PIPEHYD.csv</td>
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300">Pipe hydraulic data</td>
+                      </tr>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300 font-mono">PUMPHYD.csv</td>
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300">Pump hydraulic data</td>
+                      </tr>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300 font-mono">WWELLHYD.csv</td>
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300">Well hydraulic data</td>
+                      </tr>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300 font-mono">PIPEDGN.csv</td>
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300">Pipe design data</td>
+                      </tr>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300 font-mono">HYDROGRH.csv</td>
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300">Hydrographic data</td>
+                      </tr>
+                      <tr>
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300 font-mono">CONTROL.csv</td>
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300">Control data</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 className="font-medium text-gray-700 dark:text-gray-200 mb-3">
+                  <i className="fas fa-chart-line mr-2 text-orange-500"></i>
+                  Analysis & Output Data
+                </h4>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-xs border border-gray-200 dark:border-gray-600 rounded-lg">
+                    <thead className="bg-gray-50 dark:bg-gray-700">
+                      <tr>
+                        <th className="px-2 py-1 text-left font-medium text-gray-700 dark:text-gray-200 border-b border-gray-200 dark:border-gray-600">File</th>
+                        <th className="px-2 py-1 text-left font-medium text-gray-700 dark:text-gray-200 border-b border-gray-200 dark:border-gray-600">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300 font-mono">MHOUT.csv</td>
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300">MH output data</td>
+                      </tr>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300 font-mono">PIPEOUT.csv</td>
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300">Pipe output data</td>
+                      </tr>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300 font-mono">PUMPOUT.csv</td>
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300">Pump output data</td>
+                      </tr>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300 font-mono">WWELLOUT.csv</td>
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300">Well output data</td>
+                      </tr>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300 font-mono">REPORT.csv</td>
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300">Report data</td>
+                      </tr>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300 font-mono">FORCEOUT.csv</td>
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300">Force output data</td>
+                      </tr>
+                      <tr>
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300 font-mono">OUTLEOUT.csv</td>
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300">Outlet output data</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div>
+                <h4 className="font-medium text-gray-700 dark:text-gray-200 mb-3">
+                  <i className="fas fa-sliders-h mr-2 text-purple-500"></i>
+                  Configuration & Settings
+                </h4>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-xs border border-gray-200 dark:border-gray-600 rounded-lg">
+                    <thead className="bg-gray-50 dark:bg-gray-700">
+                      <tr>
+                        <th className="px-2 py-1 text-left font-medium text-gray-700 dark:text-gray-200 border-b border-gray-200 dark:border-gray-600">File</th>
+                        <th className="px-2 py-1 text-left font-medium text-gray-700 dark:text-gray-200 border-b border-gray-200 dark:border-gray-600">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300 font-mono">SCENARIO.csv</td>
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300">Scenario data</td>
+                      </tr>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300 font-mono">RUNOPT.csv</td>
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300">Run options</td>
+                      </tr>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300 font-mono">PATTERN.csv</td>
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300">Pattern information</td>
+                      </tr>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300 font-mono">TIME.csv</td>
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300">Time settings</td>
+                      </tr>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300 font-mono">CURVE.csv</td>
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300">Curve data</td>
+                      </tr>
+                      <tr className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300 font-mono">COSTING.csv</td>
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300">Costing information</td>
+                      </tr>
+                      <tr>
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300 font-mono">STATUS.csv</td>
+                        <td className="px-2 py-1 text-gray-600 dark:text-gray-300">Status data</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+            <Alert type="warning">
+              <h4 className="font-semibold mb-2">Additional Specialized Files</h4>
+              <div className="grid md:grid-cols-3 gap-4 text-xs">
+                <div>
+                  <p className="font-medium mb-1">Link Types:</p>
+                  <p>ALINK, CBLINK, DMLINK, HLLINK, MOLINK, XNGLINK</p>
+                </div>
+                <div>
+                  <p className="font-medium mb-1">Node Types:</p>
+                  <p>ANODE, CBNODE, DMNODE, HLNODE, MONODE, XNGNODE</p>
+                </div>
+                <div>
+                  <p className="font-medium mb-1">Special Data:</p>
+                  <p>ANNO, GIS, FLD, LUC, NCP files and more</p>
+                </div>
+              </div>
+            </Alert>
           </div>
         </div>
 

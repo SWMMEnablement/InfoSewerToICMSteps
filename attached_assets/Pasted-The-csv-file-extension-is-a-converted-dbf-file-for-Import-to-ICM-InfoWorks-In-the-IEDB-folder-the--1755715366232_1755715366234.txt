@@ -1,0 +1,100 @@
+The csv file extension is a converted dbf file for Import to ICM InfoWorks.  In the IEDB folder the original extension will be .dbf
+
+FILENAME	DESCRIPTION
+ALINK.csv	File containing information about a specific type of link element
+ANNO.csv	File containing annotation data
+ANNODATA.csv	File containing additional annotation data
+ANODE.csv	File containing information about a specific type of node element
+CBLINK.csv	File containing information about a specific type of link element
+CBNODE.csv	File containing information about a specific type of node element
+CHAMBOUT.csv	File containing data related to chamber output
+CONTOUR.csv	File containing contour data
+CONTROL.csv	File containing control data
+COSTING.csv	File containing costing information
+CTRDATA.csv	File containing control data
+CTRLSET.csv	File containing control settings
+CURVE.csv	File containing curve data
+CUVDATA.csv	File containing data related to culverts
+DISCGHGL.csv	File containing information about discharge GHGLs
+DMLINK.csv	File containing information about a specific type of link element
+DMNODE.csv	File containing information about a specific type of node element
+FDMDATA.csv	File containing FDM data
+FDSDATA.csv	File containing FDS data
+FLDMAP.csv	File containing FLD map data
+FLDSET.csv	File containing FLD settings
+FORCEOUT.csv	File containing force output data
+FOXUSER.csv	File containing user data
+GISFDATA.csv	File containing GISF data
+GISGATE.csv	File containing GIS gate data
+HLLINK.csv	File containing information about a specific type of link element
+HLNODE.csv	File containing information about a specific type of node element
+HYDROGRH.csv	File containing hydrographic data
+LINK.csv	File containing information about a specific type of link element
+LINK.DBF.csv	File containing information about a specific type of link element
+LKHLINKS.csv	File containing LKH links data
+LUCOEFF.csv	File containing LUC coefficients
+MANCOVER.csv	File containing manhole cover data
+MANHOLE.csv	File containing manhole data
+MAPSSLK.csv	File containing MAPSS link data
+MAPSSND.csv	File containing MAPSS node data
+MHHYD.csv	File containing MH hydraulic data
+MHOFFSET.csv	File containing MH offset data
+MHOUT.csv	File containing MH output data
+MHSET.csv	File containing MH settings
+MHSHP.csv	File containing MH shape data
+MOLINK.csv	File containing information about a specific type of link element
+MONODE.csv	File containing information about a specific type of node element
+NAMEVIEW.csv	File containing name view data
+NCPIDGN.csv	File containing NCP IDGN data
+NCPIXSEC.csv	File containing NCP IXSEC data
+NDHLINKS.csv	File containing NDH links data
+NDSOURCE.csv	File containing ND source data
+NODE.csv	File containing information about a specific type of node element
+NODE.DBF.csv	File containing information about a specific type of node element
+OPERSET.csv	File containing operator settings
+OUTLEOUT.csv	File containing outlet output data
+PATNDATA.csv	File containing pattern data
+PATTERN.csv	File containing pattern information
+PIDGNSET.csv	File containing PIDGN settings
+PIIISET.csv	File containing PIII settings
+PIPE.csv	File containing information about a specific type of pipe element
+
+
+FILENAME	DESCRIPTION
+PIPECNST.csv	File containing pipe construction data
+PIPEDGN.csv	File containing pipe design data
+PIPEHYD.csv	File containing pipe hydraulic data
+PIPEII.csv	File containing pipe II data
+PIPEOUT.csv	File containing pipe output data
+PIPESET.csv	File containing pipe settings
+PIPESHP.csv	File containing pipe shape data
+PIPESPLT.csv	File containing pipe split data
+PIPEWQ.csv	File containing pipe water quality data
+PISPTSET.csv	File containing PI/SP/TSET data
+POLYREG.csv	File containing polygon regression data
+PUMP.csv	File containing pump data
+PUMPHYD.csv	File containing pump hydraulic data
+PUMPOUT.csv	File containing pump output data
+PUMPSET.csv	File containing pump settings
+QRYSET.csv	File containing query settings
+QSETDATA.csv	File containing query set data
+QSSSLK.csv	File containing QSSS link data
+QSSSND.csv	File containing QSSS node data
+QUERY.csv	File containing query data
+RELATE.csv	File containing data about element relationships
+REPORT.csv	File containing report data
+RPTDATA.csv	File containing report data
+RUNOPT.csv	File containing run options
+SCENARIO.csv	File containing scenario data
+SELSET.csv	File containing selection set data
+STATUS.csv	File containing status data
+TIME.csv	File containing time settings
+VERTEX.csv	File containing vertex data
+WWELL.csv	File containing well data
+WWELLHYD.csv	File containing well hydraulic data
+WWELLOUT.csv	File containing well output data
+WWELLSET.csv	File containing well settings
+XLOAD.csv	File containing external load data
+XLOADSET.csv	File containing external load settings
+XNGLINK.csv	File containing cross-nodal links data
+XNGNODE.csv	File containing cross-nodal node data
