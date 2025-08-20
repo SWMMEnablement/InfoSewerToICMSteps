@@ -854,6 +854,254 @@ C:\\\\YourProject.IEDB\\\\
           </div>
         </div>
 
+        {/* InfoSewer Hydraulic Modeling Procedures */}
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+          <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-4 text-lg">
+            <i className="fas fa-calculator mr-2"></i>
+            InfoSewer Hydraulic Modeling Procedures
+          </h3>
+          
+          <div className="space-y-6">
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 className="font-medium text-gray-700 dark:text-gray-200 mb-3">
+                  <i className="fas fa-chart-line mr-2 text-blue-500"></i>
+                  Steady State Analysis Features
+                </h4>
+                <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+                  <li><i className="fas fa-check text-green-500 mr-2"></i>Constant flow conditions at specific time points</li>
+                  <li><i className="fas fa-check text-green-500 mr-2"></i>Peak flow scenarios and capacity assessment</li>
+                  <li><i className="fas fa-check text-green-500 mr-2"></i>Transition between gravity and pressurized flow</li>
+                  <li><i className="fas fa-check text-green-500 mr-2"></i>One-dimensional incompressible flow calculations</li>
+                  <li><i className="fas fa-check text-green-500 mr-2"></i>Rational Method for stormwater peak flows</li>
+                  <li><i className="fas fa-check text-green-500 mr-2"></i>IDF curves for return period analysis</li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 className="font-medium text-gray-700 dark:text-gray-200 mb-3">
+                  <i className="fas fa-drafting-compass mr-2 text-green-500"></i>
+                  Network Design Capabilities
+                </h4>
+                <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+                  <li><i className="fas fa-check text-green-500 mr-2"></i>Explicit design method for independent pipe sizing</li>
+                  <li><i className="fas fa-check text-green-500 mr-2"></i>Pipe size and slope determination for given flows</li>
+                  <li><i className="fas fa-check text-green-500 mr-2"></i>Velocity and cover depth optimization</li>
+                  <li><i className="fas fa-check text-green-500 mr-2"></i>Existing system capacity analysis</li>
+                  <li><i className="fas fa-check text-green-500 mr-2"></i>Replacement and parallel pipe design</li>
+                  <li><i className="fas fa-check text-green-500 mr-2"></i>Cost minimization with design criteria</li>
+                </ul>
+              </div>
+            </div>
+
+            <Alert type="info">
+              <h4 className="font-semibold mb-2">Design Criteria & Constraints</h4>
+              <div className="grid md:grid-cols-2 gap-4 text-sm">
+                <div>
+                  <p className="font-medium mb-2">Velocity Requirements:</p>
+                  <ul className="space-y-1 ml-4">
+                    <li>• Minimum velocity ≥2 ft/s (prevent deposition)</li>
+                    <li>• Maximum velocity ≤10 ft/s (prevent scour)</li>
+                    <li>• User-specified limits based on system needs</li>
+                  </ul>
+                </div>
+                <div>
+                  <p className="font-medium mb-2">Analysis Types:</p>
+                  <ul className="space-y-1 ml-4">
+                    <li>• Analysis criteria: Existing pipe capacity</li>
+                    <li>• Design criteria: New pipe sizing</li>
+                    <li>• d/D ratios trigger design recommendations</li>
+                  </ul>
+                </div>
+              </div>
+            </Alert>
+          </div>
+        </div>
+
+        {/* Force Main & Pump Station Design */}
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+          <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-4 text-lg">
+            <i className="fas fa-pump-soap mr-2"></i>
+            Force Main Modeling & Pump Station Design
+          </h3>
+          
+          <div className="space-y-6">
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 className="font-medium text-gray-700 dark:text-gray-200 mb-3">
+                  <i className="fas fa-flask mr-2 text-blue-500"></i>
+                  System Components
+                </h4>
+                <div className="bg-gray-50 dark:bg-gray-700 p-3 rounded-lg">
+                  <ol className="space-y-1 text-sm text-gray-600 dark:text-gray-300">
+                    <li><strong>1. Wet Well:</strong> Basin collecting wastewater inflow</li>
+                    <li><strong>2. Pump:</strong> Device providing hydraulic head to fluid</li>
+                    <li><strong>3. Pump Curve:</strong> Head-flow relationship defining performance</li>
+                    <li><strong>4. Pressure Node:</strong> Measurement point after pump</li>
+                    <li><strong>5. Force Main:</strong> Pressurized pipe carrying wastewater</li>
+                  </ol>
+                </div>
+              </div>
+
+              <div>
+                <h4 className="font-medium text-gray-700 dark:text-gray-200 mb-3">
+                  <i className="fas fa-cogs mr-2 text-green-500"></i>
+                  Wet Well Analysis Options
+                </h4>
+                <div className="space-y-3 text-sm text-gray-600 dark:text-gray-300">
+                  <div className="p-2 bg-blue-50 dark:bg-blue-900/20 rounded">
+                    <strong>Constant Diameter (Cylindrical):</strong><br/>
+                    Representative diameter = average wet-well area diameter
+                  </div>
+                  <div className="p-2 bg-green-50 dark:bg-green-900/20 rounded">
+                    <strong>Variable Cross-Section:</strong><br/>
+                    Uses curve/shape table defining volume vs depth relationship
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-4">
+              <div className="text-center p-4 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
+                <div className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center mx-auto mb-2">
+                  <i className="fas fa-square text-white text-sm"></i>
+                </div>
+                <h5 className="font-medium text-orange-800 dark:text-orange-200 mb-1">Fixed Capacity</h5>
+                <p className="text-xs text-orange-600 dark:text-orange-300">Constant flow rate independent of head</p>
+              </div>
+              
+              <div className="text-center p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
+                <div className="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-2">
+                  <i className="fas fa-dot-circle text-white text-sm"></i>
+                </div>
+                <h5 className="font-medium text-purple-800 dark:text-purple-200 mb-1">Single-Point</h5>
+                <p className="text-xs text-purple-600 dark:text-purple-300">Single head-flow design point</p>
+              </div>
+              
+              <div className="text-center p-4 bg-cyan-50 dark:bg-cyan-900/20 rounded-lg">
+                <div className="w-10 h-10 bg-cyan-500 rounded-full flex items-center justify-center mx-auto mb-2">
+                  <i className="fas fa-chart-line text-white text-sm"></i>
+                </div>
+                <h5 className="font-medium text-cyan-800 dark:text-cyan-200 mb-1">Three-Point</h5>
+                <p className="text-xs text-cyan-600 dark:text-cyan-300">Most accurate pump representation</p>
+              </div>
+            </div>
+
+            <Alert type="warning">
+              <h4 className="font-semibold mb-2">Force Main Requirements</h4>
+              <div className="text-sm space-y-2">
+                <p><strong>Hydraulic Configuration:</strong> Must be defined as pressurized conduits with Hazen-Williams or Darcy-Weisbach coefficients</p>
+                <p><strong>System Rules:</strong> Gravity main → Wet well → Pump → Chamber/manhole → Force main</p>
+                <p><strong>Advanced Requirements:</strong> Each force main system requires dedicated wet well/pump combination</p>
+              </div>
+            </Alert>
+          </div>
+        </div>
+
+        {/* ArcGIS Integration Workflow */}
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+          <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-4 text-lg">
+            <i className="fas fa-map mr-2"></i>
+            ArcGIS Integration Workflow
+          </h3>
+          
+          <div className="space-y-6">
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 className="font-medium text-gray-700 dark:text-gray-200 mb-3">
+                  <i className="fas fa-download mr-2 text-blue-500"></i>
+                  Data Import Methods
+                </h4>
+                <div className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+                  <div className="p-2 border-l-4 border-blue-500 bg-blue-50 dark:bg-blue-900/20">
+                    <strong>InfoSewer Import Manager:</strong> Shapefiles, text files, MapInfo (MIF/MID)
+                  </div>
+                  <div className="p-2 border-l-4 border-green-500 bg-green-50 dark:bg-green-900/20">
+                    <strong>GIS Gateway Integration:</strong> Create model, add layers, coordinate matching
+                  </div>
+                  <div className="p-2 border-l-4 border-purple-500 bg-purple-50 dark:bg-purple-900/20">
+                    <strong>Database Connections:</strong> ODBC, OLE DB, direct CSV import
+                  </div>
+                  <div className="p-2 border-l-4 border-orange-500 bg-orange-50 dark:bg-orange-900/20">
+                    <strong>Legacy Systems:</strong> H2OMAP projects, ArcInfo generate files
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h4 className="font-medium text-gray-700 dark:text-gray-200 mb-3">
+                  <i className="fas fa-upload mr-2 text-green-500"></i>
+                  Data Export Options
+                </h4>
+                <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+                  <li><i className="fas fa-check text-green-500 mr-2"></i>Collection system maps with InfoSewer data</li>
+                  <li><i className="fas fa-check text-green-500 mr-2"></i>Input data and simulation outputs</li>
+                  <li><i className="fas fa-check text-green-500 mr-2"></i>ArcInfo generate files for geometry exchange</li>
+                  <li><i className="fas fa-check text-green-500 mr-2"></i>Windows Clipboard export</li>
+                  <li><i className="fas fa-check text-green-500 mr-2"></i>Database integration with spreadsheets/CAD</li>
+                  <li><i className="fas fa-check text-green-500 mr-2"></i>Bidirectional GIS Exchange tool updates</li>
+                </ul>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="font-medium text-gray-700 dark:text-gray-200 mb-3">
+                <i className="fas fa-chart-area mr-2 text-purple-500"></i>
+                Spatial Analysis Integration
+              </h4>
+              <div className="grid md:grid-cols-4 gap-3">
+                <div className="text-center p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+                  <i className="fas fa-search text-blue-600 dark:text-blue-400 text-lg mb-2"></i>
+                  <h5 className="font-medium text-blue-800 dark:text-blue-200 text-sm">Extract Tools</h5>
+                  <p className="text-xs text-blue-600 dark:text-blue-300">SQL queries, spatial criteria</p>
+                </div>
+                
+                <div className="text-center p-3 bg-green-50 dark:bg-green-900/20 rounded-lg">
+                  <i className="fas fa-layer-group text-green-600 dark:text-green-400 text-lg mb-2"></i>
+                  <h5 className="font-medium text-green-800 dark:text-green-200 text-sm">Overlay Tools</h5>
+                  <p className="text-xs text-green-600 dark:text-green-300">Clip, intersect, union</p>
+                </div>
+                
+                <div className="text-center p-3 bg-orange-50 dark:bg-orange-900/20 rounded-lg">
+                  <i className="fas fa-crosshairs text-orange-600 dark:text-orange-400 text-lg mb-2"></i>
+                  <h5 className="font-medium text-orange-800 dark:text-orange-200 text-sm">Proximity</h5>
+                  <p className="text-xs text-orange-600 dark:text-orange-300">Buffer, near, distance</p>
+                </div>
+                
+                <div className="text-center p-3 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
+                  <i className="fas fa-chart-bar text-purple-600 dark:text-purple-400 text-lg mb-2"></i>
+                  <h5 className="font-medium text-purple-800 dark:text-purple-200 text-sm">Statistics</h5>
+                  <p className="text-xs text-purple-600 dark:text-purple-300">Spatial patterns, analysis</p>
+                </div>
+              </div>
+            </div>
+
+            <Alert type="success">
+              <h4 className="font-semibold mb-2">Quality Control Best Practices</h4>
+              <div className="grid md:grid-cols-2 gap-4 text-sm">
+                <div>
+                  <p className="font-medium mb-2">Pre-Import Validation:</p>
+                  <ul className="space-y-1 ml-4">
+                    <li>• All conduits connect to exactly two unique nodes</li>
+                    <li>• Proper snapping at connection points</li>
+                    <li>• No disconnected/orphan nodes</li>
+                    <li>• Coordinate system matching</li>
+                  </ul>
+                </div>
+                <div>
+                  <p className="font-medium mb-2">Post-Import Checks:</p>
+                  <ul className="space-y-1 ml-4">
+                    <li>• Use Orphan Nodes utility</li>
+                    <li>• Run Orphan Pipes check</li>
+                    <li>• Verify coordinate alignment</li>
+                    <li>• Test model connectivity</li>
+                  </ul>
+                </div>
+              </div>
+            </Alert>
+          </div>
+        </div>
+
         {/* Quick Navigation */}
         <div className="flex justify-center">
           <button 
