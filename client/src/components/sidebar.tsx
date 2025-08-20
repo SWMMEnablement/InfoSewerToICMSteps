@@ -12,6 +12,7 @@ interface TabItem {
 
 const tabs: TabItem[] = [
   { id: 'overview', icon: 'fas fa-info-circle', title: 'Overview', subtitle: 'Getting Started' },
+  { id: 'documentation', icon: 'fas fa-book', title: 'Documentation', subtitle: 'InfoSewer References' },
   { id: 'step1', icon: 'fas fa-circle-nodes', title: 'Step 1', subtitle: 'Import Nodes & Subcatchments' },
   { id: 'step2', icon: 'fas fa-route', title: 'Step 2', subtitle: 'Import Links & Geometry' },
   { id: 'step3', icon: 'fas fa-water', title: 'Step 3', subtitle: 'Import Manhole Hydraulics' },

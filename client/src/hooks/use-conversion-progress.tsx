@@ -11,7 +11,7 @@ interface ConversionProgressContextType {
 const ConversionProgressContext = createContext<ConversionProgressContextType | undefined>(undefined);
 
 const steps = [
-  'overview', 'step1', 'step2', 'step3', 'step4', 
+  'overview', 'documentation', 'step1', 'step2', 'step3', 'step4', 
   'step5', 'step6', 'step7', 'step8', 'step9'
 ];
 
