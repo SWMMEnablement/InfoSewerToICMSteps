@@ -224,6 +224,179 @@ C:\\\\YourProject.IEDB\\\\
           </div>
         </div>
 
+        {/* SWMM456.com Expert Resources */}
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+          <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-4 text-lg">
+            <i className="fas fa-graduation-cap mr-2"></i>
+            Expert Resources from SWMM456.com
+          </h3>
+          
+          <Alert type="success">
+            <h4 className="font-semibold mb-3">About Robert Dickinson & SWMM456.com</h4>
+            <div className="space-y-3 text-sm">
+              <p><strong>Expert Authority:</strong> Robert Dickinson is a world-renowned urban drainage modeling authority and Product Sector Leader for InfoSWMM/InfoSewer at Autodesk (formerly Innovyze) with over 40 years of SWMM modeling experience.</p>
+              <p><strong>Co-Developer:</strong> Co-developer of EPA SWMM versions 3, 4, and 5+</p>
+              <p><strong>Resource Platform:</strong> SWMM456.com (formerly SWMM5.NET) provides specialized mini-blog tutorials and resources for InfoSewer, InfoSWMM, and ICM networks.</p>
+            </div>
+          </Alert>
+
+          <div className="grid md:grid-cols-2 gap-6 mt-6">
+            <div>
+              <h4 className="font-medium text-gray-700 dark:text-gray-200 mb-3">Available Tutorial Categories</h4>
+              <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+                <li><i className="fas fa-check text-green-500 mr-2"></i>Database setup and project initialization</li>
+                <li><i className="fas fa-check text-green-500 mr-2"></i>Configuration files for ICM InfoWorks migration</li>
+                <li><i className="fas fa-check text-green-500 mr-2"></i>CSV and geodatabase import/export workflows</li>
+                <li><i className="fas fa-check text-green-500 mr-2"></i>Flow splitter usage for dendritic networks</li>
+                <li><i className="fas fa-check text-green-500 mr-2"></i>Force main hydraulics and pump operations</li>
+                <li><i className="fas fa-check text-green-500 mr-2"></i>Ruby scripting for ICM integration</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-medium text-gray-700 dark:text-gray-200 mb-3">Expert Contact Information</h4>
+              <div className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+                <div><i className="fas fa-envelope text-blue-500 mr-2"></i>robert.dickinson@gmail.com</div>
+                <div><i className="fas fa-envelope text-blue-500 mr-2"></i>robert.e.dickinson@innovyze.com</div>
+                <div><i className="fas fa-globe text-green-500 mr-2"></i>SWMM456.com</div>
+                <div><i className="fab fa-linkedin text-blue-600 mr-2"></i>LinkedIn Professional Network</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* InfoSewer Database Setup Guide */}
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+          <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-4 text-lg">
+            <i className="fas fa-database mr-2"></i>
+            InfoSewer Database Setup & Configuration
+          </h3>
+          
+          <div className="space-y-6">
+            <Alert type="info">
+              <h4 className="font-semibold mb-2">Database-Centric Architecture</h4>
+              <p className="text-sm">InfoSewer uses a database-centric approach where all model data is stored in DBF (database) files within the IEDB (InfoSewer Database) folder, integrated with ArcGIS for spatial visualization.</p>
+            </Alert>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <h4 className="font-medium text-gray-700 dark:text-gray-200 mb-3">DB Editor Functions</h4>
+                <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+                  <li><i className="fas fa-table text-blue-500 mr-2"></i>View modeling data tables</li>
+                  <li><i className="fas fa-plus text-green-500 mr-2"></i>Add/delete custom fields</li>
+                  <li><i className="fas fa-edit text-orange-500 mr-2"></i>Perform block edits on multiple records</li>
+                  <li><i className="fas fa-cog text-purple-500 mr-2"></i>Customize data tables with user-defined fields</li>
+                </ul>
+              </div>
+              
+              <div>
+                <h4 className="font-medium text-gray-700 dark:text-gray-200 mb-3">Data Import Methods</h4>
+                <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+                  <li><i className="fas fa-file-csv text-green-500 mr-2"></i>CSV file import with field mapping</li>
+                  <li><i className="fas fa-database text-blue-500 mr-2"></i>Geodatabase import via ODIC</li>
+                  <li><i className="fas fa-map text-red-500 mr-2"></i>Shapefile integration</li>
+                  <li><i className="fas fa-drafting-compass text-purple-500 mr-2"></i>AutoCAD file support</li>
+                </ul>
+              </div>
+            </div>
+
+            <CodeBlock language="text" code={`InfoSewer Database Implementation Steps:
+
+1. Project Creation:
+   • Open ArcMap with appropriate coordinate system
+   • Load background layers/shapefiles
+   • Initialize new InfoSewer project
+
+2. Database Initialization:
+   • System creates IEDB folder structure
+   • Default tables populated with standard fields
+   • Spatial reference system established
+
+3. Data Population:
+   • Import existing network data (CSV/Geodatabase)
+   • Manual data entry through attribute browsers
+   • Bulk data updates via DB Editor
+
+4. Configuration Optimization:
+   • Set display scopes and domains
+   • Configure custom fields for project needs
+   • Establish data validation rules
+
+5. Network Validation:
+   • Run "Update Map from DB" to sync database with map
+   • Perform connectivity checks
+   • Validate hydraulic parameters`} />
+          </div>
+        </div>
+
+        {/* Professional Training Information */}
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+          <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-4 text-lg">
+            <i className="fas fa-chalkboard-teacher mr-2"></i>
+            Professional Training Resources
+          </h3>
+          
+          <div className="grid md:grid-cols-2 gap-6">
+            <div>
+              <Alert type="warning">
+                <h4 className="font-semibold mb-2">Official Innovyze Training</h4>
+                <div className="space-y-2 text-sm">
+                  <p><strong>"Introduction to InfoSewer (US)"</strong></p>
+                  <p>• 2-day comprehensive web-based training</p>
+                  <p>• Hands-on modeling and database customization</p>
+                  <p>• GIS integration techniques</p>
+                  <p>• Steady-state and dynamic simulation methods</p>
+                  <p>• Wet well cycling and pump optimization</p>
+                </div>
+              </Alert>
+            </div>
+            
+            <div>
+              <h4 className="font-medium text-gray-700 dark:text-gray-200 mb-3">Design Capabilities Covered</h4>
+              <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-300">
+                <li><i className="fas fa-water text-blue-500 mr-2"></i>Peak discharge conveyance analysis</li>
+                <li><i className="fas fa-cube text-brown-500 mr-2"></i>Solids transport optimization</li>
+                <li><i className="fas fa-chart-line text-green-500 mr-2"></i>Capacity analysis for existing systems</li>
+                <li><i className="fas fa-tools text-orange-500 mr-2"></i>Replacement and parallel pipe design</li>
+                <li><i className="fas fa-tachometer-alt text-purple-500 mr-2"></i>Velocity and cover depth criteria compliance</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Advanced Features & Integration */}
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
+          <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-4 text-lg">
+            <i className="fas fa-rocket mr-2"></i>
+            Advanced Features & Integration
+          </h3>
+          
+          <div className="grid md:grid-cols-3 gap-4">
+            <div className="text-center p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
+              <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                <i className="fas fa-layer-group text-white"></i>
+              </div>
+              <h4 className="font-medium text-blue-800 dark:text-blue-200 mb-2">Multi-Level Inheritance</h4>
+              <p className="text-sm text-blue-600 dark:text-blue-300">Scenario Manager for alternative analysis with hierarchical data inheritance</p>
+            </div>
+            
+            <div className="text-center p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
+              <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                <i className="fas fa-shield-alt text-white"></i>
+              </div>
+              <h4 className="font-medium text-green-800 dark:text-green-200 mb-2">Quality Assurance</h4>
+              <p className="text-sm text-green-600 dark:text-green-300">Built-in validation routines and mass balance verification tools</p>
+            </div>
+            
+            <div className="text-center p-4 bg-purple-50 dark:bg-purple-900/20 rounded-lg">
+              <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                <i className="fas fa-exchange-alt text-white"></i>
+              </div>
+              <h4 className="font-medium text-purple-800 dark:text-purple-200 mb-2">Integration</h4>
+              <p className="text-sm text-purple-600 dark:text-purple-300">GIS Gateway for spatial data exchange and ICM InfoWorks conversion</p>
+            </div>
+          </div>
+        </div>
+
         {/* Quick Navigation */}
         <div className="flex justify-center">
           <button 
