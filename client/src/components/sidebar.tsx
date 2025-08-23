@@ -12,7 +12,6 @@ interface TabItem {
 
 const tabs: TabItem[] = [
   { id: 'overview', icon: 'fas fa-info-circle', title: 'Overview', subtitle: 'Getting Started' },
-  { id: 'documentation', icon: 'fas fa-book', title: 'Documentation', subtitle: 'InfoSewer References' },
   { id: 'step1', icon: 'fas fa-circle-nodes', title: 'Step 1', subtitle: 'Import Nodes & Subcatchments' },
   { id: 'step2', icon: 'fas fa-route', title: 'Step 2', subtitle: 'Import Links & Geometry' },
   { id: 'step3', icon: 'fas fa-water', title: 'Step 3', subtitle: 'Import Manhole Hydraulics' },
@@ -22,6 +21,7 @@ const tabs: TabItem[] = [
   { id: 'step7', icon: 'fas fa-tint', title: 'Step 7', subtitle: 'Import Subcatchment DWF' },
   { id: 'step8', icon: 'fas fa-flask', title: 'Step 8', subtitle: 'Import Wet Well Hydraulics' },
   { id: 'step9', icon: 'fas fa-cloud-rain', title: 'Step 9', subtitle: 'Configure RDII Hydrographs' },
+  { id: 'documentation', icon: 'fas fa-book', title: 'Documentation', subtitle: 'InfoSewer References' },
 ];
 
 export default function Sidebar() {
