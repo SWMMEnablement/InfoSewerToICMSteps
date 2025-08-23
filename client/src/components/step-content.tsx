@@ -1120,11 +1120,11 @@ C:\\\\YourProject.IEDB\\\\
 function OverviewContent({ showStep }: { showStep: (step: string) => void }) {
   return (
     <div className="animate-fade-in">
-      <div className="gradient-primary text-white min-h-[60vh] flex items-center">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 w-full">
+      <div className="gradient-primary text-white py-8 flex items-center">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-6 w-full">
           <div className="text-center">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6 leading-tight px-2">InfoSewer to InfoWorks ICM</h1>
-            <p className="text-lg sm:text-xl lg:text-2xl mb-6 sm:mb-8 opacity-90 leading-relaxed px-2">Knowledge Management Conversion Guide</p>
+            <h1 className="text-2xl sm:text-3xl font-bold mb-3 leading-tight px-2">InfoSewer to InfoWorks ICM</h1>
+            <p className="text-base sm:text-lg mb-4 opacity-90 leading-relaxed px-2">Knowledge Management Conversion Guide</p>
             <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 px-4">
               <div className="glass-effect px-4 sm:px-6 py-3 rounded-full backdrop-blur-md">
                 <i className="fas fa-clock mr-2 text-sm sm:text-base"></i>
