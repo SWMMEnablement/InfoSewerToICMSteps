@@ -1138,6 +1138,10 @@ function OverviewContent({ showStep }: { showStep: (step: string) => void }) {
                 <i className="fas fa-users mr-2 text-sm sm:text-base"></i>
                 <span className="text-sm sm:text-base">Expert Level</span>
               </div>
+              <div className="glass-effect px-4 sm:px-6 py-3 rounded-full backdrop-blur-md">
+                <i className="fas fa-calendar-alt mr-2 text-sm sm:text-base"></i>
+                <span className="text-sm sm:text-base">Last Updated: February 11, 2026</span>
+              </div>
             </div>
           </div>
         </div>
