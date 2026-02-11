@@ -42,38 +42,91 @@
       { "icon": "fas fa-layer-group", "text": "9 Steps" },
       { "icon": "fas fa-users", "text": "Expert Level" }
     ],
-    "automatedTool": {
-      "label": "Recommended",
-      "title": "Automated Conversion Tool",
-      "description": "A companion Ruby script that combines all nine manual steps into a single automated process.",
+    "preferredTool": {
+      "label": "Preferred Method",
+      "title": "InfoSewer Import Tool (Nov 2025)",
+      "scriptName": "InfoSewer_Import_UI.rb",
+      "lastUpdated": "February 2026",
+      "description": "A completely refreshed Ruby script that replaces the previous multi-step workflow with a single, streamlined process including multi-scenario support.",
+      "improvements": [
+        { "previous": "Manual DBF to CSV conversion in Excel", "new": "Direct DBF reading (no Excel needed)" },
+        { "previous": "Manual shapefile export via ArcCatalog", "new": "Direct geometry import from DBF files" },
+        { "previous": "Run 4 separate scenario import scripts", "new": "Multi-scenario import built-in" },
+        { "previous": "Track which scenarios to create", "new": "Interactive scenario selection dialog" },
+        { "previous": "Multiple manual steps, slow", "new": "Significantly faster" }
+      ],
       "benefits": [
-        { "title": "One-Click Conversion", "description": "Runs all 9 import steps automatically with a single Ruby script execution inside ICM" },
-        { "title": "Minutes, Not Hours", "description": "Reduces typical conversion time from 2-4 hours of manual work to under 15 minutes" },
-        { "title": "Validated & Tested", "description": "Official Innovyze tool with built-in error handling and data integrity checks" }
+        { "title": "No Pre-Conversion Needed", "description": "Reads DBF files directly from the .IEDB folder. No Excel macro or ArcCatalog export required." },
+        { "title": "Multi-Scenario Support", "description": "Interactive dialog to select which scenarios to import, with automatic parent inheritance handling." },
+        { "title": "Built-In Data Quality", "description": "Auto-fixes invalid links, case mismatches, non-compliant IDs, and conduit length issues with detailed reporting." }
       ],
       "quickStart": [
-        { "step": 1, "title": "Prepare Input Folders", "description": "Convert DBF to CSV and Map.mdb to SHP" },
-        { "step": 2, "title": "Point to 3 Folders", "description": "SHP files, CSV files, and CFG files" },
-        { "step": 3, "title": "Run the Script", "description": "Execute InfoSewer_to_InfoWorks_BASE.rb in ICM" }
+        { "step": 1, "title": "Download the tool", "description": "Save InfoSewer_Import_UI.rb, lib/ folder, and import_config/ folder to the same location" },
+        { "step": 2, "title": "Create a new blank InfoWorks Network", "description": "Right-click Model Group > New InfoWorks > InfoWorks Network (yellow icon). NOT SWMM network." },
+        { "step": 3, "title": "Network > Run Ruby Script", "description": "Select InfoSewer_Import_UI.rb" },
+        { "step": 4, "title": "Follow the dialogs", "description": "Choose .IEDB folder, select Import Configuration folder, choose scenarios, confirm" }
       ],
-      "requiredInputs": [
-        { "folder": "SHP Folder", "source": "Converted from Map.mdb via ESRI ArcCatalog" },
-        { "folder": "CSV Folder", "source": "Converted from .IEDB DBF files via Excel macro" },
-        { "folder": "CFG Folder", "source": "Configuration files from the GitHub repository" }
+      "requiredFiles": [
+        { "name": "InfoSewer_Import_UI.rb", "description": "Main script - run this in ICM" },
+        { "name": "lib/ folder", "description": "Required helper modules for DBF reading and import" },
+        { "name": "import_config/ folder", "description": "JSON configuration files for conversion settings" }
+      ],
+      "automatedImports": [
+        "Complete BASE network geometry (nodes, links, vertices)",
+        "All node and link properties",
+        "Subcatchments for all manholes",
+        "Pumps with curves and control levels",
+        "Node types (Manhole, WetWell, Outfall, Break)",
+        "Multiple scenarios with scenario-specific data",
+        "Scenario parent inheritance",
+        "Selection lists (AN_Root, AN_*, QS_*, SS_*)",
+        "Post-import SQL transformations",
+        "Data quality fixes with console reporting"
+      ],
+      "manualReviewRequired": [
+        "Wetwell curves: If model uses wetwell CURVES (not fixed diameter), manually set chamber_area and shaft_area",
+        "Inactive elements: Selection lists identify active elements, but inactive ones remain",
+        "FAC_TYPE 3 & 4 scenarios: Intelli-Selection and Inherited facility types not yet supported"
+      ],
+      "dataQualityHandling": [
+        { "issue": "Invalid link connectivity", "handling": "Links referencing non-existent nodes removed with detailed warning" },
+        { "issue": "Case mismatches", "handling": "Link node references matched case-insensitively" },
+        { "issue": "Missing vertex data", "handling": "Links imported as straight lines with batch warning" },
+        { "issue": "Non-compliant node IDs", "handling": "Dots replaced with underscores" },
+        { "issue": "Short conduits (<3.3 ft)", "handling": "Extended to InfoWorks minimum length" },
+        { "issue": "Long conduits (>16404 ft)", "handling": "Reduced to InfoWorks maximum length" },
+        { "issue": "Pump control defaults", "handling": "TYPE=0 pumps with no CONTROL data get defaults" }
       ],
       "githubUrl": "https://github.com/innovyze/Open-Source-Support/tree/main/01%20InfoWorks%20ICM/01%20Ruby/01%20InfoWorks/0060%20-%20InfoSewer%20to%20InfoWorks%20ICM%20Conversion%20Tools",
       "downloadUrl": "https://download-directory.github.io/?url=https%3A%2F%2Fgithub.com%2Finnovyze%2FOpen-Source-Support%2Ftree%2Fmain%2F01%2520InfoWorks%2520ICM%2F01%2520Ruby%2F01%2520InfoWorks%2F0060%2520-%2520InfoSewer%2520to%2520InfoWorks%2520ICM%2520Conversion%2520Tools"
     },
-    "manualProcess": {
-      "label": "Legacy / Fallback",
-      "title": "9-Step Manual Process",
-      "description": "For edge cases, custom configurations, or when the automated tool needs manual intervention.",
-      "whenToUse": [
-        "The automated script encounters errors with your specific model configuration",
-        "You need to import only specific data types (e.g., just nodes or just pumps)",
-        "Your model has non-standard setups requiring custom SQL adjustments",
-        "You want to inspect and validate data at each individual stage"
-      ]
+    "historicalMethods": {
+      "originalRubyScript": {
+        "label": "Archived",
+        "date": "Oct 2024",
+        "title": "Original Ruby Script (InfoSewer_to_InfoWorks_BASE.rb)",
+        "description": "A companion Ruby script that combined the nine manual ODIC import steps into a single script execution. Required pre-converted CSV and SHP files as inputs.",
+        "limitations": [
+          "Manual DBF to CSV conversion via Excel macro (DBF_to_CSV.xlsm)",
+          "Manual Map.mdb to SHP export via ESRI ArcCatalog",
+          "Pointing to 3 separate folders (SHP, CSV, CFG)",
+          "Separate scripts for scenario imports"
+        ],
+        "archiveUrl": "https://github.com/innovyze/Open-Source-Support/tree/main/01%20InfoWorks%20ICM/01%20Ruby/01%20InfoWorks/0060%20-%20InfoSewer%20to%20InfoWorks%20ICM%20Conversion%20Tools/Archive"
+      },
+      "manual9StepProcess": {
+        "label": "Legacy / Fallback",
+        "title": "Manual 9-Step ODIC Process",
+        "description": "The original step-by-step method using InfoWorks ICM's Open Data Import Centre (ODIC) with CFG configuration files, CSV data files, and SHP geometry files.",
+        "limitations": [
+          "Manual DBF to CSV conversion via Excel",
+          "Manual Map.mdb to SHP export via ArcCatalog",
+          "Running each of 9 import steps individually via ODIC",
+          "Manual SQL script execution for data manipulation",
+          "2-4 hours of hands-on work"
+        ],
+        "stillUsefulFor": "Edge cases, debugging individual import stages, or custom SQL adjustments"
+      }
     },
     "requirements": {
       "software": ["InfoWorks ICM", "Microsoft Excel", "Ruby interpreter"],

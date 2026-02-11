@@ -1149,17 +1149,56 @@ function OverviewContent({ showStep }: { showStep: (step: string) => void }) {
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
 
-        {/* Recommended: Automated Conversion Tool */}
+        {/* Recommended: New InfoSewer Import Tool (Nov 2025) */}
         <div className="mb-8 sm:mb-12">
           <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/30 dark:to-emerald-900/30 border-2 border-green-500 dark:border-green-400 rounded-2xl p-6 sm:p-8 relative overflow-hidden">
-            <div className="absolute top-0 right-0 bg-green-500 text-white px-4 py-1 rounded-bl-lg text-xs font-bold uppercase tracking-wider">Recommended</div>
+            <div className="absolute top-0 right-0 bg-green-500 text-white px-4 py-1 rounded-bl-lg text-xs font-bold uppercase tracking-wider">Preferred Method</div>
             <div className="flex items-start space-x-4 mb-6">
               <div className="w-14 h-14 bg-green-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
                 <i className="fas fa-magic text-white text-xl"></i>
               </div>
               <div>
-                <h2 className="text-2xl sm:text-3xl font-bold text-green-800 dark:text-green-200 mb-2">Automated Conversion Tool</h2>
-                <p className="text-green-700 dark:text-green-300 text-sm sm:text-base">A companion Ruby script that combines all nine manual steps into a single automated process.</p>
+                <h2 className="text-2xl sm:text-3xl font-bold text-green-800 dark:text-green-200 mb-2">InfoSewer Import Tool (Nov 2025)</h2>
+                <p className="text-green-700 dark:text-green-300 text-sm sm:text-base">A completely refreshed Ruby script (<code className="bg-green-100 dark:bg-green-800 px-1 rounded text-xs">InfoSewer_Import_UI.rb</code>) that replaces the previous multi-step workflow with a single, streamlined process including multi-scenario support.</p>
+              </div>
+            </div>
+
+            <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-green-200 dark:border-green-700 mb-6">
+              <h4 className="font-semibold text-gray-800 dark:text-gray-100 mb-3 text-sm sm:text-base">
+                <i className="fas fa-exchange-alt text-green-500 mr-2"></i>
+                Key Improvements Over Previous Workflow
+              </h4>
+              <div className="overflow-x-auto">
+                <table className="w-full text-xs sm:text-sm">
+                  <thead>
+                    <tr className="border-b border-gray-200 dark:border-gray-600">
+                      <th className="px-3 py-2 text-left font-medium text-gray-500 dark:text-gray-400">Previous Workflow (Oct 2024)</th>
+                      <th className="px-3 py-2 text-left font-medium text-green-700 dark:text-green-300">New Tool (Nov 2025)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="border-b border-gray-100 dark:border-gray-700">
+                      <td className="px-3 py-2 text-gray-500 dark:text-gray-400">Manual DBF to CSV conversion in Excel</td>
+                      <td className="px-3 py-2 text-green-700 dark:text-green-300"><i className="fas fa-check text-green-500 mr-1"></i>Direct DBF reading (no Excel needed)</td>
+                    </tr>
+                    <tr className="border-b border-gray-100 dark:border-gray-700">
+                      <td className="px-3 py-2 text-gray-500 dark:text-gray-400">Manual shapefile export via ArcCatalog</td>
+                      <td className="px-3 py-2 text-green-700 dark:text-green-300"><i className="fas fa-check text-green-500 mr-1"></i>Direct geometry import from DBF files</td>
+                    </tr>
+                    <tr className="border-b border-gray-100 dark:border-gray-700">
+                      <td className="px-3 py-2 text-gray-500 dark:text-gray-400">Run 4 separate scenario import scripts</td>
+                      <td className="px-3 py-2 text-green-700 dark:text-green-300"><i className="fas fa-check text-green-500 mr-1"></i>Multi-scenario import built-in</td>
+                    </tr>
+                    <tr className="border-b border-gray-100 dark:border-gray-700">
+                      <td className="px-3 py-2 text-gray-500 dark:text-gray-400">Track which scenarios to create</td>
+                      <td className="px-3 py-2 text-green-700 dark:text-green-300"><i className="fas fa-check text-green-500 mr-1"></i>Interactive scenario selection dialog</td>
+                    </tr>
+                    <tr>
+                      <td className="px-3 py-2 text-gray-500 dark:text-gray-400">Multiple manual steps, slow</td>
+                      <td className="px-3 py-2 text-green-700 dark:text-green-300"><i className="fas fa-check text-green-500 mr-1"></i>Significantly faster</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
 
@@ -1167,60 +1206,99 @@ function OverviewContent({ showStep }: { showStep: (step: string) => void }) {
               <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-green-200 dark:border-green-700">
                 <div className="flex items-center space-x-2 mb-2">
                   <i className="fas fa-bolt text-yellow-500"></i>
-                  <h4 className="font-semibold text-gray-800 dark:text-gray-100 text-sm">One-Click Conversion</h4>
+                  <h4 className="font-semibold text-gray-800 dark:text-gray-100 text-sm">No Pre-Conversion Needed</h4>
                 </div>
-                <p className="text-xs text-gray-600 dark:text-gray-300">Runs all 9 import steps automatically with a single Ruby script execution inside ICM</p>
+                <p className="text-xs text-gray-600 dark:text-gray-300">Reads DBF files directly from the .IEDB folder. No Excel macro or ArcCatalog export required.</p>
               </div>
               <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-green-200 dark:border-green-700">
                 <div className="flex items-center space-x-2 mb-2">
-                  <i className="fas fa-clock text-blue-500"></i>
-                  <h4 className="font-semibold text-gray-800 dark:text-gray-100 text-sm">Minutes, Not Hours</h4>
+                  <i className="fas fa-layer-group text-blue-500"></i>
+                  <h4 className="font-semibold text-gray-800 dark:text-gray-100 text-sm">Multi-Scenario Support</h4>
                 </div>
-                <p className="text-xs text-gray-600 dark:text-gray-300">Reduces typical conversion time from 2-4 hours of manual work to under 15 minutes</p>
+                <p className="text-xs text-gray-600 dark:text-gray-300">Interactive dialog to select which scenarios to import, with automatic parent inheritance handling.</p>
               </div>
               <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-green-200 dark:border-green-700">
                 <div className="flex items-center space-x-2 mb-2">
                   <i className="fas fa-shield-alt text-green-500"></i>
-                  <h4 className="font-semibold text-gray-800 dark:text-gray-100 text-sm">Validated & Tested</h4>
+                  <h4 className="font-semibold text-gray-800 dark:text-gray-100 text-sm">Built-In Data Quality</h4>
                 </div>
-                <p className="text-xs text-gray-600 dark:text-gray-300">Official Innovyze tool with built-in error handling and data integrity checks</p>
+                <p className="text-xs text-gray-600 dark:text-gray-300">Auto-fixes invalid links, case mismatches, non-compliant IDs, and conduit length issues with detailed reporting.</p>
               </div>
             </div>
 
             <div className="bg-white dark:bg-gray-800 p-4 sm:p-5 rounded-xl shadow-sm border border-green-200 dark:border-green-700 mb-6">
               <h4 className="font-semibold text-gray-800 dark:text-gray-100 mb-3 text-sm sm:text-base">
                 <i className="fas fa-play-circle text-green-500 mr-2"></i>
-                Quick Start: 3 Simple Steps
+                Quick Start
               </h4>
-              <div className="grid md:grid-cols-3 gap-4">
+              <div className="space-y-3">
                 <div className="flex items-start space-x-3">
                   <div className="w-8 h-8 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center flex-shrink-0 text-green-700 dark:text-green-300 font-bold text-sm">1</div>
                   <div>
-                    <p className="font-medium text-gray-800 dark:text-gray-100 text-sm">Prepare Input Folders</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">Convert DBF to CSV and Map.mdb to SHP</p>
+                    <p className="font-medium text-gray-800 dark:text-gray-100 text-sm">Download the tool</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">Save <code className="bg-gray-100 dark:bg-gray-700 px-1 rounded">InfoSewer_Import_UI.rb</code>, the <code className="bg-gray-100 dark:bg-gray-700 px-1 rounded">lib/</code> folder, and the <code className="bg-gray-100 dark:bg-gray-700 px-1 rounded">import_config/</code> folder to the same location</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
                   <div className="w-8 h-8 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center flex-shrink-0 text-green-700 dark:text-green-300 font-bold text-sm">2</div>
                   <div>
-                    <p className="font-medium text-gray-800 dark:text-gray-100 text-sm">Point to 3 Folders</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">SHP files, CSV files, and CFG files</p>
+                    <p className="font-medium text-gray-800 dark:text-gray-100 text-sm">Create a new blank InfoWorks Network</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">Right-click Model Group &rarr; New InfoWorks &rarr; <strong>InfoWorks Network</strong> (yellow icon). <span className="text-red-500 font-medium">NOT</span> SWMM network (blue icon).</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-3">
                   <div className="w-8 h-8 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center flex-shrink-0 text-green-700 dark:text-green-300 font-bold text-sm">3</div>
                   <div>
-                    <p className="font-medium text-gray-800 dark:text-gray-100 text-sm">Run the Script</p>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">Execute InfoSewer_to_InfoWorks_BASE.rb in ICM</p>
+                    <p className="font-medium text-gray-800 dark:text-gray-100 text-sm">Network &rarr; Run Ruby Script</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">Select <code className="bg-gray-100 dark:bg-gray-700 px-1 rounded">InfoSewer_Import_UI.rb</code></p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <div className="w-8 h-8 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center flex-shrink-0 text-green-700 dark:text-green-300 font-bold text-sm">4</div>
+                  <div>
+                    <p className="font-medium text-gray-800 dark:text-gray-100 text-sm">Follow the dialogs</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">Choose your <code className="bg-gray-100 dark:bg-gray-700 px-1 rounded">.IEDB</code> folder, select Import Configuration folder, choose scenarios, and confirm</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="bg-white dark:bg-gray-800 p-4 sm:p-5 rounded-xl shadow-sm border border-green-200 dark:border-green-700 mb-6">
+              <h4 className="font-semibold text-gray-800 dark:text-gray-100 mb-3 text-sm sm:text-base">
+                <i className="fas fa-check-double text-green-500 mr-2"></i>
+                What Gets Imported Automatically
+              </h4>
+              <div className="grid md:grid-cols-2 gap-3 text-xs sm:text-sm text-gray-600 dark:text-gray-300">
+                <ul className="space-y-1">
+                  <li><i className="fas fa-check text-green-500 mr-1"></i>Complete BASE network geometry (nodes, links, vertices)</li>
+                  <li><i className="fas fa-check text-green-500 mr-1"></i>All node and link properties</li>
+                  <li><i className="fas fa-check text-green-500 mr-1"></i>Subcatchments for all manholes</li>
+                  <li><i className="fas fa-check text-green-500 mr-1"></i>Pumps with curves and control levels</li>
+                  <li><i className="fas fa-check text-green-500 mr-1"></i>Node types (Manhole, WetWell, Outfall, Break)</li>
+                </ul>
+                <ul className="space-y-1">
+                  <li><i className="fas fa-check text-green-500 mr-1"></i>Multiple scenarios with scenario-specific data</li>
+                  <li><i className="fas fa-check text-green-500 mr-1"></i>Scenario parent inheritance</li>
+                  <li><i className="fas fa-check text-green-500 mr-1"></i>Selection lists (AN_Root, AN_*, QS_*, SS_*)</li>
+                  <li><i className="fas fa-check text-green-500 mr-1"></i>Post-import SQL transformations</li>
+                  <li><i className="fas fa-check text-green-500 mr-1"></i>Data quality fixes with console reporting</li>
+                </ul>
+              </div>
+            </div>
+
+            <Alert type="warning">
+              <h4 className="font-semibold mb-2 text-sm">Requires Manual Review After Import</h4>
+              <ul className="text-xs sm:text-sm space-y-1">
+                <li><i className="fas fa-exclamation-triangle text-yellow-500 mr-2"></i><strong>Wetwell curves:</strong> If your model uses wetwell CURVES (not fixed diameter), manually set chamber_area and shaft_area in ICM</li>
+                <li><i className="fas fa-exclamation-triangle text-yellow-500 mr-2"></i><strong>Inactive elements:</strong> Selection lists identify active elements, but inactive ones remain. Delete manually if needed.</li>
+                <li><i className="fas fa-exclamation-triangle text-yellow-500 mr-2"></i><strong>FAC_TYPE 3 &amp; 4 scenarios:</strong> Intelli-Selection and Inherited facility types not yet supported</li>
+              </ul>
+            </Alert>
+
+            <div className="flex flex-col sm:flex-row gap-3 mt-6">
               <a href="https://github.com/innovyze/Open-Source-Support/tree/main/01%20InfoWorks%20ICM/01%20Ruby/01%20InfoWorks/0060%20-%20InfoSewer%20to%20InfoWorks%20ICM%20Conversion%20Tools" className="inline-flex items-center justify-center gradient-primary text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 text-sm sm:text-base" target="_blank" rel="noopener noreferrer">
                 <i className="fab fa-github mr-2"></i>
-                Download Automated Tool from GitHub
+                Download from GitHub
               </a>
               <a href="https://download-directory.github.io/?url=https%3A%2F%2Fgithub.com%2Finnovyze%2FOpen-Source-Support%2Ftree%2Fmain%2F01%2520InfoWorks%2520ICM%2F01%2520Ruby%2F01%2520InfoWorks%2F0060%2520-%2520InfoSewer%2520to%2520InfoWorks%2520ICM%2520Conversion%2520Tools" className="inline-flex items-center justify-center bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-6 py-3 rounded-xl font-semibold hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300 text-sm sm:text-base" target="_blank" rel="noopener noreferrer">
                 <i className="fas fa-download mr-2"></i>
@@ -1230,33 +1308,33 @@ function OverviewContent({ showStep }: { showStep: (step: string) => void }) {
           </div>
         </div>
 
-        {/* Script Inputs */}
+        {/* Required Files */}
         <div className="mb-8 sm:mb-12">
           <Alert type="info">
             <h4 className="font-semibold mb-3 text-sm sm:text-base">
               <i className="fas fa-folder-open mr-2"></i>
-              Required Inputs for the Automated Script
+              Required Files for the New Import Tool
             </h4>
             <div className="grid md:grid-cols-3 gap-4 text-sm">
               <div className="flex items-start space-x-2">
-                <i className="fas fa-map text-blue-500 mt-1"></i>
+                <i className="fas fa-file-code text-green-500 mt-1"></i>
                 <div>
-                  <p className="font-medium">SHP Folder</p>
-                  <p className="text-xs opacity-80">Converted from Map.mdb via ESRI ArcCatalog</p>
+                  <p className="font-medium">InfoSewer_Import_UI.rb</p>
+                  <p className="text-xs opacity-80">Main script - run this in ICM</p>
                 </div>
               </div>
               <div className="flex items-start space-x-2">
-                <i className="fas fa-file-csv text-green-500 mt-1"></i>
+                <i className="fas fa-folder text-blue-500 mt-1"></i>
                 <div>
-                  <p className="font-medium">CSV Folder</p>
-                  <p className="text-xs opacity-80">Converted from .IEDB DBF files via Excel macro</p>
+                  <p className="font-medium">lib/ folder</p>
+                  <p className="text-xs opacity-80">Required helper modules for DBF reading and import</p>
                 </div>
               </div>
               <div className="flex items-start space-x-2">
-                <i className="fas fa-cog text-purple-500 mt-1"></i>
+                <i className="fas fa-folder text-purple-500 mt-1"></i>
                 <div>
-                  <p className="font-medium">CFG Folder</p>
-                  <p className="text-xs opacity-80">Configuration files from the GitHub repository</p>
+                  <p className="font-medium">import_config/ folder</p>
+                  <p className="text-xs opacity-80">JSON configuration files for conversion settings</p>
                 </div>
               </div>
             </div>
@@ -1311,62 +1389,72 @@ function OverviewContent({ showStep }: { showStep: (step: string) => void }) {
           <p className="text-sm sm:text-base leading-relaxed">This conversion process requires professional software licenses and technical expertise. Always backup your original data before beginning the conversion process. Verify that display units are set as desired prior to import (Tools &gt; Options &gt; Units tab in ICM).</p>
         </Alert>
 
-        {/* Legacy 9-Step Manual Process */}
+        {/* Alternate Historical Methods */}
         <div className="mb-8 sm:mb-12 mt-8 sm:mt-12">
-          <div className="bg-gray-50 dark:bg-gray-800/50 border border-gray-300 dark:border-gray-600 rounded-2xl p-6 sm:p-8">
-            <div className="flex items-start space-x-4 mb-6">
-              <div className="w-12 h-12 bg-gray-400 dark:bg-gray-600 rounded-xl flex items-center justify-center flex-shrink-0">
-                <i className="fas fa-list-ol text-white text-lg"></i>
+          <div className="flex items-center gap-3 mb-6">
+            <div className="w-10 h-10 bg-gray-400 dark:bg-gray-600 rounded-lg flex items-center justify-center flex-shrink-0">
+              <i className="fas fa-history text-white text-sm"></i>
+            </div>
+            <div>
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-700 dark:text-gray-300">Alternate Historical Import Methods</h2>
+              <p className="text-gray-500 dark:text-gray-400 text-xs sm:text-sm">Previous approaches to InfoSewer conversion - now superseded by the new Import Tool above</p>
+            </div>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-6">
+            {/* Historical Method A: Original Ruby Script */}
+            <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-300 dark:border-amber-700 rounded-xl p-5 sm:p-6">
+              <div className="flex items-center gap-2 mb-3">
+                <span className="bg-amber-200 dark:bg-amber-800 text-amber-800 dark:text-amber-200 px-2.5 py-0.5 rounded-full text-xs font-semibold uppercase tracking-wide">Archived</span>
+                <span className="text-xs text-gray-500 dark:text-gray-400">Oct 2024</span>
               </div>
-              <div>
-                <div className="flex items-center gap-3 mb-1">
-                  <h2 className="text-xl sm:text-2xl font-bold text-gray-700 dark:text-gray-300">9-Step Manual Process</h2>
-                  <span className="bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-300 px-3 py-0.5 rounded-full text-xs font-semibold uppercase tracking-wide">Legacy / Fallback</span>
-                </div>
-                <p className="text-gray-500 dark:text-gray-400 text-sm sm:text-base">For edge cases, custom configurations, or when the automated tool needs manual intervention. Use this step-by-step guide to troubleshoot individual import stages or handle non-standard model setups.</p>
+              <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-2 text-base sm:text-lg">
+                <i className="fas fa-gem text-amber-500 mr-2"></i>
+                Original Ruby Script (InfoSewer_to_InfoWorks_BASE.rb)
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 text-xs sm:text-sm mb-3">A companion Ruby script that combined the nine manual ODIC import steps into a single script execution. Required pre-converted CSV and SHP files as inputs.</p>
+              <div className="bg-white dark:bg-gray-800 p-3 rounded-lg border border-amber-200 dark:border-amber-700 mb-3">
+                <p className="text-xs font-medium text-gray-700 dark:text-gray-200 mb-2">This method required:</p>
+                <ul className="text-xs text-gray-500 dark:text-gray-400 space-y-1">
+                  <li><i className="fas fa-times text-red-400 mr-1"></i>Manual DBF to CSV conversion via Excel macro (DBF_to_CSV.xlsm)</li>
+                  <li><i className="fas fa-times text-red-400 mr-1"></i>Manual Map.mdb to SHP export via ESRI ArcCatalog</li>
+                  <li><i className="fas fa-times text-red-400 mr-1"></i>Pointing to 3 separate folders (SHP, CSV, CFG)</li>
+                  <li><i className="fas fa-times text-red-400 mr-1"></i>Separate scripts for scenario imports</li>
+                </ul>
               </div>
+              <a href="https://github.com/innovyze/Open-Source-Support/tree/main/01%20InfoWorks%20ICM/01%20Ruby/01%20InfoWorks/0060%20-%20InfoSewer%20to%20InfoWorks%20ICM%20Conversion%20Tools/Archive" className="inline-flex items-center text-amber-700 dark:text-amber-300 hover:text-amber-900 dark:hover:text-amber-100 text-xs underline" target="_blank" rel="noopener noreferrer">
+                <i className="fab fa-github mr-1"></i>
+                View in Archive on GitHub
+              </a>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-6">
-              <div className="text-center bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-200 dark:border-gray-700">
-                <div className="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-xl flex items-center justify-center mx-auto mb-3">
-                  <i className="fas fa-file-export text-white text-lg"></i>
-                </div>
-                <h3 className="text-base font-semibold text-gray-700 dark:text-gray-300 mb-2">1. Export</h3>
-                <p className="text-gray-500 dark:text-gray-400 text-xs">Convert InfoSewer data to compatible formats (DBF to CSV, MDB to SHP)</p>
+            {/* Historical Method B: Manual 9-Step ODIC Process */}
+            <div className="bg-gray-50 dark:bg-gray-800/50 border border-gray-300 dark:border-gray-600 rounded-xl p-5 sm:p-6">
+              <div className="flex items-center gap-2 mb-3">
+                <span className="bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-300 px-2.5 py-0.5 rounded-full text-xs font-semibold uppercase tracking-wide">Legacy / Fallback</span>
               </div>
-
-              <div className="text-center bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-200 dark:border-gray-700">
-                <div className="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-xl flex items-center justify-center mx-auto mb-3">
-                  <i className="fas fa-download text-white text-lg"></i>
-                </div>
-                <h3 className="text-base font-semibold text-gray-700 dark:text-gray-300 mb-2">2. Import</h3>
-                <p className="text-gray-500 dark:text-gray-400 text-xs">Use InfoWorks ICM ODIC with configuration files to import data systematically</p>
+              <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-2 text-base sm:text-lg">
+                <i className="fas fa-list-ol text-gray-500 mr-2"></i>
+                Manual 9-Step ODIC Process
+              </h3>
+              <p className="text-gray-600 dark:text-gray-300 text-xs sm:text-sm mb-3">The original step-by-step method using InfoWorks ICM's Open Data Import Centre (ODIC) with CFG configuration files, CSV data files, and SHP geometry files.</p>
+              <div className="bg-white dark:bg-gray-800 p-3 rounded-lg border border-gray-200 dark:border-gray-700 mb-3">
+                <p className="text-xs font-medium text-gray-700 dark:text-gray-200 mb-2">This method required:</p>
+                <ul className="text-xs text-gray-500 dark:text-gray-400 space-y-1">
+                  <li><i className="fas fa-times text-red-400 mr-1"></i>Manual DBF to CSV conversion via Excel</li>
+                  <li><i className="fas fa-times text-red-400 mr-1"></i>Manual Map.mdb to SHP export via ArcCatalog</li>
+                  <li><i className="fas fa-times text-red-400 mr-1"></i>Running each of 9 import steps individually via ODIC</li>
+                  <li><i className="fas fa-times text-red-400 mr-1"></i>Manual SQL script execution for data manipulation</li>
+                  <li><i className="fas fa-times text-red-400 mr-1"></i>2-4 hours of hands-on work</li>
+                </ul>
               </div>
-
-              <div className="text-center bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-200 dark:border-gray-700">
-                <div className="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-xl flex items-center justify-center mx-auto mb-3">
-                  <i className="fas fa-cogs text-white text-lg"></i>
-                </div>
-                <h3 className="text-base font-semibold text-gray-700 dark:text-gray-300 mb-2">3. Configure</h3>
-                <p className="text-gray-500 dark:text-gray-400 text-xs">Run SQL scripts and validate data integrity to complete the conversion</p>
-              </div>
-            </div>
-
-            <Alert type="info">
-              <h4 className="font-semibold mb-2 text-sm">When to use the manual 9-step process:</h4>
-              <ul className="text-xs sm:text-sm space-y-1">
-                <li><i className="fas fa-exclamation-triangle text-yellow-500 mr-2"></i>The automated script encounters errors with your specific model configuration</li>
-                <li><i className="fas fa-puzzle-piece text-blue-500 mr-2"></i>You need to import only specific data types (e.g., just nodes or just pumps)</li>
-                <li><i className="fas fa-wrench text-orange-500 mr-2"></i>Your model has non-standard setups requiring custom SQL adjustments</li>
-                <li><i className="fas fa-search text-purple-500 mr-2"></i>You want to inspect and validate data at each individual stage</li>
-              </ul>
-            </Alert>
-
-            <div className="text-center mt-6">
+              <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">
+                <i className="fas fa-info-circle mr-1"></i>
+                Still useful for edge cases, debugging individual import stages, or custom SQL adjustments.
+              </p>
               <button 
                 onClick={() => showStep('step1')}
-                className="bg-gray-500 dark:bg-gray-600 text-white px-6 sm:px-8 py-3 rounded-xl font-semibold hover:bg-gray-600 dark:hover:bg-gray-500 hover:shadow-lg transition-all duration-300 text-sm sm:text-base"
+                className="inline-flex items-center bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-200 px-4 py-2 rounded-lg font-medium hover:bg-gray-300 dark:hover:bg-gray-600 transition-all duration-300 text-xs"
               >
                 <i className="fas fa-arrow-right mr-2"></i>
                 View Manual 9-Step Process
