@@ -1144,6 +1144,121 @@ function OverviewContent({ showStep }: { showStep: (step: string) => void }) {
       </div>
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
+
+        {/* Recommended: Automated Conversion Tool */}
+        <div className="mb-8 sm:mb-12">
+          <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/30 dark:to-emerald-900/30 border-2 border-green-500 dark:border-green-400 rounded-2xl p-6 sm:p-8 relative overflow-hidden">
+            <div className="absolute top-0 right-0 bg-green-500 text-white px-4 py-1 rounded-bl-lg text-xs font-bold uppercase tracking-wider">Recommended</div>
+            <div className="flex items-start space-x-4 mb-6">
+              <div className="w-14 h-14 bg-green-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                <i className="fas fa-magic text-white text-xl"></i>
+              </div>
+              <div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-green-800 dark:text-green-200 mb-2">Automated Conversion Tool</h2>
+                <p className="text-green-700 dark:text-green-300 text-sm sm:text-base">A companion Ruby script that combines all nine manual steps into a single automated process.</p>
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-4 mb-6">
+              <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-green-200 dark:border-green-700">
+                <div className="flex items-center space-x-2 mb-2">
+                  <i className="fas fa-bolt text-yellow-500"></i>
+                  <h4 className="font-semibold text-gray-800 dark:text-gray-100 text-sm">One-Click Conversion</h4>
+                </div>
+                <p className="text-xs text-gray-600 dark:text-gray-300">Runs all 9 import steps automatically with a single Ruby script execution inside ICM</p>
+              </div>
+              <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-green-200 dark:border-green-700">
+                <div className="flex items-center space-x-2 mb-2">
+                  <i className="fas fa-clock text-blue-500"></i>
+                  <h4 className="font-semibold text-gray-800 dark:text-gray-100 text-sm">Minutes, Not Hours</h4>
+                </div>
+                <p className="text-xs text-gray-600 dark:text-gray-300">Reduces typical conversion time from 2-4 hours of manual work to under 15 minutes</p>
+              </div>
+              <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-green-200 dark:border-green-700">
+                <div className="flex items-center space-x-2 mb-2">
+                  <i className="fas fa-shield-alt text-green-500"></i>
+                  <h4 className="font-semibold text-gray-800 dark:text-gray-100 text-sm">Validated & Tested</h4>
+                </div>
+                <p className="text-xs text-gray-600 dark:text-gray-300">Official Innovyze tool with built-in error handling and data integrity checks</p>
+              </div>
+            </div>
+
+            <div className="bg-white dark:bg-gray-800 p-4 sm:p-5 rounded-xl shadow-sm border border-green-200 dark:border-green-700 mb-6">
+              <h4 className="font-semibold text-gray-800 dark:text-gray-100 mb-3 text-sm sm:text-base">
+                <i className="fas fa-play-circle text-green-500 mr-2"></i>
+                Quick Start: 3 Simple Steps
+              </h4>
+              <div className="grid md:grid-cols-3 gap-4">
+                <div className="flex items-start space-x-3">
+                  <div className="w-8 h-8 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center flex-shrink-0 text-green-700 dark:text-green-300 font-bold text-sm">1</div>
+                  <div>
+                    <p className="font-medium text-gray-800 dark:text-gray-100 text-sm">Prepare Input Folders</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">Convert DBF to CSV and Map.mdb to SHP</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <div className="w-8 h-8 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center flex-shrink-0 text-green-700 dark:text-green-300 font-bold text-sm">2</div>
+                  <div>
+                    <p className="font-medium text-gray-800 dark:text-gray-100 text-sm">Point to 3 Folders</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">SHP files, CSV files, and CFG files</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <div className="w-8 h-8 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center flex-shrink-0 text-green-700 dark:text-green-300 font-bold text-sm">3</div>
+                  <div>
+                    <p className="font-medium text-gray-800 dark:text-gray-100 text-sm">Run the Script</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">Execute InfoSewer_to_InfoWorks_BASE.rb in ICM</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row gap-3">
+              <a href="https://github.com/innovyze/Open-Source-Support/tree/main/01%20InfoWorks%20ICM/01%20Ruby/01%20InfoWorks/0060%20-%20InfoSewer%20to%20InfoWorks%20ICM%20Conversion%20Tools" className="inline-flex items-center justify-center gradient-primary text-white px-6 py-3 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 text-sm sm:text-base" target="_blank" rel="noopener noreferrer">
+                <i className="fab fa-github mr-2"></i>
+                Download Automated Tool from GitHub
+              </a>
+              <a href="https://download-directory.github.io/?url=https%3A%2F%2Fgithub.com%2Finnovyze%2FOpen-Source-Support%2Ftree%2Fmain%2F01%2520InfoWorks%2520ICM%2F01%2520Ruby%2F01%2520InfoWorks%2F0060%2520-%2520InfoSewer%2520to%2520InfoWorks%2520ICM%2520Conversion%2520Tools" className="inline-flex items-center justify-center bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-6 py-3 rounded-xl font-semibold hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300 text-sm sm:text-base" target="_blank" rel="noopener noreferrer">
+                <i className="fas fa-download mr-2"></i>
+                Direct Download (ZIP)
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Script Inputs */}
+        <div className="mb-8 sm:mb-12">
+          <Alert type="info">
+            <h4 className="font-semibold mb-3 text-sm sm:text-base">
+              <i className="fas fa-folder-open mr-2"></i>
+              Required Inputs for the Automated Script
+            </h4>
+            <div className="grid md:grid-cols-3 gap-4 text-sm">
+              <div className="flex items-start space-x-2">
+                <i className="fas fa-map text-blue-500 mt-1"></i>
+                <div>
+                  <p className="font-medium">SHP Folder</p>
+                  <p className="text-xs opacity-80">Converted from Map.mdb via ESRI ArcCatalog</p>
+                </div>
+              </div>
+              <div className="flex items-start space-x-2">
+                <i className="fas fa-file-csv text-green-500 mt-1"></i>
+                <div>
+                  <p className="font-medium">CSV Folder</p>
+                  <p className="text-xs opacity-80">Converted from .IEDB DBF files via Excel macro</p>
+                </div>
+              </div>
+              <div className="flex items-start space-x-2">
+                <i className="fas fa-cog text-purple-500 mt-1"></i>
+                <div>
+                  <p className="font-medium">CFG Folder</p>
+                  <p className="text-xs opacity-80">Configuration files from the GitHub repository</p>
+                </div>
+              </div>
+            </div>
+          </Alert>
+        </div>
+
         {/* Requirements Section */}
         <div className="mb-8 sm:mb-12">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-gray-100 mb-6 sm:mb-8 text-center sm:text-left">Requirements</h2>
@@ -1186,51 +1301,74 @@ function OverviewContent({ showStep }: { showStep: (step: string) => void }) {
           </div>
         </div>
 
-        {/* Process Overview */}
-        <div className="mb-8 sm:mb-12">
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-gray-100 mb-6 sm:mb-8 text-center sm:text-left">Conversion Process</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6">
-                <i className="fas fa-file-export text-white text-xl sm:text-2xl"></i>
-              </div>
-              <h3 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-gray-100 mb-3">1. Export</h3>
-              <p className="text-gray-600 dark:text-gray-300 text-sm sm:text-base">Convert InfoSewer data to compatible formats (DBF to CSV, MDB to SHP)</p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6">
-                <i className="fas fa-download text-white text-xl sm:text-2xl"></i>
-              </div>
-              <h3 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-gray-100 mb-3">2. Import</h3>
-              <p className="text-gray-600 dark:text-gray-300 text-sm sm:text-base">Use InfoWorks ICM ODIC with configuration files to import data systematically</p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-16 h-16 sm:w-20 sm:h-20 gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-4 sm:mb-6">
-                <i className="fas fa-cogs text-white text-xl sm:text-2xl"></i>
-              </div>
-              <h3 className="text-lg sm:text-xl font-semibold text-gray-800 dark:text-gray-100 mb-3">3. Configure</h3>
-              <p className="text-gray-600 dark:text-gray-300 text-sm sm:text-base">Run SQL scripts and validate data integrity to complete the conversion</p>
-            </div>
-          </div>
-        </div>
-
         {/* Important Notice */}
         <Alert type="warning">
           <h4 className="font-semibold mb-2 text-sm sm:text-base">Important Notice</h4>
-          <p className="text-sm sm:text-base leading-relaxed">This conversion process requires professional software licenses and technical expertise. Always backup your original data before beginning the conversion process.</p>
+          <p className="text-sm sm:text-base leading-relaxed">This conversion process requires professional software licenses and technical expertise. Always backup your original data before beginning the conversion process. Verify that display units are set as desired prior to import (Tools &gt; Options &gt; Units tab in ICM).</p>
         </Alert>
 
-        {/* Getting Started */}
-        <div className="text-center mb-8 sm:mb-12">
-          <button 
-            onClick={() => showStep('step1')}
-            className="gradient-primary text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-sm sm:text-base w-full sm:w-auto max-w-sm"
-          >
-            <i className="fas fa-arrow-right mr-2"></i>
-            Start Conversion Process
-          </button>
+        {/* Legacy 9-Step Manual Process */}
+        <div className="mb-8 sm:mb-12 mt-8 sm:mt-12">
+          <div className="bg-gray-50 dark:bg-gray-800/50 border border-gray-300 dark:border-gray-600 rounded-2xl p-6 sm:p-8">
+            <div className="flex items-start space-x-4 mb-6">
+              <div className="w-12 h-12 bg-gray-400 dark:bg-gray-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                <i className="fas fa-list-ol text-white text-lg"></i>
+              </div>
+              <div>
+                <div className="flex items-center gap-3 mb-1">
+                  <h2 className="text-xl sm:text-2xl font-bold text-gray-700 dark:text-gray-300">9-Step Manual Process</h2>
+                  <span className="bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-300 px-3 py-0.5 rounded-full text-xs font-semibold uppercase tracking-wide">Legacy / Fallback</span>
+                </div>
+                <p className="text-gray-500 dark:text-gray-400 text-sm sm:text-base">For edge cases, custom configurations, or when the automated tool needs manual intervention. Use this step-by-step guide to troubleshoot individual import stages or handle non-standard model setups.</p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-6">
+              <div className="text-center bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-200 dark:border-gray-700">
+                <div className="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-xl flex items-center justify-center mx-auto mb-3">
+                  <i className="fas fa-file-export text-white text-lg"></i>
+                </div>
+                <h3 className="text-base font-semibold text-gray-700 dark:text-gray-300 mb-2">1. Export</h3>
+                <p className="text-gray-500 dark:text-gray-400 text-xs">Convert InfoSewer data to compatible formats (DBF to CSV, MDB to SHP)</p>
+              </div>
+
+              <div className="text-center bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-200 dark:border-gray-700">
+                <div className="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-xl flex items-center justify-center mx-auto mb-3">
+                  <i className="fas fa-download text-white text-lg"></i>
+                </div>
+                <h3 className="text-base font-semibold text-gray-700 dark:text-gray-300 mb-2">2. Import</h3>
+                <p className="text-gray-500 dark:text-gray-400 text-xs">Use InfoWorks ICM ODIC with configuration files to import data systematically</p>
+              </div>
+
+              <div className="text-center bg-white dark:bg-gray-800 p-4 rounded-xl border border-gray-200 dark:border-gray-700">
+                <div className="w-12 h-12 bg-gray-300 dark:bg-gray-600 rounded-xl flex items-center justify-center mx-auto mb-3">
+                  <i className="fas fa-cogs text-white text-lg"></i>
+                </div>
+                <h3 className="text-base font-semibold text-gray-700 dark:text-gray-300 mb-2">3. Configure</h3>
+                <p className="text-gray-500 dark:text-gray-400 text-xs">Run SQL scripts and validate data integrity to complete the conversion</p>
+              </div>
+            </div>
+
+            <Alert type="info">
+              <h4 className="font-semibold mb-2 text-sm">When to use the manual 9-step process:</h4>
+              <ul className="text-xs sm:text-sm space-y-1">
+                <li><i className="fas fa-exclamation-triangle text-yellow-500 mr-2"></i>The automated script encounters errors with your specific model configuration</li>
+                <li><i className="fas fa-puzzle-piece text-blue-500 mr-2"></i>You need to import only specific data types (e.g., just nodes or just pumps)</li>
+                <li><i className="fas fa-wrench text-orange-500 mr-2"></i>Your model has non-standard setups requiring custom SQL adjustments</li>
+                <li><i className="fas fa-search text-purple-500 mr-2"></i>You want to inspect and validate data at each individual stage</li>
+              </ul>
+            </Alert>
+
+            <div className="text-center mt-6">
+              <button 
+                onClick={() => showStep('step1')}
+                className="bg-gray-500 dark:bg-gray-600 text-white px-6 sm:px-8 py-3 rounded-xl font-semibold hover:bg-gray-600 dark:hover:bg-gray-500 hover:shadow-lg transition-all duration-300 text-sm sm:text-base"
+              >
+                <i className="fas fa-arrow-right mr-2"></i>
+                View Manual 9-Step Process
+              </button>
+            </div>
+          </div>
         </div>
 
         {/* Official Documentation Reference */}

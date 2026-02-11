@@ -42,19 +42,45 @@
       { "icon": "fas fa-layer-group", "text": "9 Steps" },
       { "icon": "fas fa-users", "text": "Expert Level" }
     ],
+    "automatedTool": {
+      "label": "Recommended",
+      "title": "Automated Conversion Tool",
+      "description": "A companion Ruby script that combines all nine manual steps into a single automated process.",
+      "benefits": [
+        { "title": "One-Click Conversion", "description": "Runs all 9 import steps automatically with a single Ruby script execution inside ICM" },
+        { "title": "Minutes, Not Hours", "description": "Reduces typical conversion time from 2-4 hours of manual work to under 15 minutes" },
+        { "title": "Validated & Tested", "description": "Official Innovyze tool with built-in error handling and data integrity checks" }
+      ],
+      "quickStart": [
+        { "step": 1, "title": "Prepare Input Folders", "description": "Convert DBF to CSV and Map.mdb to SHP" },
+        { "step": 2, "title": "Point to 3 Folders", "description": "SHP files, CSV files, and CFG files" },
+        { "step": 3, "title": "Run the Script", "description": "Execute InfoSewer_to_InfoWorks_BASE.rb in ICM" }
+      ],
+      "requiredInputs": [
+        { "folder": "SHP Folder", "source": "Converted from Map.mdb via ESRI ArcCatalog" },
+        { "folder": "CSV Folder", "source": "Converted from .IEDB DBF files via Excel macro" },
+        { "folder": "CFG Folder", "source": "Configuration files from the GitHub repository" }
+      ],
+      "githubUrl": "https://github.com/innovyze/Open-Source-Support/tree/main/01%20InfoWorks%20ICM/01%20Ruby/01%20InfoWorks/0060%20-%20InfoSewer%20to%20InfoWorks%20ICM%20Conversion%20Tools",
+      "downloadUrl": "https://download-directory.github.io/?url=https%3A%2F%2Fgithub.com%2Finnovyze%2FOpen-Source-Support%2Ftree%2Fmain%2F01%2520InfoWorks%2520ICM%2F01%2520Ruby%2F01%2520InfoWorks%2F0060%2520-%2520InfoSewer%2520to%2520InfoWorks%2520ICM%2520Conversion%2520Tools"
+    },
+    "manualProcess": {
+      "label": "Legacy / Fallback",
+      "title": "9-Step Manual Process",
+      "description": "For edge cases, custom configurations, or when the automated tool needs manual intervention.",
+      "whenToUse": [
+        "The automated script encounters errors with your specific model configuration",
+        "You need to import only specific data types (e.g., just nodes or just pumps)",
+        "Your model has non-standard setups requiring custom SQL adjustments",
+        "You want to inspect and validate data at each individual stage"
+      ]
+    },
     "requirements": {
       "software": ["InfoWorks ICM", "Microsoft Excel", "Ruby interpreter"],
       "data": ["InfoSewer project (.IEDB folder)", "Map.mdb geometry file", "DBF data files"],
       "knowledge": ["Basic SQL understanding", "Familiarity with sewer modeling", "GIS data concepts"]
     },
-    "conversionWorkflow": {
-      "steps": [
-        { "title": "1. Export", "description": "Convert DBF files to CSV and Map.mdb to SHP format using provided tools" },
-        { "title": "2. Import", "description": "Use InfoWorks ICM ODIC with configuration files to import data systematically" },
-        { "title": "3. Configure", "description": "Run SQL scripts and validate data integrity to complete the conversion" }
-      ]
-    },
-    "importantNotice": "This conversion process requires professional software licenses and technical expertise. Always backup your original data before beginning the conversion process.",
+    "importantNotice": "This conversion process requires professional software licenses and technical expertise. Always backup your original data before beginning the conversion process. Verify that display units are set as desired prior to import (Tools > Options > Units tab in ICM).",
     "nineConversionSteps": [
       "Import Nodes and Create Subcatchments",
       "Import Links",
