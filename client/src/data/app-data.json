@@ -1,0 +1,605 @@
+{
+  "app": {
+    "title": "InfoSewer to InfoWorks ICM",
+    "subtitle": "Knowledge Management Conversion Guide",
+    "estimatedTime": "~2-4 hours",
+    "totalSteps": 9,
+    "difficulty": "Expert Level"
+  },
+  "navigation": {
+    "tabs": [
+      { "id": "overview", "icon": "fas fa-info-circle", "title": "Overview", "subtitle": "Getting Started" },
+      { "id": "step1", "icon": "fas fa-circle-nodes", "title": "Step 1", "subtitle": "Import Nodes & Subcatchments" },
+      { "id": "step2", "icon": "fas fa-route", "title": "Step 2", "subtitle": "Import Links & Geometry" },
+      { "id": "step3", "icon": "fas fa-water", "title": "Step 3", "subtitle": "Import Manhole Hydraulics" },
+      { "id": "step4", "icon": "fas fa-pipe", "title": "Step 4", "subtitle": "Import Link Hydraulics" },
+      { "id": "step5", "icon": "fas fa-pump-soap", "title": "Step 5", "subtitle": "Import Pump Hydraulics" },
+      { "id": "step6", "icon": "fas fa-cogs", "title": "Step 6", "subtitle": "Import Pump Controls" },
+      { "id": "step7", "icon": "fas fa-tint", "title": "Step 7", "subtitle": "Import Subcatchment DWF" },
+      { "id": "step8", "icon": "fas fa-flask", "title": "Step 8", "subtitle": "Import Wet Well Hydraulics" },
+      { "id": "step9", "icon": "fas fa-cloud-rain", "title": "Step 9", "subtitle": "Configure RDII Hydrographs" },
+      { "id": "documentation", "icon": "fas fa-book", "title": "Documentation", "subtitle": "InfoSewer References" }
+    ]
+  },
+  "themes": {
+    "available": [
+      { "id": "ocean", "name": "Ocean Blue" },
+      { "id": "sunset", "name": "Sunset Orange" },
+      { "id": "forest", "name": "Forest Green" },
+      { "id": "lavender", "name": "Lavender Purple" },
+      { "id": "corporate", "name": "Corporate Gray" },
+      { "id": "midnight", "name": "Midnight Blue" },
+      { "id": "autumn", "name": "Autumn Warmth" },
+      { "id": "arctic", "name": "Arctic Teal" }
+    ],
+    "modes": ["light", "dark"]
+  },
+  "overview": {
+    "title": "InfoSewer to InfoWorks ICM",
+    "subtitle": "Knowledge Management Conversion Guide",
+    "badges": [
+      { "icon": "fas fa-clock", "text": "~2-4 hours" },
+      { "icon": "fas fa-layer-group", "text": "9 Steps" },
+      { "icon": "fas fa-users", "text": "Expert Level" }
+    ],
+    "requirements": {
+      "software": ["InfoWorks ICM", "Microsoft Excel", "Ruby interpreter"],
+      "data": ["InfoSewer project (.IEDB folder)", "Map.mdb geometry file", "DBF data files"],
+      "knowledge": ["Basic SQL understanding", "Familiarity with sewer modeling", "GIS data concepts"]
+    },
+    "conversionWorkflow": {
+      "steps": [
+        { "title": "1. Export", "description": "Convert DBF files to CSV and Map.mdb to SHP format using provided tools" },
+        { "title": "2. Import", "description": "Use InfoWorks ICM ODIC with configuration files to import data systematically" },
+        { "title": "3. Configure", "description": "Run SQL scripts and validate data integrity to complete the conversion" }
+      ]
+    },
+    "importantNotice": "This conversion process requires professional software licenses and technical expertise. Always backup your original data before beginning the conversion process.",
+    "nineConversionSteps": [
+      "Import Nodes and Create Subcatchments",
+      "Import Links",
+      "Import Manhole Hydraulics",
+      "Import Link Hydraulics",
+      "Import Pump Hydraulics",
+      "Import Pump Controls",
+      "Import Subcatchment DWF",
+      "Import Wet Well Hydraulics",
+      "Configuration for Rainfall-Dependent Infiltration and Inflow (RDII) hydrographs"
+    ],
+    "conversionProcess": {
+      "issue": "Converting hydraulic models from one program to another requires a degree of dedication due to the intricacies involved in the process. It requires a certain investment of time and an understanding of both programs. This series of articles contains step-by-step instructions to perform a basic conversion for the BASE scenario from InfoSewer to InfoWorks ICM.",
+      "disclaimer": "Please be aware that this guide is not exhaustive. The unique setup of each InfoSewer model means a one-size-fits-all approach to conversion is impractical. However, these steps have been carefully planned to facilitate the conversion process for as many models as possible.",
+      "highLevelSteps": [
+        "Converting DBF Files to CSV: Use an Excel macro to convert DBF files within the .IEDB model folder to CSV format for importing network data into ICM.",
+        "Converting Map.mdb to SHP: Use ESRI's ArcCatalog to convert the Map.mdb file within the .IEDB model folder to SHP format for importing network geometry into ICM.",
+        "Importing CSV Files: Import network data from CSV files with configuration (CFG) files.",
+        "Importing SHP Files: Import geometry data from SHP files with configuration (CFG) files.",
+        "Performing Data Manipulation: Modify imported data using SQL."
+      ],
+      "rubyScriptInputs": [
+        "Folder containing converted SHP files from Map.mdb",
+        "Folder containing converted CSV files from .IEDB",
+        "Folder containing CFG files"
+      ],
+      "importantNote": "Verify that display units are set as desired prior to import. To review units in ICM, go to Tools > Options and view the Units tab. Display units can be modified as necessary."
+    },
+    "technologyStack": ["React 18", "TypeScript", "Tailwind CSS", "Node.js", "Vite", "Express"],
+    "keyFeatures": [
+      "8 customizable themes with dark mode",
+      "Mobile-first responsive design",
+      "Progress tracking with localStorage",
+      "Keyboard navigation support",
+      "Interactive step-by-step guide",
+      "Official documentation integration"
+    ]
+  },
+  "documentation": {
+    "officialLinks": [
+      {
+        "title": "Overview of All Import Steps",
+        "description": "Complete conversion process overview and methodology",
+        "url": "https://www.autodesk.com/support/technical/article/caas/sfdcarticles/sfdcarticles/Knowledge-Importing-InfoSewer-to-InfoWorks-ICM-Overview-of-all-Import-Steps.html",
+        "icon": "fas fa-file-alt"
+      },
+      {
+        "title": "Step 1: Import Nodes and Create Subcatchments",
+        "description": "Node import procedures and subcatchment creation",
+        "url": "https://www.autodesk.com/support/technical/article/caas/sfdcarticles/sfdcarticles/Step-1-Import-Nodes-and-Create-Subcatchments-in-the-Import-of-InfoSewer-to-ICM-InfoWorks.html",
+        "icon": "fas fa-circle-nodes"
+      },
+      {
+        "title": "GitHub: Conversion Tools Repository",
+        "description": "Official Innovyze conversion scripts and tools",
+        "url": "https://github.com/innovyze/Open-Source-Support/tree/main/01%20InfoWorks%20ICM/01%20Ruby/01%20InfoWorks/0060%20-%20InfoSewer%20to%20InfoWorks%20ICM%20Conversion%20Tools",
+        "icon": "fab fa-github"
+      }
+    ],
+    "projectStructure": {
+      "infoSewer": {
+        "label": "Basic Files in InfoSewer",
+        "storageExtension": "*.IEDB",
+        "contents": [
+          { "item": "Network Map", "storage": "Network Schematic - Stored as *.MXD File" },
+          { "item": "Feature Attributes", "storage": "Database Tables and Modeling Files - Stored as *.IEDB Folder" },
+          { "item": "Modeling Parameters", "storage": "Results Directory - *.OUT Folder (post-successful Run)" },
+          { "item": "Model Solution and Results", "storage": "" },
+          { "item": "Model Scenarios", "storage": "" }
+        ]
+      },
+      "infoSWMM": {
+        "label": "Basic Files in InfoSWMM",
+        "storageExtension": "*.ISDB",
+        "contents": [
+          { "item": "Network Map", "storage": "Network Schematic - Stored as *.MXD File" },
+          { "item": "Feature Attributes", "storage": "Database Tables and Modeling Files - Stored as *.ISDB Folder" },
+          { "item": "Modeling Parameters", "storage": "Results Directory - *.OUT Folder (post-successful Run)" },
+          { "item": "Model Solution and Results", "storage": "" },
+          { "item": "Model Scenarios", "storage": "" }
+        ]
+      }
+    },
+    "scenarioFiles": {
+      "infoSewer": {
+        "textFiles": "~SSNINP, ~DGNINP, ~EPSINP, STEADY.RPT, DESIGN.RPT, EPS.RPT",
+        "binaryFiles": "STEADY.OUT, EPS.OUT"
+      },
+      "infoSWMM": {
+        "textFiles": "HYDQUA.INP, HYDQUA.RPT.TXT, HYDQUA.HTML",
+        "binaryFiles": "HYDQUA.OUT"
+      }
+    },
+    "keyDifferences": {
+      "infoSewer": {
+        "extension": "*.IEDB",
+        "features": [
+          "Sanitary sewer collection systems",
+          "Steady-state and extended period simulation",
+          "Design analysis capabilities",
+          "Multiple report files (STEADY.RPT, DESIGN.RPT, EPS.RPT)"
+        ]
+      },
+      "infoSWMM": {
+        "extension": "*.ISDB",
+        "features": [
+          "Stormwater and combined sewer systems",
+          "Dynamic rainfall-runoff modeling",
+          "Hydrologic and hydraulic analysis",
+          "Single comprehensive output format (HYDQUA.*)"
+        ]
+      }
+    },
+    "systemRequirements": {
+      "minimum": [
+        "Windows 10 or later",
+        "8 GB RAM minimum",
+        "4 GB available disk space",
+        "DirectX 11 compatible graphics",
+        "Microsoft Excel (for DBF conversion)"
+      ],
+      "recommended": [
+        "16+ GB RAM",
+        "SSD storage",
+        "Dedicated graphics card",
+        "ESRI ArcGIS (for SHP conversion)"
+      ]
+    },
+    "fileFormatReference": {
+      "iedbFolderStructure": [
+        { "file": "NODE.DBF", "description": "Node data (manholes, outlets)" },
+        { "file": "LINK.DBF", "description": "Link data (pipes, pumps)" },
+        { "file": "MANHOLE.DBF", "description": "Manhole properties" },
+        { "file": "PIPE.DBF", "description": "Pipe hydraulics" },
+        { "file": "PUMP.DBF", "description": "Pump definitions" },
+        { "file": "PUMPCTRL.DBF", "description": "Pump controls" },
+        { "file": "MHHYD.DBF", "description": "Manhole hydraulics" },
+        { "file": "WWELLHYD.DBF", "description": "Wet well hydraulics" },
+        { "file": "HYDROGRH.DBF", "description": "RDII hydrographs" },
+        { "file": "Map.mdb", "description": "Spatial geometry" }
+      ],
+      "keyFileTypes": {
+        "dbfFiles": "NODE.DBF, LINK.DBF, MANHOLE.DBF, PIPE.DBF, etc. - Convert to CSV for ICM import",
+        "mapMdb": "Contains spatial geometry data for conversion to SHP format"
+      }
+    },
+    "csvFileReference": {
+      "networkElements": [
+        { "file": "NODE.csv", "description": "Node element information" },
+        { "file": "LINK.csv", "description": "Link element information" },
+        { "file": "MANHOLE.csv", "description": "Manhole data" },
+        { "file": "PIPE.csv", "description": "Pipe element information" },
+        { "file": "PUMP.csv", "description": "Pump data" },
+        { "file": "WWELL.csv", "description": "Well data" },
+        { "file": "VERTEX.csv", "description": "Vertex data" }
+      ],
+      "hydraulicData": [
+        { "file": "MHHYD.csv", "description": "MH hydraulic data" },
+        { "file": "PIPEHYD.csv", "description": "Pipe hydraulic data" },
+        { "file": "PUMPHYD.csv", "description": "Pump hydraulic data" },
+        { "file": "WWELLHYD.csv", "description": "Well hydraulic data" },
+        { "file": "PIPEDGN.csv", "description": "Pipe design data" },
+        { "file": "HYDROGRH.csv", "description": "Hydrographic data" },
+        { "file": "CONTROL.csv", "description": "Control data" }
+      ],
+      "analysisOutput": [
+        { "file": "MHOUT.csv", "description": "MH output data" },
+        { "file": "PIPEOUT.csv", "description": "Pipe output data" },
+        { "file": "PUMPOUT.csv", "description": "Pump output data" },
+        { "file": "WWELLOUT.csv", "description": "Well output data" },
+        { "file": "REPORT.csv", "description": "Report data" },
+        { "file": "FORCEOUT.csv", "description": "Force output data" },
+        { "file": "OUTLEOUT.csv", "description": "Outlet output data" }
+      ],
+      "configurationSettings": [
+        { "file": "SCENARIO.csv", "description": "Scenario data" },
+        { "file": "RUNOPT.csv", "description": "Run options" },
+        { "file": "PATTERN.csv", "description": "Pattern information" },
+        { "file": "TIME.csv", "description": "Time settings" },
+        { "file": "CURVE.csv", "description": "Curve data" },
+        { "file": "COSTING.csv", "description": "Costing information" },
+        { "file": "STATUS.csv", "description": "Status data" }
+      ],
+      "specializedFiles": {
+        "linkTypes": "ALINK, CBLINK, DMLINK, HLLINK, MOLINK, XNGLINK",
+        "nodeTypes": "ANODE, CBNODE, DMNODE, HLNODE, MONODE, XNGNODE",
+        "specialData": "ANNO, GIS, FLD, LUC, NCP files and more"
+      }
+    },
+    "pipehydDbfStructure": [
+      { "field": "ID", "sampleValue": "53", "description": "Pipe identification number" },
+      { "field": "FROM_INV", "sampleValue": "292.5", "description": "Upstream invert elevation" },
+      { "field": "TO_INV", "sampleValue": "291", "description": "Downstream invert elevation" },
+      { "field": "LENGTH", "sampleValue": "624", "description": "Pipe length" },
+      { "field": "DIAMETER", "sampleValue": "12", "description": "Pipe diameter (inches)" },
+      { "field": "COEFF", "sampleValue": "0.014", "description": "Manning's roughness coefficient" },
+      { "field": "PARALLEL", "sampleValue": "0", "description": "Number of parallel pipes" }
+    ],
+    "conversionProcessSummary": {
+      "phases": [
+        { "title": "Data Export", "description": "Convert DBF to CSV, Map.mdb to SHP" },
+        { "title": "Data Import", "description": "Use ODIC with CFG files" },
+        { "title": "Data Processing", "description": "Run SQL scripts and validate" }
+      ]
+    },
+    "expertResources": {
+      "expert": {
+        "name": "Robert Dickinson",
+        "title": "Product Sector Leader for InfoSWMM/InfoSewer at Autodesk (formerly Innovyze)",
+        "experience": "40+ years of SWMM modeling experience",
+        "authority": "World-renowned urban drainage modeling authority",
+        "credentials": "Co-developer of EPA SWMM versions 3, 4, and 5+",
+        "platform": "SWMM456.com (formerly SWMM5.NET)"
+      },
+      "contact": {
+        "email1": "robert.dickinson@gmail.com",
+        "email2": "robert.e.dickinson@innovyze.com",
+        "website": "SWMM456.com",
+        "linkedin": "LinkedIn Professional Network"
+      },
+      "tutorialCategories": [
+        "Database setup and project initialization",
+        "Configuration files for ICM InfoWorks migration",
+        "CSV and geodatabase import/export workflows",
+        "Flow splitter usage for dendritic networks",
+        "Force main hydraulics and pump operations",
+        "Ruby scripting for ICM integration"
+      ]
+    },
+    "databaseSetup": {
+      "architecture": "InfoSewer uses a database-centric approach where all model data is stored in DBF (database) files within the IEDB (InfoSewer Database) folder, integrated with ArcGIS for spatial visualization.",
+      "dbEditorFunctions": [
+        "View modeling data tables",
+        "Add/delete custom fields",
+        "Perform block edits on multiple records",
+        "Customize data tables with user-defined fields"
+      ],
+      "dataImportMethods": [
+        "CSV file import with field mapping",
+        "Geodatabase import via ODIC",
+        "Shapefile integration",
+        "AutoCAD file support"
+      ],
+      "implementationSteps": [
+        "Project Creation: Open ArcMap with appropriate coordinate system, load background layers/shapefiles, initialize new InfoSewer project",
+        "Database Initialization: System creates IEDB folder structure, default tables populated with standard fields, spatial reference system established",
+        "Data Population: Import existing network data (CSV/Geodatabase), manual data entry through attribute browsers, bulk data updates via DB Editor",
+        "Configuration Optimization: Set display scopes and domains, configure custom fields for project needs, establish data validation rules",
+        "Network Validation: Run 'Update Map from DB' to sync database with map, perform connectivity checks, validate hydraulic parameters"
+      ]
+    },
+    "professionalTraining": {
+      "officialTraining": {
+        "title": "Introduction to InfoSewer (US)",
+        "duration": "2-day comprehensive web-based training",
+        "topics": [
+          "Hands-on modeling and database customization",
+          "GIS integration techniques",
+          "Steady-state and dynamic simulation methods",
+          "Wet well cycling and pump optimization"
+        ]
+      },
+      "designCapabilities": [
+        "Peak discharge conveyance analysis",
+        "Solids transport optimization",
+        "Capacity analysis for existing systems",
+        "Replacement and parallel pipe design",
+        "Velocity and cover depth criteria compliance"
+      ]
+    },
+    "advancedFeatures": [
+      {
+        "title": "Multi-Level Inheritance",
+        "description": "Scenario Manager for alternative analysis with hierarchical data inheritance"
+      },
+      {
+        "title": "Quality Assurance",
+        "description": "Built-in validation routines and mass balance verification tools"
+      },
+      {
+        "title": "Integration",
+        "description": "GIS Gateway for spatial data exchange and ICM InfoWorks conversion"
+      }
+    ],
+    "hydraulicModelingProcedures": {
+      "steadyStateAnalysis": [
+        "Constant flow conditions at specific time points",
+        "Peak flow scenarios and capacity assessment",
+        "Transition between gravity and pressurized flow",
+        "One-dimensional incompressible flow calculations",
+        "Rational Method for stormwater peak flows",
+        "IDF curves for return period analysis"
+      ],
+      "networkDesignCapabilities": [
+        "Explicit design method for independent pipe sizing",
+        "Pipe size and slope determination for given flows",
+        "Velocity and cover depth optimization",
+        "Existing system capacity analysis",
+        "Replacement and parallel pipe design",
+        "Cost minimization with design criteria"
+      ],
+      "designCriteria": {
+        "velocityRequirements": [
+          "Minimum velocity ≥2 ft/s (prevent deposition)",
+          "Maximum velocity ≤10 ft/s (prevent scour)",
+          "User-specified limits based on system needs"
+        ],
+        "analysisTypes": [
+          "Analysis criteria: Existing pipe capacity",
+          "Design criteria: New pipe sizing",
+          "d/D ratios trigger design recommendations"
+        ]
+      }
+    },
+    "forceMainModeling": {
+      "systemComponents": [
+        { "name": "Wet Well", "description": "Basin collecting wastewater inflow" },
+        { "name": "Pump", "description": "Device providing hydraulic head to fluid" },
+        { "name": "Pump Curve", "description": "Head-flow relationship defining performance" },
+        { "name": "Pressure Node", "description": "Measurement point after pump" },
+        { "name": "Force Main", "description": "Pressurized pipe carrying wastewater" }
+      ],
+      "wetWellAnalysisOptions": {
+        "constantDiameter": "Representative diameter = average wet-well area diameter",
+        "variableCrossSection": "Uses curve/shape table defining volume vs depth relationship"
+      },
+      "pumpCurveTypes": [
+        { "type": "Fixed Capacity", "description": "Constant flow rate independent of head" },
+        { "type": "Single-Point", "description": "Single head-flow design point" },
+        { "type": "Three-Point", "description": "Most accurate pump representation" }
+      ],
+      "forceMainRequirements": {
+        "hydraulicConfiguration": "Must be defined as pressurized conduits with Hazen-Williams or Darcy-Weisbach coefficients",
+        "systemRules": "Gravity main → Wet well → Pump → Chamber/manhole → Force main",
+        "advancedRequirements": "Each force main system requires dedicated wet well/pump combination"
+      }
+    },
+    "arcGISIntegration": {
+      "dataImportMethods": [
+        { "method": "InfoSewer Import Manager", "formats": "Shapefiles, text files, MapInfo (MIF/MID)" },
+        { "method": "GIS Gateway Integration", "formats": "Create model, add layers, coordinate matching" },
+        { "method": "Database Connections", "formats": "ODBC, OLE DB, direct CSV import" },
+        { "method": "Legacy Systems", "formats": "H2OMAP projects, ArcInfo generate files" }
+      ],
+      "dataExportOptions": [
+        "Collection system maps with InfoSewer data",
+        "Input data and simulation outputs",
+        "ArcInfo generate files for geometry exchange",
+        "Windows Clipboard export",
+        "Database integration with spreadsheets/CAD",
+        "Bidirectional GIS Exchange tool updates"
+      ],
+      "spatialAnalysisTools": [
+        { "tool": "Extract Tools", "description": "SQL queries, spatial criteria" },
+        { "tool": "Overlay Tools", "description": "Clip, intersect, union" },
+        { "tool": "Proximity", "description": "Buffer, near, distance" },
+        { "tool": "Statistics", "description": "Spatial patterns, analysis" }
+      ],
+      "qualityControl": {
+        "preImportValidation": [
+          "All conduits connect to exactly two unique nodes",
+          "Proper snapping at connection points",
+          "No disconnected/orphan nodes",
+          "Coordinate system matching"
+        ],
+        "postImportChecks": [
+          "Use Orphan Nodes utility",
+          "Run Orphan Pipes check",
+          "Verify coordinate alignment",
+          "Test model connectivity"
+        ]
+      }
+    }
+  },
+  "steps": {
+    "step1": {
+      "title": "Step 1: Import Nodes and Create Subcatchments",
+      "subtitle": "Convert DBF files to CSV and import node data using ODIC",
+      "icon": "fas fa-download",
+      "githubRepo": {
+        "title": "InfoSewer to InfoWorks ICM Conversion Tools",
+        "url": "https://github.com/innovyze/Open-Source-Support/tree/main/01%20InfoWorks%20ICM/01%20Ruby/01%20InfoWorks/0060%20-%20InfoSewer%20to%20InfoWorks%20ICM%20Conversion%20Tools",
+        "downloadUrl": "https://download-directory.github.io/?url=https%3A%2F%2Fgithub.com%2Finnovyze%2FOpen-Source-Support%2Ftree%2Fmain%2F01%2520InfoWorks%2520ICM%2F01%2520Ruby%2F01%2520InfoWorks%2F0060%2520-%2520InfoSewer%2520to%2520InfoWorks%2520ICM%2520Conversion%2520Tools"
+      },
+      "repositoryStructure": {
+        "root": "01 InfoWorks ICM/01 Ruby/01 InfoWorks/0060 - InfoSewer to InfoWorks ICM Conversion Tools/",
+        "contents": [
+          "Configuration (CFG) Files/",
+          "DBF to CSV Macro/DBF_to_CSV.xlsm",
+          "Ruby Import BASE/InfoSewer_to_InfoWorks_BASE.rb",
+          "SQL Scripts/",
+          "Scenario Tools/",
+          "Pattern Tools/",
+          "readme.md"
+        ]
+      },
+      "officialDocUrl": "https://www.autodesk.com/support/technical/article/caas/sfdcarticles/sfdcarticles/Knowledge-Importing-InfoSewer-to-InfoWorks-ICM-Overview-of-all-Import-Steps.html"
+    },
+    "step2": {
+      "title": "Step 2: Export InfoSewer Database",
+      "subtitle": "Extract data from InfoSewer IEDB folder",
+      "icon": "fas fa-database"
+    },
+    "step3": {
+      "title": "Step 3: Import Manhole Hydraulics",
+      "subtitle": "Configure manhole hydraulic properties",
+      "icon": "fas fa-water"
+    },
+    "step4": {
+      "title": "Step 4: Import Link Hydraulics",
+      "subtitle": "Configure pipe and link hydraulic properties",
+      "icon": "fas fa-pipe"
+    },
+    "step5": {
+      "title": "Step 5: Import Pump Hydraulics",
+      "subtitle": "Configure pump hydraulic characteristics",
+      "icon": "fas fa-pump-soap"
+    },
+    "step6": {
+      "title": "Step 6: Import Pump Controls",
+      "subtitle": "Set up pump control logic and automation",
+      "icon": "fas fa-cogs"
+    },
+    "step7": {
+      "title": "Step 7: Import Subcatchment DWF",
+      "subtitle": "Configure dry weather flow parameters",
+      "icon": "fas fa-tint"
+    },
+    "step8": {
+      "title": "Step 8: Import Wet Well Hydraulics",
+      "subtitle": "Configure wet well hydraulic properties",
+      "icon": "fas fa-flask"
+    },
+    "step9": {
+      "title": "Step 9: Configure RDII Hydrographs",
+      "subtitle": "Set up rainfall-dependent infiltration/inflow parameters",
+      "icon": "fas fa-cloud-rain"
+    }
+  },
+  "infoSewerFeatures": {
+    "description": "One of the most powerful GIS Sewer modeling software in the world with many tools for Sewer Design, Water Quality, Runoff, RDII and Steady State/EPS Modeling",
+    "bridgesGap": "InfoSewer bridges the gap between network modeling and ArcGIS based software",
+    "lastUpdated": "2 February, 2021",
+    "applications": {
+      "planningDesign": [
+        "Master Planning",
+        "CMOM Program Planning",
+        "Facility Sizing",
+        "Wet-Well Design",
+        "New System Design",
+        "System Layout Mapping",
+        "System Expansion",
+        "Stormwater Modeling"
+      ],
+      "operationsManagement": [
+        "Facility Management",
+        "Outlet Configuration",
+        "Operations Study",
+        "Pump Cycling",
+        "Real-time Simulation",
+        "Infrastructure Rehabilitation/Replacement",
+        "Operator Training",
+        "Project Management"
+      ],
+      "analysisModeling": [
+        "Peak Flow Effects",
+        "Flow Capacity Evaluation",
+        "Overflow Management",
+        "Infiltration/Inflow Modeling",
+        "System Deficiency Identification",
+        "System Improvements",
+        "Dynamic Loading Comparison",
+        "Dynamic Profiling"
+      ],
+      "waterQualityEnvironmental": [
+        "BOD Modeling",
+        "Odor Control",
+        "Source Tracing",
+        "Pollutant Contribution Analysis",
+        "Discharge Permit Compliance",
+        "Corrosion Control",
+        "Treatment Process Efficiency Evaluation",
+        "Sewage Age Improvement"
+      ],
+      "advancedAnalytics": [
+        "Sediment Modeling and Impact Analysis",
+        "Sensitivity Analysis",
+        "Alternative Analyses",
+        "Flow Monitoring Design",
+        "Model Calibration"
+      ],
+      "financialManagement": [
+        "Capital Improvement Program Development",
+        "Capital Budgeting",
+        "Impact Fees Determination"
+      ]
+    },
+    "coreTools": [
+      "Sewer Design",
+      "Water Quality",
+      "Runoff",
+      "RDII (Rainfall Derived Infiltration/Inflow)",
+      "Steady State/EPS Modeling"
+    ],
+    "retirementTimeline": "2025/2026 (due to ArcMap deprecation)"
+  },
+  "projectArchitecture": {
+    "structure": {
+      "components": [
+        "theme-selector.tsx",
+        "sidebar.tsx",
+        "step-content.tsx",
+        "alert.tsx",
+        "code-block.tsx"
+      ],
+      "hooks": [
+        "use-theme.tsx",
+        "use-conversion-progress.tsx",
+        "use-mobile.tsx"
+      ],
+      "pages": [
+        "conversion-guide.tsx"
+      ],
+      "lib": [
+        "queryClient.ts"
+      ],
+      "server": [
+        "index.ts",
+        "routes.ts"
+      ],
+      "shared": [
+        "schema.ts"
+      ]
+    },
+    "buildTools": [
+      "Vite for fast development",
+      "TypeScript for type safety",
+      "ESLint for code quality",
+      "Tailwind CSS for styling"
+    ],
+    "developmentFeatures": [
+      "Hot Module Replacement",
+      "Path aliases (@/components)",
+      "Error overlay for debugging",
+      "Production optimizations"
+    ]
+  }
+}
