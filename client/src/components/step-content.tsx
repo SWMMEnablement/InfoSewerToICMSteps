@@ -1,7 +1,232 @@
-import React from "react";
+import React, { useState } from "react";
 import { useConversionProgress } from "@/hooks/use-conversion-progress";
 import Alert from "@/components/alert";
 import CodeBlock from "@/components/code-block";
+
+const GITHUB_REPO = 'https://github.com/innovyze/Open-Source-Support/tree/main/01%20InfoWorks%20ICM/01%20Ruby/01%20InfoWorks/0060%20-%20InfoSewer%20to%20InfoWorks%20ICM%20Conversion%20Tools';
+const GITHUB_BLOB = 'https://github.com/innovyze/Open-Source-Support/blob/main/01%20InfoWorks%20ICM/01%20Ruby/01%20InfoWorks/0060%20-%20InfoSewer%20to%20InfoWorks%20ICM%20Conversion%20Tools';
+
+interface DownloadFile {
+  name: string;
+  type: 'cfg' | 'sql' | 'ruby';
+  description: string;
+  path?: string;
+}
+
+function getFileUrl(file: DownloadFile): string {
+  if (file.path) return `${GITHUB_BLOB}/${file.path}`;
+  const subfolderMap: Record<string, string> = {
+    cfg: 'import_config',
+    sql: 'import_config',
+    ruby: '',
+  };
+  const subfolder = subfolderMap[file.type];
+  if (subfolder) return `${GITHUB_REPO}/${subfolder}`;
+  return GITHUB_REPO;
+}
+
+function StepDownloads({ files }: { files: DownloadFile[] }) {
+  const typeConfig = {
+    cfg: { icon: 'fas fa-file-code', bg: 'bg-purple-100 dark:bg-purple-900/30', text: 'text-purple-700 dark:text-purple-300', border: 'border-purple-200 dark:border-purple-700', hoverBg: 'hover:bg-purple-200 dark:hover:bg-purple-900/50' },
+    sql: { icon: 'fas fa-database', bg: 'bg-blue-100 dark:bg-blue-900/30', text: 'text-blue-700 dark:text-blue-300', border: 'border-blue-200 dark:border-blue-700', hoverBg: 'hover:bg-blue-200 dark:hover:bg-blue-900/50' },
+    ruby: { icon: 'fas fa-gem', bg: 'bg-red-100 dark:bg-red-900/30', text: 'text-red-700 dark:text-red-300', border: 'border-red-200 dark:border-red-700', hoverBg: 'hover:bg-red-200 dark:hover:bg-red-900/50' },
+  };
+
+  return (
+    <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
+      <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-4">
+        <i className="fas fa-download mr-2"></i>Step Resources
+      </h3>
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        {files.map((file) => {
+          const config = typeConfig[file.type];
+          return (
+            <a
+              key={file.name}
+              href={getFileUrl(file)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`flex items-start space-x-3 p-3 rounded-lg border ${config.bg} ${config.border} ${config.hoverBg} transition-colors`}
+            >
+              <i className={`${config.icon} ${config.text} mt-0.5`}></i>
+              <div>
+                <div className={`font-medium text-sm ${config.text}`}>{file.name}</div>
+                <div className="text-xs text-gray-500 dark:text-gray-400">{file.description}</div>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function WorkflowMapper({ currentStep }: { currentStep?: string }) {
+  const stages = [
+    { id: 'iedb', label: 'IEDB (.dbf)' },
+    { id: 'csv', label: 'CSV/SHP' },
+    { id: 'odic', label: 'ODIC Import' },
+    { id: 'sql', label: 'SQL Transform' },
+    { id: 'icm', label: 'ICM Network' },
+  ];
+
+  const getHighlighted = (): string[] => {
+    if (!currentStep) return [];
+    const step = currentStep;
+    if (['step1', 'step2', 'step3', 'step4', 'step5', 'step6'].includes(step)) return ['odic'];
+    if (['step7', 'step8'].includes(step)) return ['odic', 'sql'];
+    if (step === 'step9') return ['sql'];
+    return [];
+  };
+
+  const highlighted = new Set(getHighlighted());
+
+  return (
+    <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 mb-6">
+      <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-4 text-sm">
+        <i className="fas fa-project-diagram mr-2"></i>Conversion Workflow
+      </h3>
+      <div className="flex items-center justify-between overflow-x-auto pb-2">
+        {stages.map((stage, index) => (
+          <React.Fragment key={stage.id}>
+            <div className={`flex-shrink-0 px-4 py-3 rounded-lg border-2 text-center min-w-[100px] transition-all ${
+              highlighted.has(stage.id)
+                ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/30 shadow-md'
+                : 'border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700'
+            }`}>
+              <div className={`text-xs font-semibold ${
+                highlighted.has(stage.id)
+                  ? 'text-blue-700 dark:text-blue-300'
+                  : 'text-gray-600 dark:text-gray-400'
+              }`}>{stage.label}</div>
+            </div>
+            {index < stages.length - 1 && (
+              <div className="flex-shrink-0 mx-2">
+                <i className="fas fa-arrow-right text-gray-400 dark:text-gray-500"></i>
+              </div>
+            )}
+          </React.Fragment>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+const errorDatabase = [
+  { code: 'ODIC-001', category: 'ODIC Import', title: 'Field mapping not found', description: 'CFG file references a field that does not exist in the CSV file', solution: 'Verify CSV column headers match the field names in the CFG file. Column names are case-sensitive.' },
+  { code: 'ODIC-002', category: 'ODIC Import', title: 'Duplicate key violation', description: 'Attempting to import a node or link with an ID that already exists', solution: 'Clear the network before re-importing, or use "Update" mode in ODIC instead of "Insert".' },
+  { code: 'ODIC-003', category: 'ODIC Import', title: 'Coordinate system mismatch', description: 'Imported geometry does not align with the network coordinate system', solution: 'Ensure SHP files use the same coordinate system as the ICM database. Check projection settings in ArcCatalog.' },
+  { code: 'ODIC-004', category: 'ODIC Import', title: 'CSV parsing error - unexpected character', description: 'CSV file contains special characters or encoding issues', solution: 'Re-export CSV files ensuring UTF-8 encoding. Check for embedded commas or quotes in field values.' },
+  { code: 'ODIC-005', category: 'ODIC Import', title: 'Missing required field', description: 'A required field in the CFG mapping has no corresponding data', solution: 'Check that all required columns exist in your CSV. Common missing fields: node_id, us_node_id, ds_node_id.' },
+  { code: 'RUBY-001', category: 'Ruby Script', title: 'No current network error', description: 'Ruby script cannot find an open network to import into', solution: 'Ensure you have a network open and selected in ICM before running the script. The network must be checked out if using a shared database.' },
+  { code: 'RUBY-002', category: 'Ruby Script', title: 'File not found - lib/ modules', description: 'Script cannot locate required helper modules in lib/ folder', solution: 'Ensure lib/ folder is in the same directory as InfoSewer_Import_UI.rb. All .rb files in lib/ are required.' },
+  { code: 'RUBY-003', category: 'Ruby Script', title: 'DBF read error - file locked', description: 'Cannot read DBF file because it is locked by another process', solution: 'Close InfoSewer/ArcMap if open. Check that no other application has the .IEDB folder files locked.' },
+  { code: 'RUBY-004', category: 'Ruby Script', title: 'Invalid IEDB folder structure', description: 'Selected folder does not contain expected InfoSewer database files', solution: 'Verify you selected the correct .IEDB folder. It should contain DBF files like NODE.DBF, LINK.DBF, etc.' },
+  { code: 'RUBY-005', category: 'Ruby Script', title: 'Scenario import failed - parent not found', description: 'Cannot create scenario because parent scenario does not exist', solution: 'Import scenarios in order. Ensure BASE scenario is imported first, then child scenarios.' },
+  { code: 'SQL-001', category: 'SQL Transform', title: 'Column does not exist', description: 'SQL script references a column that was not imported', solution: 'Verify the ODIC import completed successfully for all required data. Re-run the import step if needed.' },
+  { code: 'SQL-002', category: 'SQL Transform', title: 'Type conversion error', description: 'Cannot convert text value to numeric type in SQL', solution: 'Check source data for non-numeric values in numeric fields. Common issue with roughness or diameter values containing text.' },
+  { code: 'SQL-003', category: 'SQL Transform', title: 'Division by zero in calculation', description: 'SQL calculation encounters zero denominator', solution: 'Add NULLIF or CASE statements to handle zero values. Common with slope or length calculations.' },
+  { code: 'DATA-001', category: 'Data Quality', title: 'Non-compliant node ID', description: 'Node ID contains characters not allowed in ICM (periods, spaces)', solution: 'The new import tool auto-fixes this. For manual process: use SQL to replace dots with underscores.' },
+  { code: 'DATA-002', category: 'Data Quality', title: 'Invalid link connectivity', description: 'Link references upstream or downstream node that does not exist', solution: 'Check NODE.DBF/CSV for missing nodes. The new import tool removes invalid links automatically.' },
+  { code: 'DATA-003', category: 'Data Quality', title: 'Conduit length out of range', description: 'Pipe length is shorter than 3.3 ft or longer than 16,404 ft', solution: 'The new import tool auto-corrects lengths. For manual: adjust conduit_length via SQL to ICM min/max limits.' },
+  { code: 'DATA-004', category: 'Data Quality', title: 'Case mismatch in node references', description: 'Link node references do not match node IDs due to case sensitivity', solution: 'The new import tool handles this automatically. For manual: use UPPER() in SQL to normalize.' },
+  { code: 'ICM-001', category: 'ICM Network', title: 'Wrong network type created', description: 'Network was created as SWMM (blue icon) instead of InfoWorks (yellow icon)', solution: 'Delete the network and create a new one: Right-click Model Group \u2192 New InfoWorks \u2192 InfoWorks Network (yellow icon).' },
+  { code: 'ICM-002', category: 'ICM Network', title: 'Network validation warnings after import', description: 'ICM shows validation warnings after completing the import', solution: 'Run Validate on the network. Common warnings include missing flood levels (run SQL to set from ground_level) and zero roughness values.' },
+];
+
+const errorCategories = ['All', 'ODIC Import', 'Ruby Script', 'SQL Transform', 'Data Quality', 'ICM Network'];
+
+const categoryColors: Record<string, { bg: string; text: string; border: string }> = {
+  'ODIC Import': { bg: 'bg-purple-50 dark:bg-purple-900/20', text: 'text-purple-700 dark:text-purple-300', border: 'border-purple-200 dark:border-purple-700' },
+  'Ruby Script': { bg: 'bg-red-50 dark:bg-red-900/20', text: 'text-red-700 dark:text-red-300', border: 'border-red-200 dark:border-red-700' },
+  'SQL Transform': { bg: 'bg-blue-50 dark:bg-blue-900/20', text: 'text-blue-700 dark:text-blue-300', border: 'border-blue-200 dark:border-blue-700' },
+  'Data Quality': { bg: 'bg-yellow-50 dark:bg-yellow-900/20', text: 'text-yellow-700 dark:text-yellow-300', border: 'border-yellow-200 dark:border-yellow-700' },
+  'ICM Network': { bg: 'bg-green-50 dark:bg-green-900/20', text: 'text-green-700 dark:text-green-300', border: 'border-green-200 dark:border-green-700' },
+};
+
+function ErrorLookup() {
+  const [search, setSearch] = useState('');
+  const [activeCategory, setActiveCategory] = useState('All');
+
+  const filtered = errorDatabase.filter((err) => {
+    const matchesCategory = activeCategory === 'All' || err.category === activeCategory;
+    const matchesSearch = search === '' ||
+      err.code.toLowerCase().includes(search.toLowerCase()) ||
+      err.title.toLowerCase().includes(search.toLowerCase()) ||
+      err.description.toLowerCase().includes(search.toLowerCase()) ||
+      err.solution.toLowerCase().includes(search.toLowerCase());
+    return matchesCategory && matchesSearch;
+  });
+
+  return (
+    <div className="mt-8 sm:mt-12">
+      <div className="flex items-center space-x-4 mb-6">
+        <div className="w-12 h-12 bg-red-500 rounded-full flex items-center justify-center">
+          <i className="fas fa-bug text-white"></i>
+        </div>
+        <div>
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-gray-100">Error Code Lookup</h2>
+          <p className="text-gray-600 dark:text-gray-300">Common errors and troubleshooting solutions</p>
+        </div>
+      </div>
+
+      <div className="mb-6">
+        <div className="relative">
+          <i className="fas fa-search absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-gray-500"></i>
+          <input
+            type="text"
+            placeholder="Search errors by code, title, or description..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          />
+        </div>
+      </div>
+
+      <div className="flex flex-wrap gap-2 mb-6">
+        {errorCategories.map((cat) => (
+          <button
+            key={cat}
+            onClick={() => setActiveCategory(cat)}
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+              activeCategory === cat
+                ? 'gradient-primary text-white'
+                : 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+            }`}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
+
+      <div className="space-y-4">
+        {filtered.length === 0 && (
+          <div className="text-center py-8 text-gray-500 dark:text-gray-400">
+            <i className="fas fa-search text-3xl mb-3 block"></i>
+            <p>No errors found matching your search.</p>
+          </div>
+        )}
+        {filtered.map((err) => {
+          const colors = categoryColors[err.category] || categoryColors['ODIC Import'];
+          return (
+            <div key={err.code} className={`p-5 rounded-xl border ${colors.border} ${colors.bg}`}>
+              <div className="flex flex-wrap items-center gap-2 mb-2">
+                <span className={`font-mono text-sm font-bold ${colors.text}`}>{err.code}</span>
+                <span className={`px-2 py-0.5 rounded-full text-xs font-medium ${colors.text} border ${colors.border}`}>{err.category}</span>
+              </div>
+              <h4 className="font-semibold text-gray-800 dark:text-gray-100 mb-1">{err.title}</h4>
+              <p className="text-sm text-gray-600 dark:text-gray-300 mb-3">{err.description}</p>
+              <div className="flex items-start space-x-2 bg-white dark:bg-gray-800 p-3 rounded-lg border border-gray-200 dark:border-gray-600">
+                <i className="fas fa-lightbulb text-yellow-500 mt-0.5"></i>
+                <p className="text-sm text-gray-700 dark:text-gray-200">{err.solution}</p>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
 
 interface StepContentProps {
   step: string;
@@ -16,6 +241,14 @@ export default function StepContent({ step }: StepContentProps) {
 
   if (step === 'documentation') {
     return <DocumentationContent showStep={showStep} />;
+  }
+
+  if (step === 'errors') {
+    return (
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 animate-fade-in">
+        <ErrorLookup />
+      </div>
+    );
   }
 
   if (step === 'step1') {
@@ -1149,6 +1382,8 @@ function OverviewContent({ showStep }: { showStep: (step: string) => void }) {
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
 
+        <WorkflowMapper />
+
         {/* Recommended: New InfoSewer Import Tool (Nov 2025) */}
         <div className="mb-8 sm:mb-12">
           <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/30 dark:to-emerald-900/30 border-2 border-green-500 dark:border-green-400 rounded-2xl p-6 sm:p-8 relative overflow-hidden">
@@ -1541,6 +1776,8 @@ Important: Verify that display units are set as desired prior to import. To revi
           </Alert>
         </div>
 
+        <ErrorLookup />
+
         {/* App Source Code & Documentation */}
         <div className="mb-8 sm:mb-12">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-gray-100 mb-6 sm:mb-8 text-center sm:text-left">
@@ -1758,32 +1995,35 @@ function Step1Content({ showStep }: { showStep: (step: string) => void }) {
             <i className="fas fa-download text-white"></i>
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-gray-800">Step 1: Import Nodes and Create Subcatchments</h1>
-            <p className="text-gray-600">Convert DBF files to CSV and import node data using ODIC</p>
+            <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100">Step 1: Import Nodes and Create Subcatchments</h1>
+            <p className="text-gray-600 dark:text-gray-300">Convert DBF files to CSV and import node data using ODIC</p>
           </div>
         </div>
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-8">
-        <div className="space-y-6">
-          <Alert type="info">
-            <h4 className="font-semibold mb-2">Official GitHub Repository</h4>
-            <p>Access the official Innovyze conversion tools from the GitHub repository:</p>
-            <div className="mt-3 space-y-2">
-              <a href="https://github.com/innovyze/Open-Source-Support/tree/main/01%20InfoWorks%20ICM/01%20Ruby/01%20InfoWorks/0060%20-%20InfoSewer%20to%20InfoWorks%20ICM%20Conversion%20Tools" className="block text-blue-600 hover:text-blue-800 underline text-sm" target="_blank" rel="noopener noreferrer">
-                <i className="fab fa-github mr-2"></i>
-                InfoSewer to InfoWorks ICM Conversion Tools
-              </a>
-              <a href="https://download-directory.github.io/?url=https%3A%2F%2Fgithub.com%2Finnovyze%2FOpen-Source-Support%2Ftree%2Fmain%2F01%2520InfoWorks%2520ICM%2F01%2520Ruby%2F01%2520InfoWorks%2F0060%2520-%2520InfoSewer%2520to%2520InfoWorks%2520ICM%2520Conversion%2520Tools" className="block text-green-600 hover:text-green-800 underline text-sm" target="_blank" rel="noopener noreferrer">
-                <i className="fas fa-download mr-2"></i>
-                Direct Download Link
-              </a>
-            </div>
-          </Alert>
+      <WorkflowMapper currentStep="step1" />
 
-          <div className="bg-white p-6 rounded-xl shadow-sm border">
-            <h3 className="font-semibold text-gray-800 mb-4">Required Files Location</h3>
-            <CodeBlock language="bash" code={`Repository Structure:
+      <div className="space-y-6">
+        <StepDownloads files={[
+          { name: 'node_import.cfg', type: 'cfg', description: 'Node import configuration' },
+          { name: 'subcatchment_import.cfg', type: 'cfg', description: 'Subcatchment import configuration' },
+          { name: 'step1_node_types.sql', type: 'sql', description: 'Node type assignment SQL' },
+        ]} />
+
+        <Alert type="info">
+          <h4 className="font-semibold mb-2">Official GitHub Repository</h4>
+          <p>Access the official Innovyze conversion tools from the GitHub repository:</p>
+          <div className="mt-3 space-y-2">
+            <a href={GITHUB_REPO} className="block text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 underline text-sm" target="_blank" rel="noopener noreferrer">
+              <i className="fab fa-github mr-2"></i>
+              InfoSewer to InfoWorks ICM Conversion Tools
+            </a>
+          </div>
+        </Alert>
+
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700">
+          <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-4">Required Files Location</h3>
+          <CodeBlock language="bash" code={`Repository Structure:
 01 InfoWorks ICM/
 ├── 01 Ruby/
 │   └── 01 InfoWorks/
@@ -1796,11 +2036,7 @@ function Step1Content({ showStep }: { showStep: (step: string) => void }) {
 │           ├── SQL Scripts/
 │           ├── Scenario Tools/
 │           ├── Pattern Tools/
-│           └── readme.md
-
-Official Documentation:
-https://www.autodesk.com/support/technical/article/caas/sfdcarticles/sfdcarticles/Knowledge-Importing-InfoSewer-to-InfoWorks-ICM-Overview-of-all-Import-Steps.html`} />
-          </div>
+│           └── readme.md`} />
         </div>
       </div>
     </div>
@@ -1816,11 +2052,16 @@ function Step2Content({ showStep }: { showStep: (step: string) => void }) {
             <i className="fas fa-database text-white"></i>
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-gray-800">Step 2: Export InfoSewer Database</h1>
-            <p className="text-gray-600">Extract data from InfoSewer IEDB folder</p>
+            <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100">Step 2: Import Links & Geometry</h1>
+            <p className="text-gray-600 dark:text-gray-300">Extract data from InfoSewer IEDB folder</p>
           </div>
         </div>
       </div>
+      <WorkflowMapper currentStep="step2" />
+      <StepDownloads files={[
+        { name: 'link_import.cfg', type: 'cfg', description: 'Link import configuration' },
+        { name: 'vertex_import.cfg', type: 'cfg', description: 'Vertex import configuration' },
+      ]} />
     </div>
   );
 }
@@ -1834,11 +2075,16 @@ function Step3Content({ showStep }: { showStep: (step: string) => void }) {
             <i className="fas fa-water text-white"></i>
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-gray-800">Step 3: Import Manhole Hydraulics</h1>
-            <p className="text-gray-600">Configure manhole hydraulic properties</p>
+            <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100">Step 3: Import Manhole Hydraulics</h1>
+            <p className="text-gray-600 dark:text-gray-300">Configure manhole hydraulic properties</p>
           </div>
         </div>
       </div>
+      <WorkflowMapper currentStep="step3" />
+      <StepDownloads files={[
+        { name: 'mhhyd_import.cfg', type: 'cfg', description: 'Manhole hydraulics import configuration' },
+        { name: 'step3_manhole.sql', type: 'sql', description: 'Manhole data transformation SQL' },
+      ]} />
     </div>
   );
 }
@@ -1852,11 +2098,16 @@ function Step4Content({ showStep }: { showStep: (step: string) => void }) {
             <i className="fas fa-pipe text-white"></i>
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-gray-800">Step 4: Import Link Hydraulics</h1>
-            <p className="text-gray-600">Configure pipe and link hydraulic properties</p>
+            <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100">Step 4: Import Link Hydraulics</h1>
+            <p className="text-gray-600 dark:text-gray-300">Configure pipe and link hydraulic properties</p>
           </div>
         </div>
       </div>
+      <WorkflowMapper currentStep="step4" />
+      <StepDownloads files={[
+        { name: 'pipehyd_import.cfg', type: 'cfg', description: 'Pipe hydraulics import configuration' },
+        { name: 'step4_pipe.sql', type: 'sql', description: 'Pipe data transformation SQL' },
+      ]} />
     </div>
   );
 }
@@ -1870,11 +2121,16 @@ function Step5Content({ showStep }: { showStep: (step: string) => void }) {
             <i className="fas fa-pump-soap text-white"></i>
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-gray-800">Step 5: Import Pump Hydraulics</h1>
-            <p className="text-gray-600">Configure pump hydraulic characteristics</p>
+            <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100">Step 5: Import Pump Hydraulics</h1>
+            <p className="text-gray-600 dark:text-gray-300">Configure pump hydraulic characteristics</p>
           </div>
         </div>
       </div>
+      <WorkflowMapper currentStep="step5" />
+      <StepDownloads files={[
+        { name: 'pumphyd_import.cfg', type: 'cfg', description: 'Pump hydraulics import configuration' },
+        { name: 'step5_pump.sql', type: 'sql', description: 'Pump data transformation SQL' },
+      ]} />
     </div>
   );
 }
@@ -1888,11 +2144,16 @@ function Step6Content({ showStep }: { showStep: (step: string) => void }) {
             <i className="fas fa-cogs text-white"></i>
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-gray-800">Step 6: Import Pump Controls</h1>
-            <p className="text-gray-600">Set up pump control logic and automation</p>
+            <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100">Step 6: Import Pump Controls</h1>
+            <p className="text-gray-600 dark:text-gray-300">Set up pump control logic and automation</p>
           </div>
         </div>
       </div>
+      <WorkflowMapper currentStep="step6" />
+      <StepDownloads files={[
+        { name: 'control_import.cfg', type: 'cfg', description: 'Pump control import configuration' },
+        { name: 'step6_controls.sql', type: 'sql', description: 'Pump control transformation SQL' },
+      ]} />
     </div>
   );
 }
@@ -1906,11 +2167,16 @@ function Step7Content({ showStep }: { showStep: (step: string) => void }) {
             <i className="fas fa-tint text-white"></i>
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-gray-800">Step 7: Import Subcatchment DWF</h1>
-            <p className="text-gray-600">Configure dry weather flow patterns</p>
+            <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100">Step 7: Import Subcatchment DWF</h1>
+            <p className="text-gray-600 dark:text-gray-300">Configure dry weather flow patterns</p>
           </div>
         </div>
       </div>
+      <WorkflowMapper currentStep="step7" />
+      <StepDownloads files={[
+        { name: 'dwf_import.cfg', type: 'cfg', description: 'DWF import configuration' },
+        { name: 'step7_dwf.sql', type: 'sql', description: 'DWF data transformation SQL' },
+      ]} />
     </div>
   );
 }
@@ -1924,11 +2190,16 @@ function Step8Content({ showStep }: { showStep: (step: string) => void }) {
             <i className="fas fa-flask text-white"></i>
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-gray-800">Step 8: Import Wet Well Hydraulics</h1>
-            <p className="text-gray-600">Configure wet well hydraulic parameters</p>
+            <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100">Step 8: Import Wet Well Hydraulics</h1>
+            <p className="text-gray-600 dark:text-gray-300">Configure wet well hydraulic parameters</p>
           </div>
         </div>
       </div>
+      <WorkflowMapper currentStep="step8" />
+      <StepDownloads files={[
+        { name: 'wwellhyd_import.cfg', type: 'cfg', description: 'Wet well hydraulics import configuration' },
+        { name: 'step8_wetwell.sql', type: 'sql', description: 'Wet well data transformation SQL' },
+      ]} />
     </div>
   );
 }
@@ -1942,11 +2213,16 @@ function Step9Content({ showStep }: { showStep: (step: string) => void }) {
             <i className="fas fa-cloud-rain text-white"></i>
           </div>
           <div>
-            <h1 className="text-3xl font-bold text-gray-800">Step 9: Configure RDII Hydrographs</h1>
-            <p className="text-gray-600">Set up rainfall-dependent infiltration and inflow</p>
+            <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100">Step 9: Configure RDII Hydrographs</h1>
+            <p className="text-gray-600 dark:text-gray-300">Set up rainfall-dependent infiltration and inflow</p>
           </div>
         </div>
       </div>
+      <WorkflowMapper currentStep="step9" />
+      <StepDownloads files={[
+        { name: 'step9_rdii.sql', type: 'sql', description: 'RDII configuration SQL' },
+        { name: 'rdii_patterns.rb', type: 'ruby', description: 'RDII pattern generation script' },
+      ]} />
     </div>
   );
 }

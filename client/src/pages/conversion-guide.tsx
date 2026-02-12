@@ -15,8 +15,9 @@ export default function ConversionGuide() {
       if (e.ctrlKey || e.altKey || e.metaKey) return;
       
       const steps = [
-        'overview', 'documentation', 'step1', 'step2', 'step3', 'step4', 
-        'step5', 'step6', 'step7', 'step8', 'step9'
+        'overview', 'step1', 'step2', 'step3', 'step4', 
+        'step5', 'step6', 'step7', 'step8', 'step9',
+        'errors', 'documentation'
       ];
       
       const currentIndex = steps.indexOf(currentStep);
