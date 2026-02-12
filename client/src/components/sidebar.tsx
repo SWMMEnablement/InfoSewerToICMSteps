@@ -11,7 +11,7 @@ interface TabItem {
 }
 
 const tabs: TabItem[] = [
-  { id: 'overview', icon: 'fas fa-info-circle', title: 'Overview', subtitle: 'Getting Started' },
+  { id: 'overview', icon: 'fas fa-info-circle', title: 'Overview', subtitle: 'Start Here + Recommended Path' },
   { id: 'step1', icon: 'fas fa-circle-nodes', title: 'Step 1', subtitle: 'Import Nodes & Subcatchments' },
   { id: 'step2', icon: 'fas fa-route', title: 'Step 2', subtitle: 'Import Links & Geometry' },
   { id: 'step3', icon: 'fas fa-water', title: 'Step 3', subtitle: 'Import Manhole Hydraulics' },
@@ -68,40 +68,54 @@ export default function Sidebar() {
       <div className="p-4 space-y-2">
         {tabs.map((tab) => {
           const isStep = stepIds.includes(tab.id);
-          const completed = isStep && isStepComplete(tab.id);
+          const isCompleted = isStep && isStepComplete(tab.id);
+          const isFirstStep = tab.id === 'step1';
 
           return (
-            <div key={tab.id} className="flex items-center">
-              {isStep && (
-                <button
-                  className="flex-shrink-0 mr-2 w-5 h-5 flex items-center justify-center"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    toggleStepComplete(tab.id);
-                  }}
-                >
-                  {completed ? (
-                    <i className="fas fa-check-circle text-green-500 text-lg"></i>
-                  ) : (
-                    <i className="far fa-circle text-gray-400 dark:text-gray-500 text-lg"></i>
-                  )}
-                </button>
-              )}
-              <button
-                className={`tab flex-1 p-4 rounded-xl text-left transition-all duration-300 ${
-                  currentStep === tab.id ? 'tab-active' : 'tab-inactive'
-                }`}
-                onClick={() => handleTabClick(tab.id)}
-              >
-                <div className="flex items-center space-x-3">
-                  <i className={`${tab.icon} w-5`}></i>
-                  <div>
-                    <div className="font-medium">{tab.title}</div>
-                    <div className="text-sm opacity-75">{tab.subtitle}</div>
+            <React.Fragment key={tab.id}>
+              {isFirstStep && (
+                <div className="pt-3 pb-1 px-2">
+                  <div className="flex items-center gap-2">
+                    <div className="h-px flex-1 bg-gray-200 dark:bg-gray-600"></div>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500 flex items-center gap-1">
+                      <i className="fas fa-history text-[9px]"></i>Legacy 9-Step Path
+                    </span>
+                    <div className="h-px flex-1 bg-gray-200 dark:bg-gray-600"></div>
                   </div>
                 </div>
-              </button>
-            </div>
+              )}
+              <div className="flex items-center">
+                {isStep && (
+                  <button
+                    className="flex-shrink-0 mr-2 w-5 h-5 flex items-center justify-center"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleStepComplete(tab.id);
+                    }}
+                  >
+                    {isCompleted ? (
+                      <i className="fas fa-check-circle text-green-500 text-lg"></i>
+                    ) : (
+                      <i className="far fa-circle text-gray-400 dark:text-gray-500 text-lg"></i>
+                    )}
+                  </button>
+                )}
+                <button
+                  className={`tab flex-1 p-4 rounded-xl text-left transition-all duration-300 ${
+                    currentStep === tab.id ? 'tab-active' : 'tab-inactive'
+                  }`}
+                  onClick={() => handleTabClick(tab.id)}
+                >
+                  <div className="flex items-center space-x-3">
+                    <i className={`${tab.icon} w-5`}></i>
+                    <div>
+                      <div className="font-medium">{tab.title}</div>
+                      <div className="text-sm opacity-75">{tab.subtitle}</div>
+                    </div>
+                  </div>
+                </button>
+              </div>
+            </React.Fragment>
           );
         })}
       </div>

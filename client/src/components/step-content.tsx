@@ -112,6 +112,174 @@ function WorkflowMapper({ currentStep }: { currentStep?: string }) {
   );
 }
 
+function LegacyPathBanner({ showStep }: { showStep: (step: string) => void }) {
+  return (
+    <div className="bg-amber-50 dark:bg-amber-900/20 border border-amber-300 dark:border-amber-700 rounded-xl p-4 mb-6 flex flex-col sm:flex-row items-start sm:items-center gap-3">
+      <div className="flex items-center gap-2 flex-shrink-0">
+        <i className="fas fa-history text-amber-500"></i>
+        <span className="bg-amber-200 dark:bg-amber-800 text-amber-800 dark:text-amber-200 px-2.5 py-0.5 rounded-full text-xs font-bold uppercase tracking-wide">Legacy Path</span>
+      </div>
+      <p className="text-xs text-amber-700 dark:text-amber-300 flex-1">
+        This is part of the manual 9-step ODIC process. The <strong>recommended method</strong> is the new single-script InfoSewer Import Tool which automates this entire workflow.
+      </p>
+      <button onClick={() => showStep('overview')} className="text-xs text-amber-700 dark:text-amber-300 underline hover:text-amber-900 dark:hover:text-amber-100 flex-shrink-0 font-medium">
+        View Recommended Path
+      </button>
+    </div>
+  );
+}
+
+function DecisionTreeFlowchart({ showStep }: { showStep: (step: string) => void }) {
+  return (
+    <div className="bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-lg border-2 border-indigo-200 dark:border-indigo-700 mb-8">
+      <h3 className="font-bold text-lg sm:text-xl text-gray-800 dark:text-gray-100 mb-2 text-center">
+        <i className="fas fa-map-signs mr-2 text-indigo-500"></i>Start Here
+      </h3>
+      <p className="text-sm text-gray-500 dark:text-gray-400 text-center mb-6">Choose the right conversion path for your situation</p>
+
+      <div className="flex flex-col items-center">
+        <div className="bg-indigo-100 dark:bg-indigo-900/40 border-2 border-indigo-400 dark:border-indigo-500 rounded-xl px-6 py-4 text-center max-w-md">
+          <p className="font-semibold text-indigo-800 dark:text-indigo-200 text-sm sm:text-base">Do you have the new Ruby script?</p>
+          <p className="text-xs text-indigo-600 dark:text-indigo-300 mt-1">InfoSewer_Import_UI.rb (Nov 2025)</p>
+        </div>
+
+        <div className="flex items-center my-3">
+          <div className="w-0.5 h-6 bg-gray-300 dark:bg-gray-600"></div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 w-full max-w-2xl">
+          <div className="flex flex-col items-center">
+            <div className="bg-green-100 dark:bg-green-900/30 border-2 border-green-400 dark:border-green-500 rounded-full px-5 py-1.5 font-bold text-green-700 dark:text-green-300 text-sm mb-3">YES</div>
+            <div className="w-0.5 h-4 bg-green-400 dark:bg-green-500"></div>
+            <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/30 dark:to-emerald-900/30 border-2 border-green-500 dark:border-green-400 rounded-xl p-5 text-center w-full relative">
+              <div className="absolute -top-2.5 right-3 bg-green-500 text-white px-2 py-0.5 rounded text-[10px] font-bold uppercase">Recommended</div>
+              <div className="w-10 h-10 bg-green-500 rounded-lg flex items-center justify-center mx-auto mb-3 shadow">
+                <i className="fas fa-magic text-white"></i>
+              </div>
+              <h4 className="font-bold text-green-800 dark:text-green-200 text-sm mb-1">New Automated Path</h4>
+              <p className="text-xs text-green-700 dark:text-green-300 mb-1">Single script, ~15-30 min</p>
+              <p className="text-[11px] text-gray-500 dark:text-gray-400 mb-3">Direct DBF reading, multi-scenario, built-in data quality fixes</p>
+              <a href="#recommended-path" onClick={(e) => { e.preventDefault(); document.getElementById('recommended-path')?.scrollIntoView({ behavior: 'smooth' }); }} className="inline-flex items-center bg-green-500 text-white px-4 py-2 rounded-lg text-xs font-semibold hover:bg-green-600 transition-colors">
+                <i className="fas fa-rocket mr-1.5"></i>Go to Recommended Path
+              </a>
+            </div>
+          </div>
+
+          <div className="flex flex-col items-center">
+            <div className="bg-gray-200 dark:bg-gray-600 border-2 border-gray-400 dark:border-gray-500 rounded-full px-5 py-1.5 font-bold text-gray-600 dark:text-gray-300 text-sm mb-3">NO</div>
+            <div className="w-0.5 h-4 bg-gray-400 dark:bg-gray-500"></div>
+            <div className="bg-gray-50 dark:bg-gray-700/50 border-2 border-gray-300 dark:border-gray-600 rounded-xl p-5 text-center w-full relative">
+              <div className="absolute -top-2.5 right-3 bg-gray-500 text-white px-2 py-0.5 rounded text-[10px] font-bold uppercase">Legacy</div>
+              <div className="w-10 h-10 bg-gray-400 dark:bg-gray-500 rounded-lg flex items-center justify-center mx-auto mb-3 shadow">
+                <i className="fas fa-list-ol text-white"></i>
+              </div>
+              <h4 className="font-bold text-gray-700 dark:text-gray-200 text-sm mb-1">Legacy 9-Step Process</h4>
+              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1">Manual ODIC imports, ~2-4 hours</p>
+              <p className="text-[11px] text-gray-500 dark:text-gray-400 mb-3">Requires Excel, ArcCatalog, manual CFG/SQL per step</p>
+              <button onClick={() => showStep('step1')} className="inline-flex items-center bg-gray-400 dark:bg-gray-500 text-white px-4 py-2 rounded-lg text-xs font-semibold hover:bg-gray-500 dark:hover:bg-gray-400 transition-colors">
+                <i className="fas fa-arrow-right mr-1.5"></i>View Legacy Steps
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-5 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-700 rounded-lg px-4 py-3 max-w-md text-center">
+          <p className="text-xs text-blue-700 dark:text-blue-300">
+            <i className="fas fa-lightbulb mr-1 text-yellow-500"></i>
+            <strong>Tip:</strong> Download the new script from <a href="https://github.com/innovyze/Open-Source-Support/tree/main/01%20InfoWorks%20ICM/01%20Ruby/01%20InfoWorks/0060%20-%20InfoSewer%20to%20InfoWorks%20ICM%20Conversion%20Tools" target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-900 dark:hover:text-blue-200">GitHub</a> to use the recommended path.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ComparisonCalculator() {
+  const legacySteps = [
+    { name: 'DBF to CSV conversion (Excel macro)', minutes: 15 },
+    { name: 'Map.mdb to SHP export (ArcCatalog)', minutes: 20 },
+    { name: 'ODIC imports (9 steps x ~8 min each)', minutes: 72 },
+    { name: 'SQL script execution & validation', minutes: 20 },
+    { name: 'Scenario configuration (manual)', minutes: 30 },
+    { name: 'Data quality fixes (manual SQL)', minutes: 25 },
+  ];
+
+  const newToolSteps = [
+    { name: 'Download script + open network', minutes: 5 },
+    { name: 'Run InfoSewer_Import_UI.rb', minutes: 1 },
+    { name: 'Select IEDB folder + config', minutes: 2 },
+    { name: 'Automated import + scenarios', minutes: 10 },
+    { name: 'Post-import review', minutes: 10 },
+  ];
+
+  const legacyTotal = legacySteps.reduce((sum, s) => sum + s.minutes, 0);
+  const newTotal = newToolSteps.reduce((sum, s) => sum + s.minutes, 0);
+  const savedMinutes = legacyTotal - newTotal;
+  const savedHours = Math.floor(savedMinutes / 60);
+  const savedRemainder = savedMinutes % 60;
+
+  return (
+    <div className="bg-white dark:bg-gray-800 p-6 sm:p-8 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-700 mb-8">
+      <h3 className="font-bold text-lg sm:text-xl text-gray-800 dark:text-gray-100 mb-2 text-center">
+        <i className="fas fa-calculator mr-2 text-blue-500"></i>Time Savings Calculator
+      </h3>
+      <p className="text-sm text-gray-500 dark:text-gray-400 text-center mb-6">See how much time the new tool saves you</p>
+
+      <div className="grid md:grid-cols-2 gap-6 mb-6">
+        <div className="bg-red-50 dark:bg-red-900/15 border border-red-200 dark:border-red-800 rounded-xl p-5">
+          <div className="flex items-center gap-2 mb-4">
+            <i className="fas fa-clock text-red-500"></i>
+            <h4 className="font-semibold text-red-700 dark:text-red-300 text-sm">Legacy 9-Step Process</h4>
+          </div>
+          <div className="space-y-2">
+            {legacySteps.map((step) => (
+              <div key={step.name} className="flex justify-between items-center text-xs">
+                <span className="text-gray-600 dark:text-gray-400">{step.name}</span>
+                <span className="font-mono font-semibold text-red-600 dark:text-red-400 ml-2 flex-shrink-0">{step.minutes} min</span>
+              </div>
+            ))}
+          </div>
+          <div className="border-t border-red-200 dark:border-red-700 mt-3 pt-3 flex justify-between items-center">
+            <span className="font-bold text-red-700 dark:text-red-300 text-sm">Total</span>
+            <span className="font-bold font-mono text-red-700 dark:text-red-300 text-lg">~{Math.floor(legacyTotal / 60)}h {legacyTotal % 60}m</span>
+          </div>
+        </div>
+
+        <div className="bg-green-50 dark:bg-green-900/15 border border-green-200 dark:border-green-800 rounded-xl p-5">
+          <div className="flex items-center gap-2 mb-4">
+            <i className="fas fa-bolt text-green-500"></i>
+            <h4 className="font-semibold text-green-700 dark:text-green-300 text-sm">New Import Tool</h4>
+          </div>
+          <div className="space-y-2">
+            {newToolSteps.map((step) => (
+              <div key={step.name} className="flex justify-between items-center text-xs">
+                <span className="text-gray-600 dark:text-gray-400">{step.name}</span>
+                <span className="font-mono font-semibold text-green-600 dark:text-green-400 ml-2 flex-shrink-0">{step.minutes} min</span>
+              </div>
+            ))}
+          </div>
+          <div className="border-t border-green-200 dark:border-green-700 mt-3 pt-3 flex justify-between items-center">
+            <span className="font-bold text-green-700 dark:text-green-300 text-sm">Total</span>
+            <span className="font-bold font-mono text-green-700 dark:text-green-300 text-lg">~{newTotal} min</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 border-2 border-blue-300 dark:border-blue-600 rounded-xl p-5 text-center">
+        <div className="text-sm text-blue-700 dark:text-blue-300 mb-1 font-medium">You Save Approximately</div>
+        <div className="text-3xl sm:text-4xl font-black text-blue-600 dark:text-blue-400 mb-1">
+          ~{savedHours}h {savedRemainder}m
+        </div>
+        <div className="text-xs text-blue-600 dark:text-blue-300 space-x-3">
+          <span><i className="fas fa-times-circle text-red-400 mr-1"></i>No Excel macros</span>
+          <span><i className="fas fa-times-circle text-red-400 mr-1"></i>No ArcCatalog</span>
+          <span><i className="fas fa-times-circle text-red-400 mr-1"></i>No manual ODIC</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 const errorDatabase = [
   { code: 'ODIC-001', category: 'ODIC Import', title: 'Field mapping not found', description: 'CFG file references a field that does not exist in the CSV file', solution: 'Verify CSV column headers match the field names in the CFG file. Column names are case-sensitive.' },
   { code: 'ODIC-002', category: 'ODIC Import', title: 'Duplicate key violation', description: 'Attempting to import a node or link with an ID that already exists', solution: 'Clear the network before re-importing, or use "Update" mode in ODIC instead of "Insert".' },
@@ -1360,12 +1528,12 @@ function OverviewContent({ showStep }: { showStep: (step: string) => void }) {
             <p className="text-base sm:text-lg mb-4 opacity-90 leading-relaxed px-2">Knowledge Management Conversion Guide</p>
             <div className="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4 px-4">
               <div className="glass-effect px-4 sm:px-6 py-3 rounded-full backdrop-blur-md">
-                <i className="fas fa-clock mr-2 text-sm sm:text-base"></i>
-                <span className="text-sm sm:text-base">~2-4 hours</span>
+                <i className="fas fa-magic mr-2 text-sm sm:text-base"></i>
+                <span className="text-sm sm:text-base">New: Single-Script Import</span>
               </div>
               <div className="glass-effect px-4 sm:px-6 py-3 rounded-full backdrop-blur-md">
-                <i className="fas fa-layer-group mr-2 text-sm sm:text-base"></i>
-                <span className="text-sm sm:text-base">9 Steps</span>
+                <i className="fas fa-clock mr-2 text-sm sm:text-base"></i>
+                <span className="text-sm sm:text-base">~30 min (was 2-4 hrs)</span>
               </div>
               <div className="glass-effect px-4 sm:px-6 py-3 rounded-full backdrop-blur-md">
                 <i className="fas fa-users mr-2 text-sm sm:text-base"></i>
@@ -1373,7 +1541,7 @@ function OverviewContent({ showStep }: { showStep: (step: string) => void }) {
               </div>
               <div className="glass-effect px-4 sm:px-6 py-3 rounded-full backdrop-blur-md">
                 <i className="fas fa-calendar-alt mr-2 text-sm sm:text-base"></i>
-                <span className="text-sm sm:text-base">Last Updated: February 11, 2026</span>
+                <span className="text-sm sm:text-base">Last Updated: February 12, 2026</span>
               </div>
             </div>
           </div>
@@ -1382,12 +1550,16 @@ function OverviewContent({ showStep }: { showStep: (step: string) => void }) {
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12">
 
+        <DecisionTreeFlowchart showStep={showStep} />
+
+        <ComparisonCalculator />
+
         <WorkflowMapper />
 
         {/* Recommended: New InfoSewer Import Tool (Nov 2025) */}
-        <div className="mb-8 sm:mb-12">
+        <div id="recommended-path" className="mb-8 sm:mb-12">
           <div className="bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/30 dark:to-emerald-900/30 border-2 border-green-500 dark:border-green-400 rounded-2xl p-6 sm:p-8 relative overflow-hidden">
-            <div className="absolute top-0 right-0 bg-green-500 text-white px-4 py-1 rounded-bl-lg text-xs font-bold uppercase tracking-wider">Preferred Method</div>
+            <div className="absolute top-0 right-0 bg-green-500 text-white px-4 py-1 rounded-bl-lg text-xs font-bold uppercase tracking-wider">Recommended Path</div>
             <div className="flex items-start space-x-4 mb-6">
               <div className="w-14 h-14 bg-green-500 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg">
                 <i className="fas fa-magic text-white text-xl"></i>
@@ -1989,6 +2161,7 @@ const useIsMobile = () => {
 function Step1Content({ showStep }: { showStep: (step: string) => void }) {
   return (
     <div className="max-w-6xl mx-auto px-6 py-12 animate-fade-in">
+      <LegacyPathBanner showStep={showStep} />
       <div className="mb-8">
         <div className="flex items-center space-x-4 mb-4">
           <div className="w-12 h-12 gradient-primary rounded-full flex items-center justify-center">
@@ -2046,6 +2219,7 @@ function Step1Content({ showStep }: { showStep: (step: string) => void }) {
 function Step2Content({ showStep }: { showStep: (step: string) => void }) {
   return (
     <div className="max-w-6xl mx-auto px-6 py-12 animate-fade-in">
+      <LegacyPathBanner showStep={showStep} />
       <div className="mb-8">
         <div className="flex items-center space-x-4 mb-4">
           <div className="w-12 h-12 gradient-primary rounded-full flex items-center justify-center">
@@ -2069,6 +2243,7 @@ function Step2Content({ showStep }: { showStep: (step: string) => void }) {
 function Step3Content({ showStep }: { showStep: (step: string) => void }) {
   return (
     <div className="max-w-6xl mx-auto px-6 py-12 animate-fade-in">
+      <LegacyPathBanner showStep={showStep} />
       <div className="mb-8">
         <div className="flex items-center space-x-4 mb-4">
           <div className="w-12 h-12 gradient-primary rounded-full flex items-center justify-center">
@@ -2092,6 +2267,7 @@ function Step3Content({ showStep }: { showStep: (step: string) => void }) {
 function Step4Content({ showStep }: { showStep: (step: string) => void }) {
   return (
     <div className="max-w-6xl mx-auto px-6 py-12 animate-fade-in">
+      <LegacyPathBanner showStep={showStep} />
       <div className="mb-8">
         <div className="flex items-center space-x-4 mb-4">
           <div className="w-12 h-12 gradient-primary rounded-full flex items-center justify-center">
@@ -2115,6 +2291,7 @@ function Step4Content({ showStep }: { showStep: (step: string) => void }) {
 function Step5Content({ showStep }: { showStep: (step: string) => void }) {
   return (
     <div className="max-w-6xl mx-auto px-6 py-12 animate-fade-in">
+      <LegacyPathBanner showStep={showStep} />
       <div className="mb-8">
         <div className="flex items-center space-x-4 mb-4">
           <div className="w-12 h-12 gradient-primary rounded-full flex items-center justify-center">
@@ -2138,6 +2315,7 @@ function Step5Content({ showStep }: { showStep: (step: string) => void }) {
 function Step6Content({ showStep }: { showStep: (step: string) => void }) {
   return (
     <div className="max-w-6xl mx-auto px-6 py-12 animate-fade-in">
+      <LegacyPathBanner showStep={showStep} />
       <div className="mb-8">
         <div className="flex items-center space-x-4 mb-4">
           <div className="w-12 h-12 gradient-primary rounded-full flex items-center justify-center">
@@ -2161,6 +2339,7 @@ function Step6Content({ showStep }: { showStep: (step: string) => void }) {
 function Step7Content({ showStep }: { showStep: (step: string) => void }) {
   return (
     <div className="max-w-6xl mx-auto px-6 py-12 animate-fade-in">
+      <LegacyPathBanner showStep={showStep} />
       <div className="mb-8">
         <div className="flex items-center space-x-4 mb-4">
           <div className="w-12 h-12 gradient-primary rounded-full flex items-center justify-center">
@@ -2184,6 +2363,7 @@ function Step7Content({ showStep }: { showStep: (step: string) => void }) {
 function Step8Content({ showStep }: { showStep: (step: string) => void }) {
   return (
     <div className="max-w-6xl mx-auto px-6 py-12 animate-fade-in">
+      <LegacyPathBanner showStep={showStep} />
       <div className="mb-8">
         <div className="flex items-center space-x-4 mb-4">
           <div className="w-12 h-12 gradient-primary rounded-full flex items-center justify-center">
@@ -2207,6 +2387,7 @@ function Step8Content({ showStep }: { showStep: (step: string) => void }) {
 function Step9Content({ showStep }: { showStep: (step: string) => void }) {
   return (
     <div className="max-w-6xl mx-auto px-6 py-12 animate-fade-in">
+      <LegacyPathBanner showStep={showStep} />
       <div className="mb-8">
         <div className="flex items-center space-x-4 mb-4">
           <div className="w-12 h-12 gradient-primary rounded-full flex items-center justify-center">
