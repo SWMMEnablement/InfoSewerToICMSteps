@@ -280,6 +280,560 @@ function ComparisonCalculator() {
   );
 }
 
+function NodeIdChecker() {
+  const [input, setInput] = useState('');
+  const [results, setResults] = useState<Array<{ id: string; issues: string[]; fix: string }>>([]);
+  const [analyzed, setAnalyzed] = useState(false);
+  const [copied, setCopied] = useState(false);
+
+  const analyze = () => {
+    const ids = input.split(/[\n,]+/).map(s => s.trim()).filter(Boolean);
+    const res = ids.map(id => {
+      const issues: string[] = [];
+      let fix = id;
+      if (/\./.test(id)) { issues.push('Contains periods (.)'); fix = fix.replace(/\./g, '_'); }
+      if (/\s/.test(id)) { issues.push('Contains spaces'); fix = fix.replace(/\s/g, ''); }
+      if (/[^a-zA-Z0-9_]/.test(id)) { issues.push('Contains special characters'); fix = fix.replace(/[^a-zA-Z0-9_]/g, '_'); }
+      if (id.length > 40) { issues.push('Exceeds 40 characters'); fix = fix.substring(0, 40); }
+      if (!/^[a-zA-Z0-9]/.test(id)) { issues.push('Must start with letter or number'); fix = fix.replace(/^[^a-zA-Z0-9]+/, ''); }
+      return { id, issues, fix };
+    });
+    setResults(res);
+    setAnalyzed(true);
+  };
+
+  const invalidResults = results.filter(r => r.issues.length > 0);
+
+  const sqlScript = invalidResults.map(r =>
+    `UPDATE [Node] SET [node_id] = '${r.fix}' WHERE [node_id] = '${r.id}';\nUPDATE [Link] SET [us_node_id] = '${r.fix}' WHERE [us_node_id] = '${r.id}';\nUPDATE [Link] SET [ds_node_id] = '${r.fix}' WHERE [ds_node_id] = '${r.id}';`
+  ).join('\n\n');
+
+  const copySQL = () => {
+    navigator.clipboard.writeText(sqlScript);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 animate-fade-in">
+      <div className="flex items-center space-x-4 mb-6">
+        <div className="w-12 h-12 bg-indigo-500 rounded-full flex items-center justify-center">
+          <i className="fas fa-fingerprint text-white"></i>
+        </div>
+        <div>
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-gray-100">Node ID Checker</h2>
+          <p className="text-gray-600 dark:text-gray-300">Validate node/link IDs against ICM naming rules</p>
+        </div>
+      </div>
+
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 mb-6">
+        <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+          Paste IDs (one per line or comma-separated)
+        </label>
+        <textarea
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          rows={8}
+          placeholder={"MH.001\nMH 002\nMH_003\nVery.Long.Node.ID.That.Exceeds.The.Maximum.Allowed.Characters.Limit"}
+          className="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent font-mono text-sm"
+        />
+        <button onClick={analyze} className="mt-4 px-6 py-2.5 bg-indigo-500 text-white rounded-lg font-semibold text-sm hover:bg-indigo-600 transition-colors">
+          <i className="fas fa-search mr-2"></i>Analyze
+        </button>
+      </div>
+
+      {analyzed && (
+        <>
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 mb-6">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="font-semibold text-gray-800 dark:text-gray-100">
+                Results: {results.length - invalidResults.length} valid, {invalidResults.length} invalid
+              </h3>
+              <div className="flex items-center gap-2">
+                <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300">
+                  <i className="fas fa-check mr-1"></i>{results.length - invalidResults.length} OK
+                </span>
+                {invalidResults.length > 0 && (
+                  <span className="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300">
+                    <i className="fas fa-times mr-1"></i>{invalidResults.length} Issues
+                  </span>
+                )}
+              </div>
+            </div>
+            {results.length > 0 && (
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-gray-200 dark:border-gray-600">
+                      <th className="text-left py-2 px-3 text-gray-600 dark:text-gray-400 font-medium">Original ID</th>
+                      <th className="text-left py-2 px-3 text-gray-600 dark:text-gray-400 font-medium">Status</th>
+                      <th className="text-left py-2 px-3 text-gray-600 dark:text-gray-400 font-medium">Issues</th>
+                      <th className="text-left py-2 px-3 text-gray-600 dark:text-gray-400 font-medium">Suggested Fix</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {results.map((r, i) => (
+                      <tr key={i} className="border-b border-gray-100 dark:border-gray-700">
+                        <td className="py-2 px-3 font-mono text-gray-800 dark:text-gray-200">{r.id}</td>
+                        <td className="py-2 px-3">
+                          {r.issues.length === 0 ? (
+                            <span className="text-green-500"><i className="fas fa-check-circle"></i></span>
+                          ) : (
+                            <span className="text-red-500"><i className="fas fa-times-circle"></i></span>
+                          )}
+                        </td>
+                        <td className="py-2 px-3 text-gray-600 dark:text-gray-400">{r.issues.length > 0 ? r.issues.join('; ') : '—'}</td>
+                        <td className="py-2 px-3 font-mono text-gray-800 dark:text-gray-200">{r.issues.length > 0 ? r.fix : '—'}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </div>
+
+          {invalidResults.length > 0 && (
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="font-semibold text-gray-800 dark:text-gray-100">
+                  <i className="fas fa-database mr-2"></i>SQL Fix Script
+                </h3>
+                <button onClick={copySQL} className="px-4 py-2 bg-blue-500 text-white rounded-lg text-sm font-medium hover:bg-blue-600 transition-colors">
+                  <i className={`fas ${copied ? 'fa-check' : 'fa-copy'} mr-1.5`}></i>{copied ? 'Copied!' : 'Copy SQL'}
+                </button>
+              </div>
+              <pre className="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-xs font-mono whitespace-pre-wrap">{sqlScript}</pre>
+            </div>
+          )}
+        </>
+      )}
+    </div>
+  );
+}
+
+function CsvFieldValidator() {
+  const [headerInput, setHeaderInput] = useState('');
+  const [selectedStep, setSelectedStep] = useState('1');
+  const [validated, setValidated] = useState(false);
+
+  const requiredFields: Record<string, { label: string; fields: string[] }> = {
+    '1': { label: 'Step 1 – Nodes', fields: ['ID', 'XCOORD', 'YCOORD', 'ELEV', 'RIMGRELEV'] },
+    '2': { label: 'Step 2 – Links', fields: ['ID', 'UPSTRM_ID', 'DNSTRM_ID', 'LENGTH', 'DIAMETER'] },
+    '3': { label: 'Step 3 – Manhole Hyd', fields: ['ID', 'RIMGRELEV', 'INVERTELEV', 'CHAMBER_AREA'] },
+    '4': { label: 'Step 4 – Link Hyd', fields: ['ID', 'ROUGHNESS', 'SLOPE', 'CONDUIT_LENGTH', 'CONDUIT_WIDTH'] },
+    '5': { label: 'Step 5 – Pumps', fields: ['ID', 'PUMP_CURVE', 'ON_LEVEL', 'OFF_LEVEL'] },
+    '6': { label: 'Step 6 – Controls', fields: ['ID', 'CONTROL_TYPE', 'SETPOINT'] },
+    '7': { label: 'Step 7 – DWF', fields: ['ID', 'BASE_FLOW', 'PATTERN'] },
+    '8': { label: 'Step 8 – Wet Well', fields: ['ID', 'WW_AREA', 'WW_DEPTH', 'INVERT_ELEV'] },
+    '9': { label: 'Step 9 – RDII', fields: ['ID', 'RDII_PATTERN', 'UNIT_HYD'] },
+  };
+
+  const parsedHeaders = headerInput
+    .split(/[\n,]+/)
+    .map(s => s.trim().toUpperCase().replace(/"/g, ''))
+    .filter(Boolean);
+
+  const currentReq = requiredFields[selectedStep];
+  const fieldResults = currentReq.fields.map(f => ({
+    field: f,
+    present: parsedHeaders.includes(f),
+  }));
+  const presentCount = fieldResults.filter(f => f.present).length;
+  const percentage = currentReq.fields.length > 0 ? Math.round((presentCount / currentReq.fields.length) * 100) : 0;
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      const text = ev.target?.result as string;
+      const firstLine = text.split('\n')[0] || '';
+      setHeaderInput(firstLine);
+    };
+    reader.readAsText(file);
+  };
+
+  return (
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 animate-fade-in">
+      <div className="flex items-center space-x-4 mb-6">
+        <div className="w-12 h-12 bg-emerald-500 rounded-full flex items-center justify-center">
+          <i className="fas fa-file-csv text-white"></i>
+        </div>
+        <div>
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-gray-100">CSV Field Validator</h2>
+          <p className="text-gray-600 dark:text-gray-300">Check if your CSV has the required columns for each import step</p>
+        </div>
+      </div>
+
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 mb-6">
+        <div className="grid sm:grid-cols-2 gap-4 mb-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Import Step</label>
+            <select
+              value={selectedStep}
+              onChange={(e) => { setSelectedStep(e.target.value); setValidated(false); }}
+              className="w-full px-4 py-2.5 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            >
+              {Object.entries(requiredFields).map(([k, v]) => (
+                <option key={k} value={k}>{v.label}</option>
+              ))}
+            </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Or upload CSV file</label>
+            <input
+              type="file"
+              accept=".csv"
+              onChange={handleFileUpload}
+              className="w-full px-3 py-2 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 text-sm file:mr-3 file:py-1 file:px-3 file:rounded-md file:border-0 file:bg-emerald-100 file:text-emerald-700 dark:file:bg-emerald-900/30 dark:file:text-emerald-300 file:text-sm file:font-medium"
+            />
+          </div>
+        </div>
+        <div>
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Paste CSV header line (comma-separated)</label>
+          <textarea
+            value={headerInput}
+            onChange={(e) => setHeaderInput(e.target.value)}
+            rows={3}
+            placeholder="ID,XCOORD,YCOORD,ELEV,RIMGRELEV"
+            className="w-full px-4 py-3 rounded-lg border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 font-mono text-sm"
+          />
+        </div>
+        <button onClick={() => setValidated(true)} className="mt-4 px-6 py-2.5 bg-emerald-500 text-white rounded-lg font-semibold text-sm hover:bg-emerald-600 transition-colors">
+          <i className="fas fa-check-double mr-2"></i>Validate
+        </button>
+      </div>
+
+      {validated && (
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="font-semibold text-gray-800 dark:text-gray-100">{currentReq.label} – Field Check</h3>
+            <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-bold ${
+              percentage === 100 ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300' :
+              percentage >= 50 ? 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300' :
+              'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300'
+            }`}>
+              {percentage}% Ready
+            </span>
+          </div>
+          <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 mb-6">
+            <div
+              className={`h-3 rounded-full transition-all ${
+                percentage === 100 ? 'bg-green-500' : percentage >= 50 ? 'bg-amber-500' : 'bg-red-500'
+              }`}
+              style={{ width: `${percentage}%` }}
+            ></div>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-3">
+            {fieldResults.map(f => (
+              <div key={f.field} className={`flex items-center gap-3 p-3 rounded-lg border ${
+                f.present
+                  ? 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-700'
+                  : 'bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-700'
+              }`}>
+                <i className={`fas ${f.present ? 'fa-check-circle text-green-500' : 'fa-times-circle text-red-500'}`}></i>
+                <span className={`font-mono text-sm ${f.present ? 'text-green-700 dark:text-green-300' : 'text-red-700 dark:text-red-300'}`}>{f.field}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function SqlScriptBuilder() {
+  const [selected, setSelected] = useState<Record<string, boolean>>({});
+  const [copied, setCopied] = useState(false);
+
+  const scripts: { key: string; label: string; description: string; sql: string }[] = [
+    {
+      key: 'normalize_ids',
+      label: 'Normalize Node IDs',
+      description: 'Replace dots with underscores in node IDs',
+      sql: `-- Normalize Node IDs: replace dots with underscores
+UPDATE [Node]
+SET [node_id] = REPLACE([node_id], '.', '_')
+WHERE [node_id] LIKE '%.%';
+
+UPDATE [Link]
+SET [us_node_id] = REPLACE([us_node_id], '.', '_')
+WHERE [us_node_id] LIKE '%.%';
+
+UPDATE [Link]
+SET [ds_node_id] = REPLACE([ds_node_id], '.', '_')
+WHERE [ds_node_id] LIKE '%.%';`,
+    },
+    {
+      key: 'fix_case',
+      label: 'Fix case mismatches in link node references',
+      description: 'Convert all node references to UPPER case',
+      sql: `-- Fix case mismatches in link node references
+UPDATE [Node]
+SET [node_id] = UPPER([node_id]);
+
+UPDATE [Link]
+SET [us_node_id] = UPPER([us_node_id]),
+    [ds_node_id] = UPPER([ds_node_id]);`,
+    },
+    {
+      key: 'flood_level',
+      label: 'Set flood level from ground level',
+      description: 'Copy ground_level to flood_level where missing',
+      sql: `-- Set flood level from ground level
+UPDATE [Node]
+SET [flood_level] = [ground_level]
+WHERE [flood_level] IS NULL OR [flood_level] = 0;`,
+    },
+    {
+      key: 'conduit_lengths',
+      label: 'Correct conduit lengths',
+      description: 'Enforce min 3.3 ft, max 16404 ft',
+      sql: `-- Correct conduit lengths (min 3.3 ft, max 16404 ft)
+UPDATE [Link]
+SET [conduit_length] = 3.3
+WHERE [conduit_length] < 3.3;
+
+UPDATE [Link]
+SET [conduit_length] = 16404
+WHERE [conduit_length] > 16404;`,
+    },
+    {
+      key: 'roughness',
+      label: 'Set default roughness for zero values',
+      description: 'Set roughness to 0.013 where it is zero',
+      sql: `-- Set default roughness for zero values
+UPDATE [Link]
+SET [roughness_N] = 0.013
+WHERE [roughness_N] IS NULL OR [roughness_N] = 0;`,
+    },
+    {
+      key: 'orphan_links',
+      label: 'Remove orphan links',
+      description: 'Delete links with no matching upstream or downstream nodes',
+      sql: `-- Remove orphan links (no matching nodes)
+DELETE FROM [Link]
+WHERE [us_node_id] NOT IN (SELECT [node_id] FROM [Node])
+   OR [ds_node_id] NOT IN (SELECT [node_id] FROM [Node]);`,
+    },
+    {
+      key: 'chamber_area',
+      label: 'Set chamber area from diameter',
+      description: 'Calculate chamber_area as π*(diameter/2)² for manholes',
+      sql: `-- Set chamber area from diameter
+UPDATE [Node]
+SET [chamber_area] = 3.14159 * ([chamber_diameter] / 2.0) * ([chamber_diameter] / 2.0)
+WHERE [chamber_area] IS NULL OR [chamber_area] = 0;`,
+    },
+  ];
+
+  const combined = scripts.filter(s => selected[s.key]).map(s => s.sql).join('\n\n');
+
+  const copyAll = () => {
+    navigator.clipboard.writeText(combined);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 animate-fade-in">
+      <div className="flex items-center space-x-4 mb-6">
+        <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center">
+          <i className="fas fa-database text-white"></i>
+        </div>
+        <div>
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-gray-100">SQL Script Builder</h2>
+          <p className="text-gray-600 dark:text-gray-300">Select data fixes to generate a combined SQL script</p>
+        </div>
+      </div>
+
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 mb-6">
+        <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-4">Select Fix Scripts</h3>
+        <div className="space-y-3">
+          {scripts.map(s => (
+            <label key={s.key} className={`flex items-start gap-3 p-4 rounded-lg border cursor-pointer transition-colors ${
+              selected[s.key]
+                ? 'bg-blue-50 dark:bg-blue-900/20 border-blue-300 dark:border-blue-600'
+                : 'bg-gray-50 dark:bg-gray-700/30 border-gray-200 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700/50'
+            }`}>
+              <input
+                type="checkbox"
+                checked={!!selected[s.key]}
+                onChange={(e) => setSelected({ ...selected, [s.key]: e.target.checked })}
+                className="mt-0.5 w-4 h-4 text-blue-500 rounded border-gray-300 dark:border-gray-500 focus:ring-blue-500"
+              />
+              <div>
+                <div className="font-medium text-gray-800 dark:text-gray-100 text-sm">{s.label}</div>
+                <div className="text-xs text-gray-500 dark:text-gray-400">{s.description}</div>
+              </div>
+            </label>
+          ))}
+        </div>
+      </div>
+
+      {combined && (
+        <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="font-semibold text-gray-800 dark:text-gray-100">
+              <i className="fas fa-code mr-2"></i>Generated SQL
+            </h3>
+            <button onClick={copyAll} className="px-4 py-2 bg-blue-500 text-white rounded-lg text-sm font-medium hover:bg-blue-600 transition-colors">
+              <i className={`fas ${copied ? 'fa-check' : 'fa-copy'} mr-1.5`}></i>{copied ? 'Copied!' : 'Copy All'}
+            </button>
+          </div>
+          <pre className="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto text-xs font-mono whitespace-pre-wrap">{combined}</pre>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ReadinessChecklist() {
+  const STORAGE_KEY = 'icm-readiness-checklist';
+
+  const categories = [
+    {
+      name: 'Software',
+      icon: 'fas fa-laptop-code',
+      items: [
+        { key: 'icm_installed', label: 'ICM installed' },
+        { key: 'ruby_available', label: 'Ruby available' },
+        { key: 'excel_available', label: 'Excel available (for legacy)' },
+      ],
+    },
+    {
+      name: 'Data Files',
+      icon: 'fas fa-folder-open',
+      items: [
+        { key: 'iedb_accessible', label: 'IEDB folder accessible' },
+        { key: 'dbf_readable', label: 'DBF files readable' },
+        { key: 'map_mdb_present', label: 'Map.mdb present' },
+      ],
+    },
+    {
+      name: 'Import Tool',
+      icon: 'fas fa-tools',
+      items: [
+        { key: 'script_downloaded', label: 'InfoSewer_Import_UI.rb downloaded' },
+        { key: 'lib_folder', label: 'lib/ folder present' },
+        { key: 'import_config_folder', label: 'import_config/ folder present' },
+      ],
+    },
+    {
+      name: 'Network Setup',
+      icon: 'fas fa-network-wired',
+      items: [
+        { key: 'network_created', label: 'New InfoWorks Network created (not SWMM)' },
+        { key: 'display_units', label: 'Display units configured' },
+        { key: 'coord_system', label: 'Coordinate system set' },
+      ],
+    },
+    {
+      name: 'Backup',
+      icon: 'fas fa-shield-alt',
+      items: [
+        { key: 'data_backed_up', label: 'Original data backed up' },
+        { key: 'working_copy', label: 'Working copy created' },
+      ],
+    },
+  ];
+
+  const allItems = categories.flatMap(c => c.items);
+
+  const loadState = (): Record<string, boolean> => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      return saved ? JSON.parse(saved) : {};
+    } catch {
+      return {};
+    }
+  };
+
+  const [checkedItems, setCheckedItems] = useState<Record<string, boolean>>(loadState);
+
+  const toggle = (key: string) => {
+    const next = { ...checkedItems, [key]: !checkedItems[key] };
+    setCheckedItems(next);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+  };
+
+  const checkedCount = allItems.filter(i => checkedItems[i.key]).length;
+  const totalCount = allItems.length;
+  const percentage = Math.round((checkedCount / totalCount) * 100);
+
+  return (
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 animate-fade-in">
+      <div className="flex items-center space-x-4 mb-6">
+        <div className="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center">
+          <i className="fas fa-clipboard-check text-white"></i>
+        </div>
+        <div>
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-gray-100">Readiness Checklist</h2>
+          <p className="text-gray-600 dark:text-gray-300">Track your setup progress before starting the conversion</p>
+        </div>
+      </div>
+
+      <div className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6 mb-6">
+        <div className="flex items-center justify-between mb-3">
+          <span className="font-semibold text-gray-800 dark:text-gray-100">Overall Readiness</span>
+          <span className={`text-lg font-bold ${
+            percentage === 100 ? 'text-green-500' : percentage >= 50 ? 'text-amber-500' : 'text-red-500'
+          }`}>{percentage}%</span>
+        </div>
+        <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-4">
+          <div
+            className={`h-4 rounded-full transition-all ${
+              percentage === 100 ? 'bg-green-500' : percentage >= 50 ? 'bg-amber-500' : 'bg-red-500'
+            }`}
+            style={{ width: `${percentage}%` }}
+          ></div>
+        </div>
+        <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">{checkedCount} of {totalCount} items completed</p>
+      </div>
+
+      <div className="space-y-4">
+        {categories.map(cat => (
+          <div key={cat.name} className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+            <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-4 flex items-center gap-2">
+              <i className={`${cat.icon} text-gray-500 dark:text-gray-400`}></i>
+              {cat.name}
+              <span className="text-xs font-normal text-gray-400 dark:text-gray-500 ml-auto">
+                {cat.items.filter(i => checkedItems[i.key]).length}/{cat.items.length}
+              </span>
+            </h3>
+            <div className="space-y-2">
+              {cat.items.map(item => (
+                <button
+                  key={item.key}
+                  onClick={() => toggle(item.key)}
+                  className={`w-full flex items-center gap-3 p-3 rounded-lg border text-left transition-colors ${
+                    checkedItems[item.key]
+                      ? 'bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-700'
+                      : 'bg-gray-50 dark:bg-gray-700/30 border-gray-200 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-700/50'
+                  }`}
+                >
+                  <div className={`w-5 h-5 rounded flex items-center justify-center flex-shrink-0 ${
+                    checkedItems[item.key]
+                      ? 'bg-green-500 text-white'
+                      : 'border-2 border-gray-300 dark:border-gray-500'
+                  }`}>
+                    {checkedItems[item.key] && <i className="fas fa-check text-xs"></i>}
+                  </div>
+                  <span className={`text-sm ${
+                    checkedItems[item.key]
+                      ? 'text-green-700 dark:text-green-300 line-through'
+                      : 'text-gray-700 dark:text-gray-300'
+                  }`}>{item.label}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 const errorDatabase = [
   { code: 'ODIC-001', category: 'ODIC Import', title: 'Field mapping not found', description: 'CFG file references a field that does not exist in the CSV file', solution: 'Verify CSV column headers match the field names in the CFG file. Column names are case-sensitive.' },
   { code: 'ODIC-002', category: 'ODIC Import', title: 'Duplicate key violation', description: 'Attempting to import a node or link with an ID that already exists', solution: 'Clear the network before re-importing, or use "Update" mode in ODIC instead of "Insert".' },
@@ -418,6 +972,11 @@ export default function StepContent({ step }: StepContentProps) {
       </div>
     );
   }
+
+  if (step === 'toolkit-ids') return <NodeIdChecker />;
+  if (step === 'toolkit-validator') return <CsvFieldValidator />;
+  if (step === 'toolkit-sql') return <SqlScriptBuilder />;
+  if (step === 'toolkit-readiness') return <ReadinessChecklist />;
 
   if (step === 'step1') {
     return <Step1Content showStep={showStep} />;
@@ -1553,6 +2112,46 @@ function OverviewContent({ showStep }: { showStep: (step: string) => void }) {
         <DecisionTreeFlowchart showStep={showStep} />
 
         <ComparisonCalculator />
+
+        <div className="bg-gradient-to-br from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 border-2 border-emerald-300 dark:border-emerald-600 rounded-2xl p-6 sm:p-8 mb-8">
+          <div className="text-center mb-6">
+            <div className="w-14 h-14 bg-emerald-500 rounded-xl flex items-center justify-center mx-auto mb-3 shadow-lg">
+              <i className="fas fa-toolbox text-white text-xl"></i>
+            </div>
+            <h3 className="font-bold text-xl sm:text-2xl text-emerald-800 dark:text-emerald-200 mb-2">Interactive Conversion Toolkit</h3>
+            <p className="text-sm text-emerald-700 dark:text-emerald-300 max-w-xl mx-auto">Validate your data, check compliance, and generate fix scripts — all in your browser, no uploads required.</p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <button onClick={() => showStep('toolkit-ids')} className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-emerald-200 dark:border-emerald-700 hover:shadow-md hover:border-emerald-400 dark:hover:border-emerald-500 transition-all text-left group">
+              <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/30 rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <i className="fas fa-fingerprint text-blue-600 dark:text-blue-400"></i>
+              </div>
+              <h4 className="font-semibold text-gray-800 dark:text-gray-100 text-sm mb-1">ID Checker</h4>
+              <p className="text-xs text-gray-500 dark:text-gray-400">Validate node/link IDs against ICM rules and generate fix SQL</p>
+            </button>
+            <button onClick={() => showStep('toolkit-validator')} className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-emerald-200 dark:border-emerald-700 hover:shadow-md hover:border-emerald-400 dark:hover:border-emerald-500 transition-all text-left group">
+              <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900/30 rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <i className="fas fa-file-csv text-purple-600 dark:text-purple-400"></i>
+              </div>
+              <h4 className="font-semibold text-gray-800 dark:text-gray-100 text-sm mb-1">CSV Validator</h4>
+              <p className="text-xs text-gray-500 dark:text-gray-400">Check that your CSV files have all required columns for each step</p>
+            </button>
+            <button onClick={() => showStep('toolkit-sql')} className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-emerald-200 dark:border-emerald-700 hover:shadow-md hover:border-emerald-400 dark:hover:border-emerald-500 transition-all text-left group">
+              <div className="w-10 h-10 bg-amber-100 dark:bg-amber-900/30 rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <i className="fas fa-wrench text-amber-600 dark:text-amber-400"></i>
+              </div>
+              <h4 className="font-semibold text-gray-800 dark:text-gray-100 text-sm mb-1">SQL Builder</h4>
+              <p className="text-xs text-gray-500 dark:text-gray-400">Generate common fix scripts for data quality issues</p>
+            </button>
+            <button onClick={() => showStep('toolkit-readiness')} className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-sm border border-emerald-200 dark:border-emerald-700 hover:shadow-md hover:border-emerald-400 dark:hover:border-emerald-500 transition-all text-left group">
+              <div className="w-10 h-10 bg-green-100 dark:bg-green-900/30 rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform">
+                <i className="fas fa-clipboard-check text-green-600 dark:text-green-400"></i>
+              </div>
+              <h4 className="font-semibold text-gray-800 dark:text-gray-100 text-sm mb-1">Readiness Check</h4>
+              <p className="text-xs text-gray-500 dark:text-gray-400">Verify all prerequisites before starting your conversion</p>
+            </button>
+          </div>
+        </div>
 
         <WorkflowMapper />
 

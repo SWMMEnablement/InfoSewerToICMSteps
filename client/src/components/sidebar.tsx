@@ -12,6 +12,10 @@ interface TabItem {
 
 const tabs: TabItem[] = [
   { id: 'overview', icon: 'fas fa-info-circle', title: 'Overview', subtitle: 'Start Here + Recommended Path' },
+  { id: 'toolkit-ids', icon: 'fas fa-fingerprint', title: 'ID Checker', subtitle: 'Validate Node/Link IDs' },
+  { id: 'toolkit-validator', icon: 'fas fa-file-csv', title: 'CSV Validator', subtitle: 'Check Import Fields' },
+  { id: 'toolkit-sql', icon: 'fas fa-wrench', title: 'SQL Builder', subtitle: 'Generate Fix Scripts' },
+  { id: 'toolkit-readiness', icon: 'fas fa-clipboard-check', title: 'Readiness Check', subtitle: 'Pre-Conversion Checklist' },
   { id: 'step1', icon: 'fas fa-circle-nodes', title: 'Step 1', subtitle: 'Import Nodes & Subcatchments' },
   { id: 'step2', icon: 'fas fa-route', title: 'Step 2', subtitle: 'Import Links & Geometry' },
   { id: 'step3', icon: 'fas fa-water', title: 'Step 3', subtitle: 'Import Manhole Hydraulics' },
@@ -70,9 +74,21 @@ export default function Sidebar() {
           const isStep = stepIds.includes(tab.id);
           const isCompleted = isStep && isStepComplete(tab.id);
           const isFirstStep = tab.id === 'step1';
+          const isFirstToolkit = tab.id === 'toolkit-ids';
 
           return (
             <React.Fragment key={tab.id}>
+              {isFirstToolkit && (
+                <div className="pt-3 pb-1 px-2">
+                  <div className="flex items-center gap-2">
+                    <div className="h-px flex-1 bg-emerald-200 dark:bg-emerald-700"></div>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-500 dark:text-emerald-400 flex items-center gap-1">
+                      <i className="fas fa-toolbox text-[9px]"></i>Interactive Toolkit
+                    </span>
+                    <div className="h-px flex-1 bg-emerald-200 dark:bg-emerald-700"></div>
+                  </div>
+                </div>
+              )}
               {isFirstStep && (
                 <div className="pt-3 pb-1 px-2">
                   <div className="flex items-center gap-2">

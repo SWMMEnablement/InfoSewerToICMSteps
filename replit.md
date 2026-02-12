@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a React-based web application that provides an interactive step-by-step guide for converting InfoSewer projects to ICM (InfoWorks ICM) format. The application features a modern UI built with React, TypeScript, and Tailwind CSS, offering users a comprehensive workflow through 9 conversion steps with progress tracking, mobile responsiveness, and keyboard navigation.
+This is a React-based web application that serves as an interactive conversion toolkit for converting InfoSewer projects to ICM (InfoWorks ICM) format. The application has pivoted from a static guide to an interactive toolkit that reduces manual work, validates data, and prevents errors. It features the new single-script InfoSewer Import Tool (Nov 2025) as the recommended path, with the legacy 9-step ODIC process clearly marked as an alternate fallback. The app includes 4 interactive browser-based tools: Node ID Compliance Checker, CSV Field Validator, SQL Script Builder, and Pre-Conversion Readiness Checklist.
 
 ## User Preferences
 
